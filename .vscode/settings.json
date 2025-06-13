@@ -1,0 +1,26 @@
+{
+  "editor.fontLigatures": true,
+  "editor.minimap.enabled": false,
+  "explorer.compactFolders": false,
+  "editor.renderLineHighlight": "gutter",
+  "editor.fontFamily": "JetBrains",
+  "editor.semanticHighlighting.enabled": true,
+  "editor.fontSize": 16,
+  "workbench.iconTheme": "vscode-icons",
+  "python.analysis.autoImportCompletions": true,
+  "window.zoomLevel": -0.1,
+  "java.project.referencedLibraries": [
+    "lib/**/*.jar",
+    "c:\\Program Files\\javafx-sdk-23.0.1\\lib\\javafx.base.jar",
+    "c:\\Program Files\\javafx-sdk-23.0.1\\lib\\javafx.controls.jar",
+    "c:\\Program Files\\javafx-sdk-23.0.1\\lib\\javafx.fxml.jar",
+    "c:\\Program Files\\javafx-sdk-23.0.1\\lib\\javafx.graphics.jar",
+    "c:\\Program Files\\javafx-sdk-23.0.1\\lib\\javafx.media.jar",
+    "c:\\Program Files\\javafx-sdk-23.0.1\\lib\\javafx.swing.jar",
+    "c:\\Program Files\\javafx-sdk-23.0.1\\lib\\javafx.web.jar",
+    "c:\\Program Files\\javafx-sdk-23.0.1\\lib\\javafx-swt.jar",
+    "c:\\Users\\jerfe\\Downloads\\mysql-connector-j-9.1.0\\mysql-connector-j-9.1.0\\mysql-connector-j-9.1.0.jar"
+  ],
+  "java.configuration.updateBuildConfiguration": "interactive",
+  "mdb.confirmRunAll": false
+}
