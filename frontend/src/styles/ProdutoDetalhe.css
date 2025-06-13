@@ -1,0 +1,106 @@
+.produto-detalhe-container {
+  font-family: Arial, sans-serif;
+  background-color: #f8f8f8;
+  min-height: 100vh;
+}
+
+.home-header {
+  background-color: #fff;
+  padding: 15px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #ddd;
+}
+
+.home-header .logo {
+  height: 50px;
+  cursor: pointer;
+}
+
+.home-header nav {
+  display: flex;
+  gap: 20px;
+}
+
+.home-header nav a {
+  color: #e60000;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.home-header nav a:hover {
+  text-decoration: underline;
+}
+
+.detalhe {
+  max-width: 1000px;
+  margin: 30px auto;
+  background-color: #fff;
+  padding: 30px;
+  display: flex;
+  gap: 40px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.imagem-produto {
+  width: 300px;
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.info-produto {
+  flex: 1;
+}
+
+.info-produto h2 {
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.info-produto p {
+  margin: 8px 0;
+  color: #555;
+}
+
+.info-produto .preco {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #e60000;
+  margin-top: 15px;
+}
+
+.info-produto button {
+  margin-top: 20px;
+  padding: 12px 24px;
+  background-color: #e60000;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.info-produto button:hover {
+  background-color: #cc0000;
+}
+
+@media (max-width: 768px) {
+  .detalhe {
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .imagem-produto {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .info-produto {
+    text-align: center;
+  }
+}

@@ -1,0 +1,53 @@
+.pedido {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.pedido h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.pedido ul {
+  list-style: none;
+  padding: 0;
+}
+
+.pedido li {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pedido input {
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.pedido button {
+  padding: 10px;
+  background-color: #e60000;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.pedido button:hover {
+  background-color: #cc0000;
+}
+
+.frete-info {
+  margin-top: 10px;
+  font-size: 0.95rem;
+}

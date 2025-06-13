@@ -1,0 +1,33 @@
+.perfil {
+  max-width: 500px;
+  margin: 60px auto;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.perfil h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.perfil p {
+  font-size: 1.1rem;
+  margin: 10px 0;
+}
+
+.perfil button {
+  width: 100%;
+  padding: 12px;
+  background-color: #e60000;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.perfil button:hover {
+  background-color: #cc0000;
+}

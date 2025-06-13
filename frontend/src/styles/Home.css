@@ -1,0 +1,73 @@
+.home {
+  font-family: Arial, sans-serif;
+}
+
+.home-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  background-color: #e60000;
+  color: white;
+}
+
+.home-header .logo {
+  height: 40px;
+}
+
+.home-header nav a {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.home-header nav a:hover {
+  text-decoration: underline;
+}
+
+.home-banner {
+  text-align: center;
+  padding: 40px 20px;
+  background-color: #ffeaea;
+}
+
+.home-banner h1 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  color: #e60000;
+}
+
+.home-produtos {
+  padding: 30px 20px;
+  text-align: center;
+}
+
+.lista-produtos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.home-footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #f2f2f2;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.btn-sair {
+  background: none;
+  border: none;
+  color: #e60000;
+  font-weight: bold;
+  cursor: pointer;
+  margin-left: 15px;
+}
+
+.btn-sair:hover {
+  text-decoration: underline;
+}

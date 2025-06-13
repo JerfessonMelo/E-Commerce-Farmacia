@@ -1,0 +1,41 @@
+.cadastro-produto {
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 30px;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.cadastro-produto h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.cadastro-produto form {
+  display: flex;
+  flex-direction: column;
+}
+
+.cadastro-produto input,
+.cadastro-produto button {
+  padding: 12px;
+  margin-bottom: 15px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.cadastro-produto button {
+  background-color: #e60000;
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+}
+
+.cadastro-produto button:hover {
+  background-color: #cc0000;
+}

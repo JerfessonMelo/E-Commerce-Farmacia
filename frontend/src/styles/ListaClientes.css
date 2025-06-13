@@ -1,0 +1,27 @@
+.lista-clientes {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+.lista-clientes h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.lista-clientes table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.lista-clientes th,
+.lista-clientes td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: left;
+}
+
+.lista-clientes th {
+  background-color: #f4f4f4;
+}
