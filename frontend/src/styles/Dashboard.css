@@ -29,3 +29,38 @@
   margin-bottom: 10px;
   color: #e60000;
 }
+
+.cadastro-produto {
+  margin-top: 30px;
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.cadastro-produto h3 {
+  margin-bottom: 15px;
+  color: #e60000;
+}
+
+.cadastro-produto input {
+  display: block;
+  margin-bottom: 10px;
+  padding: 10px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.cadastro-produto button {
+  padding: 10px 20px;
+  background-color: #e60000;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.cadastro-produto button:hover {
+  background-color: #cc0000;
+}
