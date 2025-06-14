@@ -29,7 +29,7 @@ const Cabecalho = () => {
         {usuario.isAdmin && <Link to="/admin">Painel Admin</Link>}
         {location.pathname !== "/pedido" && <Link to="/pedido">Carrinho</Link>}
         {usuario.email && (
-          <button className="sair-btn" onClick={handleLogout}>
+          <button className="btn-sair" onClick={handleLogout}>
             Sair
           </button>
         )}
