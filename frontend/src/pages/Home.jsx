@@ -5,6 +5,7 @@ import { obterToken, removerToken } from "../services/auth";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "../styles/Home.css";
+console.log("API base:", process.env.REACT_APP_API_URL);
 
 const Home = () => {
   const [produtos, setProdutos] = useState([]);
