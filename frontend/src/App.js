@@ -1,5 +1,4 @@
 import "./styles/App.css";
-import "./styles/Celular.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
@@ -13,6 +12,7 @@ import ListaProdutos from "./pages/painelAdmin/ListaProdutos";
 import ListaPedidos from "./pages/painelAdmin/ListaPedidos";
 import ListaClientes from "./pages/painelAdmin/ListaClientes";
 import Perfil from "./pages/Perfil";
+import "./styles/Celular.css";
 
 function App() {
   return (
