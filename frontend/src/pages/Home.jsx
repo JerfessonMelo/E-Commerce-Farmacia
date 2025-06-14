@@ -11,7 +11,8 @@ const Home = () => {
   const [produtos, setProdutos] = useState([]);
   const navigate = useNavigate();
 
-  const usuario = obterDadosUsuario() || {}; // Isso pode ser null
+  const usuario = obterDadosUsuario() || {};
+  const nomeUsuario = usuario.nome?.split(" ");
 
   useEffect(() => {
     const carregarProdutos = async () => {
@@ -41,11 +42,18 @@ const Home = () => {
         </Link>
         <nav>
           <Link to="/">Início</Link>
+          {usuario.nome && (
+            <span className="usuario-nome">Olá, {nomeUsuario}!</span>
+          )}
           {!usuario.email && <Link to="/login">Entrar</Link>}
           {usuario.email && <Link to="/perfil">Perfil</Link>}
           {usuario.isAdmin && <Link to="/admin">Painel Admin</Link>}
           <Link to="/pedido">Carrinho</Link>
-          {usuario.email && <button onClick={handleLogout}>Sair</button>}
+          {usuario.email && (
+            <button className="sair-btn" onClick={handleLogout}>
+              Sair
+            </button>
+          )}
         </nav>
       </header>
 

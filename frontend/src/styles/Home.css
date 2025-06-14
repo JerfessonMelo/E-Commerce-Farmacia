@@ -71,3 +71,9 @@
 .btn-sair:hover {
   text-decoration: underline;
 }
+
+.usuario-nome {
+  margin-right: 10px;
+  font-weight: bold;
+  color: #fff;
+}
