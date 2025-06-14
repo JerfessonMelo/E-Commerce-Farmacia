@@ -67,16 +67,6 @@ const Home = () => {
         <h2>Produtos em Destaque</h2>
 
         <section className="filtros">
-          <input
-            type="text"
-            placeholder="Buscar por nome..."
-            value={termoBusca}
-            onChange={(e) => {
-              const novaBusca = e.target.value;
-              navigate(`/produtos?busca=${encodeURIComponent(novaBusca)}`);
-            }}
-          />
-
           <select onChange={(e) => setCategoriaSelecionada(e.target.value)}>
             <option value="">Todas as categorias</option>
             <option value="vitaminas">Vitaminas</option>
