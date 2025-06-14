@@ -8,6 +8,35 @@ import "../styles/Perfil.css";
 const Perfil = () => {
   const [usuario, setUsuario] = useState(null);
   const navigate = useNavigate();
+  const [endereco, setEndereco] = useState({
+    rua: "",
+    numero: "",
+    bairro: "",
+    cidade: "",
+    estado: "",
+    cep: "",
+  });
+
+  useEffect(() => {
+    if (usuario?.endereco) {
+      setEndereco(usuario.endereco);
+    }
+  }, [usuario]);
+
+  const atualizarEndereco = async () => {
+    try {
+      const res = await api.put("/usuarios/perfil/endereco", endereco, {
+        headers: {
+          Authorization: `Bearer ${obterToken()}`,
+        },
+      });
+      alert("Endereço atualizado com sucesso!");
+      setUsuario(res.data);
+    } catch (err) {
+      alert("Erro ao atualizar endereço.");
+      console.error(err);
+    }
+  };
 
   useEffect(() => {
     if (!estaAutenticado()) {
