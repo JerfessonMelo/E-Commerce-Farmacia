@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { obterToken } from "../../services/auth";
 import Cabecalho from "../../components/Cabecalho";
 import CadastroProduto from "../../components/CadastroProduto";
+import ContadorSessao from "../../components/ContadorSessao";
 import api from "../../services/api";
 import "../../styles/Dashboard.css";
 
@@ -100,6 +101,7 @@ const Dashboard = () => {
   return (
     <div>
       <Cabecalho />
+      <ContadorSessao />
       <div className="dashboard">
         <h2>Painel Administrativo</h2>
         <div className="dashboard-cards">
