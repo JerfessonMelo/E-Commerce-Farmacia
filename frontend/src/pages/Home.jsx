@@ -56,12 +56,12 @@ const Home = () => {
       <section className="home-produtos">
         <h2>Produtos em Destaque</h2>
         <div className="lista-produtos">
-          {produtos.length > 0 ? (
+          {Array.isArray(produtos) && produtos.length > 0 ? (
             produtos.map((produto) => (
               <ProdutoCard key={produto._id} produto={produto} />
             ))
           ) : (
-            <p>Nenhum produto encontrado.</p>
+            <p>Nenhum produto encontrado ou erro de carregamento.</p>
           )}
         </div>
       </section>
