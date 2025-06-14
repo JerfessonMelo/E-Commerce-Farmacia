@@ -19,8 +19,7 @@ const CadastroUsuario = () => {
   const cadastrar = async (e) => {
     e.preventDefault();
     try {
-      await api.post("/usuarios/registro", form);
-      salvarToken(res.data.token);
+      const res = await api.post("/usuarios/registro", form);
       alert("Usuário cadastrado com sucesso!");
       navigate("/login");
     } catch (err) {
