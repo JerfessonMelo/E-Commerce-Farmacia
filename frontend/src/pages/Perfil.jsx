@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import api from "../services/api";
 import { obterToken, removerToken, estaAutenticado } from "../services/auth";
 import { useNavigate } from "react-router-dom";
-import Cabecalho from "../../components/Cabecalho";
+import Cabecalho from "../components/Cabecalho";
 import CadastroDeEndereco from "../components/CadastroDeEndereco";
 import "../styles/Perfil.css";
 
