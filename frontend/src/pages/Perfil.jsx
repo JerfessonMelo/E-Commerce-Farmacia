@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import api from "../services/api";
 import { obterToken, removerToken, estaAutenticado } from "../services/auth";
 import { useNavigate } from "react-router-dom";
+import CadastroDeEndereco from "../components/CadastroDeEndereco";
 import "../styles/Perfil.css";
 
 const Perfil = () => {
@@ -51,6 +52,11 @@ const Perfil = () => {
       <p>
         <strong>Tipo:</strong> {usuario.isAdmin ? "Administrador" : "Cliente"}
       </p>
+      <CadastroDeEndereco
+        endereco={endereco}
+        setEndereco={setEndereco}
+        onSalvar={atualizarEndereco}
+      />
       <button onClick={sair}>Sair</button>
     </div>
   );

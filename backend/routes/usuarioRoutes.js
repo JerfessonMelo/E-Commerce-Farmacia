@@ -22,6 +22,25 @@ router.post("/registro", async (req, res) => {
   }
 });
 
+router.put("/perfil/endereco", authMiddleware, async (req, res) => {
+  const { rua, numero, bairro, cidade, estado, cep } = req.body;
+  try {
+    const usuarioAtualizado = await Usuario.findByIdAndUpdate(
+      req.usuario.id,
+      {
+        endereco: { rua, numero, bairro, cidade, estado, cep },
+      },
+      { new: true }
+    ).select("-senha");
+
+    res.json(usuarioAtualizado);
+  } catch (err) {
+    res
+      .status(500)
+      .json({ mensagem: "Erro ao atualizar endereço", erro: err.message });
+  }
+});
+
 router.post("/login", async (req, res) => {
   const { email, senha } = req.body;
   console.log("Tentando login com:", email, senha);
