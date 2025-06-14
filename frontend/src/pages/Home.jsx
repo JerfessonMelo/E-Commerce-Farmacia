@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from "react";
 import api from "../services/api";
 import ProdutoCard from "../components/ProdutoCard";
-import { obterToken, removerToken } from "../services/auth";
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { obterToken, removerToken, obterDadosUsuario } from "../services/auth";
+import { useNavigate, Link } from "react-router-dom";
 import "../styles/Home.css";
+
 console.log("API base:", process.env.REACT_APP_API_URL);
 
 const Home = () => {
   const [produtos, setProdutos] = useState([]);
-  const [logado, setLogado] = useState(false);
   const navigate = useNavigate();
+  const usuario = obterDadosUsuario();
 
   useEffect(() => {
-    setLogado(!!obterToken());
     const carregarProdutos = async () => {
       try {
         const resposta = await api.get("/produtos");
@@ -27,7 +26,6 @@ const Home = () => {
 
   const handleLogout = () => {
     removerToken();
-    setLogado(false);
     navigate("/login");
   };
 
@@ -40,16 +38,11 @@ const Home = () => {
         </Link>
         <nav>
           <Link to="/">Início</Link>
-          <Link to="/login">Entrar</Link>
+          {!usuario && <Link to="/login">Entrar</Link>}
+          {usuario && <Link to="/perfil">Perfil</Link>}
+          {usuario?.isAdmin && <Link to="/painel-admin">Painel Admin</Link>}
           <Link to="/pedido">Carrinho</Link>
-          <button
-            onClick={() => {
-              removerToken();
-              window.location.href = "/login";
-            }}
-          >
-            Sair
-          </button>
+          {usuario && <button onClick={handleLogout}>Sair</button>}
         </nav>
       </header>
 
