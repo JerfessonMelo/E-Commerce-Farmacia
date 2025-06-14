@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import api from "../services/api";
 import { obterToken, removerToken, estaAutenticado } from "../services/auth";
 import { useNavigate } from "react-router-dom";
+import Cabecalho from "../../components/Cabecalho";
 import CadastroDeEndereco from "../components/CadastroDeEndereco";
 import "../styles/Perfil.css";
 
@@ -70,23 +71,26 @@ const Perfil = () => {
   if (!usuario) return <p>Carregando...</p>;
 
   return (
-    <div className="perfil">
-      <h2>Meu Perfil</h2>
-      <p>
-        <strong>Nome:</strong> {usuario.nome}
-      </p>
-      <p>
-        <strong>Email:</strong> {usuario.email}
-      </p>
-      <p>
-        <strong>Tipo:</strong> {usuario.isAdmin ? "Administrador" : "Cliente"}
-      </p>
-      <CadastroDeEndereco
-        endereco={endereco}
-        setEndereco={setEndereco}
-        onSalvar={atualizarEndereco}
-      />
-      <button onClick={sair}>Sair</button>
+    <div>
+      <Cabecalho />
+      <div className="perfil">
+        <h2>Meu Perfil</h2>
+        <p>
+          <strong>Nome:</strong> {usuario.nome}
+        </p>
+        <p>
+          <strong>Email:</strong> {usuario.email}
+        </p>
+        <p>
+          <strong>Tipo:</strong> {usuario.isAdmin ? "Administrador" : "Cliente"}
+        </p>
+        <CadastroDeEndereco
+          endereco={endereco}
+          setEndereco={setEndereco}
+          onSalvar={atualizarEndereco}
+        />
+        <button onClick={sair}>Sair</button>
+      </div>
     </div>
   );
 };
