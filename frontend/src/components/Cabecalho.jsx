@@ -21,6 +21,7 @@ const Cabecalho = () => {
         <img src="/logo.png" alt="Drogaria Poupe Já" className="logo" />
       </Link>
       <nav>
+        <ContadorSessao />
         {usuario.nome && (
           <span className="usuario-nome">Olá, {nomeUsuario}!</span>
         )}
@@ -39,7 +40,6 @@ const Cabecalho = () => {
           </button>
         )}
       </nav>
-      <ContadorSessao />
     </header>
   );
 };
