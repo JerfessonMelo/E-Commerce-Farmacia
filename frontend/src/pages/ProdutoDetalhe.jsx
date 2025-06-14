@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import api from "../services/api";
 import { adicionarAoCarrinho } from "../services/carrinho";
-import { obterDadosUsuario } from "../services/auth";
+import Cabecalho from "../components/Cabecalho";
 import "../styles/ProdutoDetalhe.css";
 
 const ProdutoDetalhe = () => {
@@ -30,22 +30,7 @@ const ProdutoDetalhe = () => {
   return (
     <div className="produto-detalhe-container">
       <header className="home-header">
-        <Link to="/">
-          <img src="/logo.png" alt="Drogaria Poupe Já" className="logo" />
-        </Link>
-        <nav>
-          {usuario.nome && (
-            <span className="usuario-nome">Olá, {nomeUsuario}!</span>
-          )}
-          <Link to="/">Início</Link>
-          <Link to="/login">Entrar</Link>
-          <Link to="/pedido">Carrinho</Link>
-          {usuario.email && (
-            <button className="sair-btn" onClick={handleLogout}>
-              Sair
-            </button>
-          )}
-        </nav>
+        <Cabecalho />
       </header>
 
       <div className="detalhe">

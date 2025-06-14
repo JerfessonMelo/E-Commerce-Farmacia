@@ -5,10 +5,9 @@ import {
   limparCarrinho,
 } from "../services/carrinho";
 import { obterToken } from "../services/auth";
-import { obterDadosUsuario } from "../services/auth";
-import { Link } from "react-router-dom";
 import api from "../services/api";
 import "../styles/Pedido.css";
+import Cabecalho from "../components/Cabecalho";
 
 const Pedido = () => {
   const [produtos, setProdutos] = useState([]);
@@ -74,21 +73,7 @@ const Pedido = () => {
   return (
     <>
       <header className="home-header">
-        <Link to="/">
-          <img src="/logo.png" alt="Drogaria Poupe Já" className="logo" />
-        </Link>
-        <nav>
-          {usuario.nome && (
-            <span className="usuario-nome">Olá, {nomeUsuario}!</span>
-          )}
-          <Link to="/">Início</Link>
-          <Link to="/login">Entrar</Link>
-          {usuario.email && (
-            <button className="sair-btn" onClick={handleLogout}>
-              Sair
-            </button>
-          )}
-        </nav>
+        <Cabecalho />
       </header>
 
       <div className="pedido">

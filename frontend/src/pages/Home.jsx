@@ -3,6 +3,7 @@ import api from "../services/api";
 import ProdutoCard from "../components/ProdutoCard";
 import { obterToken, removerToken, obterDadosUsuario } from "../services/auth";
 import { useNavigate, Link } from "react-router-dom";
+import Cabecalho from "../components/Cabecalho";
 import "../styles/Home.css";
 
 console.log("API base:", process.env.REACT_APP_API_URL);
@@ -36,25 +37,8 @@ const Home = () => {
   return (
     <div className="home">
       {/* Cabeçalho */}
-      <header className="home-header">
-        <Link to="/">
-          <img src="/logo.png" alt="Drogaria Poupe Já" className="logo" />
-        </Link>
-        <nav>
-          {usuario.nome && (
-            <span className="usuario-nome">Olá, {nomeUsuario}!</span>
-          )}
-          <Link to="/">Início</Link>
-          {!usuario.email && <Link to="/login">Entrar</Link>}
-          {usuario.email && <Link to="/perfil">Perfil</Link>}
-          {usuario.isAdmin && <Link to="/admin">Painel Admin</Link>}
-          <Link to="/pedido">Carrinho</Link>
-          {usuario.email && (
-            <button className="sair-btn" onClick={handleLogout}>
-              Sair
-            </button>
-          )}
-        </nav>
+      <header className="home">
+        <Cabecalho />
       </header>
 
       {/* Banner */}
