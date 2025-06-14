@@ -21,8 +21,7 @@ const PORT = process.env.PORT || 5000;
 app.use(express.json());
 app.use(
   cors({
-    origin: ["https://e-commerce-farmacia-rho.vercel.app"],
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    origin: ["https://e-commerce-farmacia-oaydekghf.vercel.app/"],
     credentials: true,
   })
 );
