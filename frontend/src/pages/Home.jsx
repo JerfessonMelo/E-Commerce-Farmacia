@@ -37,9 +37,7 @@ const Home = () => {
   return (
     <div className="home">
       {/* Cabeçalho */}
-      <header className="home">
-        <Cabecalho />
-      </header>
+      <Cabecalho />
 
       {/* Banner */}
       <section className="home-banner">

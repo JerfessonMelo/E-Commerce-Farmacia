@@ -6,9 +6,9 @@ import {
 } from "../services/carrinho";
 import { obterToken } from "../services/auth";
 import { obterDadosUsuario } from "../services/auth";
+import Cabecalho from "../components/Cabecalho";
 import api from "../services/api";
 import "../styles/Pedido.css";
-import Cabecalho from "../components/Cabecalho";
 
 const Pedido = () => {
   const [produtos, setProdutos] = useState([]);
@@ -73,9 +73,7 @@ const Pedido = () => {
 
   return (
     <>
-      <header className="home-header">
-        <Cabecalho />
-      </header>
+      <Cabecalho />
 
       <div className="pedido">
         <h2>Seu Pedido</h2>

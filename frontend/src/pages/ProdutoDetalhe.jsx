@@ -30,9 +30,7 @@ const ProdutoDetalhe = () => {
 
   return (
     <div className="produto-detalhe-container">
-      <header className="home-header">
-        <Cabecalho />
-      </header>
+      <Cabecalho />
 
       <div className="detalhe">
         <img
