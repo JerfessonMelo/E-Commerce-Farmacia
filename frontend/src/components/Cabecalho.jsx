@@ -5,6 +5,7 @@ import "../styles/Home.css";
 
 const Cabecalho = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const usuario = obterDadosUsuario() || {};
   const nomeUsuario = usuario.nome?.split(" ");
 
@@ -26,7 +27,7 @@ const Cabecalho = () => {
         {!usuario.email && <Link to="/login">Entrar</Link>}
         {usuario.email && <Link to="/perfil">Perfil</Link>}
         {usuario.isAdmin && <Link to="/admin">Painel Admin</Link>}
-        <Link to="/pedido">Carrinho</Link>
+        {location.pathname !== "/pedido" && <Link to="/pedido">Carrinho</Link>}
         {usuario.email && (
           <button className="sair-btn" onClick={handleLogout}>
             Sair
