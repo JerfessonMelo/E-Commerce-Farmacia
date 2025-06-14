@@ -7,6 +7,7 @@ import "../styles/AuthForm.css";
 
 const Login = () => {
   const [form, setForm] = useState({ email: "", senha: "" });
+  const [erro, setErro] = useState("");
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -15,14 +16,20 @@ const Login = () => {
 
   const logar = async (e) => {
     e.preventDefault();
-    console.log("Tentando login com:", form);
+    setErro("");
     try {
       const res = await api.post("/usuarios/login", form);
       salvarToken(res.data.token);
-      alert("Login realizado!");
-      navigate("/");
+      localStorage.setItem("usuario", JSON.stringify(res.data.usuario));
+      alert("Login realizado com sucesso!");
+
+      if (res.data.usuario.isAdmin) {
+        navigate("/admin");
+      } else {
+        navigate("/");
+      }
     } catch (erro) {
-      alert("Erro ao logar: " + erro.response?.data?.mensagem);
+      setErro(erro.response?.data?.mensagem || "Erro ao realizar login.");
     }
   };
 
@@ -44,6 +51,7 @@ const Login = () => {
           onChange={handleChange}
           required
         />
+        {erro && <p className="erro-texto">{erro}</p>}
         <button type="submit">Entrar</button>
       </form>
       <p className="link-cadastro">

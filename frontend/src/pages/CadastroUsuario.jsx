@@ -10,6 +10,7 @@ const CadastroUsuario = () => {
     senha: "",
   });
 
+  const [erro, setErro] = useState("");
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -18,12 +19,13 @@ const CadastroUsuario = () => {
 
   const cadastrar = async (e) => {
     e.preventDefault();
+    setErro("");
     try {
       await api.post("/usuarios/registro", form);
       alert("Usuário cadastrado com sucesso!");
       navigate("/login");
     } catch (err) {
-      alert("Erro ao cadastrar: " + err.response?.data?.mensagem);
+      setErro(err.response?.data?.mensagem || "Erro ao cadastrar.");
     }
   };
 
@@ -52,6 +54,7 @@ const CadastroUsuario = () => {
           onChange={handleChange}
           required
         />
+        {erro && <p className="erro-texto">{erro}</p>}
         <button type="submit">Cadastrar</button>
       </form>
       <p className="link-login">

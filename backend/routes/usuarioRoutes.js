@@ -6,7 +6,6 @@ const { authMiddleware } = require("../middlewares/authMiddleware");
 
 const router = express.Router();
 
-// Registro
 router.post("/registro", async (req, res) => {
   const { nome, email, senha } = req.body;
   try {
@@ -20,13 +19,10 @@ router.post("/registro", async (req, res) => {
 
     res.status(201).json({ mensagem: "Usuário registrado com sucesso" });
   } catch (err) {
-    res
-      .status(500)
-      .json({ mensagem: "Erro ao registrar usuário", erro: err.message });
+    res.status(500).json({ mensagem: "Erro ao registrar usuário" });
   }
 });
 
-// Login
 router.post("/login", async (req, res) => {
   const { email, senha } = req.body;
   try {
@@ -50,11 +46,10 @@ router.post("/login", async (req, res) => {
       },
     });
   } catch (err) {
-    res.status(500).json({ mensagem: "Erro no login", erro: err.message });
+    res.status(500).json({ mensagem: "Erro no login" });
   }
 });
 
-// Perfil do usuário
 router.get("/perfil", authMiddleware, async (req, res) => {
   const usuario = await Usuario.findById(req.usuario.id).select("-senha");
   res.json(usuario);
