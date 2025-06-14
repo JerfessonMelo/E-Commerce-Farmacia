@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { obterToken } from "../../services/auth";
-import Cabecalho from "../components/Cabecalho";
+import Cabecalho from "../../components/Cabecalho";
 import api from "../../services/api";
 import "../../styles/Dashboard.css";
 
