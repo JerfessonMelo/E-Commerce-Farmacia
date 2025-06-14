@@ -15,6 +15,7 @@ const Login = () => {
 
   const logar = async (e) => {
     e.preventDefault();
+    console.log("Tentando login com:", form);
     try {
       const res = await api.post("/usuarios/login", form);
       salvarToken(res.data.token);
