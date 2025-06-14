@@ -20,21 +20,21 @@ const Dashboard = () => {
     imagemUrl: "",
   });
 
-  useEffect(() => {
-    const carregarDados = async () => {
-      try {
-        const token = obterToken();
-        const res = await api.get("/admin/dashboard", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        setDados(res.data);
-      } catch (erro) {
-        console.error("Erro ao carregar dados do painel:", erro);
-      }
-    };
+  const carregarDados = async () => {
+    try {
+      const token = obterToken();
+      const res = await api.get("/admin/dashboard", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setDados(res.data);
+    } catch (erro) {
+      console.error("Erro ao carregar dados do painel:", erro);
+    }
+  };
 
+  useEffect(() => {
     carregarDados();
   }, []);
 
