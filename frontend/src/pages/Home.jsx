@@ -45,11 +45,7 @@ const Home = () => {
           {usuario.email && <Link to="/perfil">Perfil</Link>}
           {usuario.isAdmin && <Link to="/admin">Painel Admin</Link>}
           <Link to="/pedido">Carrinho</Link>
-          {usuario.email && (
-            <button className="sair-btn" onClick={handleLogout}>
-              Sair
-            </button>
-          )}
+          {usuario.email && <button onClick={handleLogout}>Sair</button>}
         </nav>
       </header>
 
