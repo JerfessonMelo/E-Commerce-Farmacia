@@ -93,7 +93,9 @@ const CadastroProduto = () => {
           />
           Ativo
         </label>
-        <button type="submit">Cadastrar Produto</button>
+        <button onClick={handleCadastrarProduto}>
+          {modoEdicao ? "Salvar Alterações" : "Cadastrar Produto"}
+        </button>
       </form>
     </div>
   );

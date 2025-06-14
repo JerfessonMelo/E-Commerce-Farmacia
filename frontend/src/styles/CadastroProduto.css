@@ -1,38 +1,53 @@
 .cadastro-produto {
-  margin: 50px auto;
-  padding: 30px;
-  background-color: #ffffff;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 30px;
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-.cadastro-produto h2 {
+.cadastro-produto h2,
+.cadastro-produto h3 {
   text-align: center;
   margin-bottom: 20px;
-  color: #333;
+  color: #e60000;
 }
 
 .cadastro-produto form {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: space-between;
 }
 
-.cadastro-produto input,
-.cadastro-produto button {
+.cadastro-produto input {
+  flex: 1 1 48%;
   padding: 12px;
-  margin-bottom: 15px;
   font-size: 16px;
   border-radius: 6px;
   border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.cadastro-produto input:last-child {
+  flex-basis: 100%;
 }
 
 .cadastro-produto button {
+  margin-top: 20px;
+  padding: 12px;
+  width: 100%;
   background-color: #e60000;
   color: #fff;
   font-weight: bold;
   border: none;
+  border-radius: 6px;
   cursor: pointer;
+  font-size: 16px;
 }
 
 .cadastro-produto button:hover {
