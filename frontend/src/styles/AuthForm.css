@@ -69,3 +69,10 @@
     transform: translateY(0);
   }
 }
+
+@media (max-width: 480px) {
+  .auth-form {
+    margin: 20px;
+    padding: 20px;
+  }
+}

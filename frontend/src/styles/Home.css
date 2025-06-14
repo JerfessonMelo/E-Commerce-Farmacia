@@ -147,3 +147,25 @@
   background-color: #e60000;
   color: white;
 }
+
+@media (max-width: 600px) {
+  .home-header {
+    flex-direction: column;
+    height: auto;
+    padding: 10px;
+  }
+
+  .barra-busca {
+    width: 100%;
+    margin: 10px 0;
+  }
+
+  .barra-busca input {
+    width: 100%;
+  }
+
+  .lista-produtos {
+    flex-direction: column;
+    align-items: center;
+  }
+}
