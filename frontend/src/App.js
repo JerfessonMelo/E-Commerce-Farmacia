@@ -7,7 +7,6 @@ import CadastroUsuario from "./pages/CadastroUsuario";
 import ProdutoDetalhe from "./pages/ProdutoDetalhe";
 import Pedido from "./pages/Pedido";
 import Dashboard from "./pages/painelAdmin/Dashboard";
-import CadastroProduto from "./pages/painelAdmin/CadastroProduto";
 import ListaProdutos from "./pages/painelAdmin/ListaProdutos";
 import ListaPedidos from "./pages/painelAdmin/ListaPedidos";
 import ListaClientes from "./pages/painelAdmin/ListaClientes";
@@ -24,7 +23,6 @@ function App() {
         <Route path="/pedido" element={<Pedido />} />
         <Route path="/admin" element={<Dashboard />} />
         <Route path="/admin/produtos" element={<ListaProdutos />} />
-        <Route path="/admin/cadastro-produto" element={<CadastroProduto />} />
         <Route path="/admin/pedidos" element={<ListaPedidos />} />
         <Route path="/admin/clientes" element={<ListaClientes />} />
         <Route path="/perfil" element={<Perfil />} />
