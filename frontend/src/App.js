@@ -12,7 +12,6 @@ import ListaProdutos from "./pages/painelAdmin/ListaProdutos";
 import ListaPedidos from "./pages/painelAdmin/ListaPedidos";
 import ListaClientes from "./pages/painelAdmin/ListaClientes";
 import Perfil from "./pages/Perfil";
-import "./styles/Celular.css";
 
 function App() {
   return (
