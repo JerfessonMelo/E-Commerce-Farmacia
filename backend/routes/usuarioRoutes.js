@@ -13,7 +13,7 @@ router.post("/registro", async (req, res) => {
     if (existente)
       return res.status(400).json({ mensagem: "E-mail já cadastrado" });
 
-    const novoUsuario = new Usuario({ nome, email, senha: hash });
+    const novoUsuario = new Usuario({ nome, email, senha });
     await novoUsuario.save();
 
     res.status(201).json({ mensagem: "Usuário registrado com sucesso" });
