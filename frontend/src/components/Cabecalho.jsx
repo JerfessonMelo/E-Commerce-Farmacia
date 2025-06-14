@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useLocation, Link, useNavigate } from "react-router-dom";
 import { obterDadosUsuario, removerToken } from "../services/auth";
 import ContadorSessao from "./ContadorSessao";
@@ -9,6 +9,11 @@ const Cabecalho = () => {
   const location = useLocation();
   const usuario = obterDadosUsuario() || {};
   const nomeUsuario = usuario.nome?.split(" ");
+  const [busca, setBusca] = useState("");
+
+  const realizarBusca = () => {
+    navigate(`/produtos?busca=${encodeURIComponent(busca)}`);
+  };
 
   const handleLogout = () => {
     removerToken();
@@ -21,6 +26,16 @@ const Cabecalho = () => {
         <img src="/logo.png" alt="Drogaria Poupe Já" className="logo" />
       </Link>
       <ContadorSessao />
+      <div className="barra-busca">
+        <input
+          type="text"
+          placeholder="Buscar produto..."
+          value={busca}
+          onChange={(e) => setBusca(e.target.value)}
+          onKeyDown={(e) => e.key === "Enter" && realizarBusca()}
+        />
+        <button onClick={realizarBusca}>🔍</button>
+      </div>
       <nav>
         {usuario.nome && (
           <span className="usuario-nome">Olá, {nomeUsuario}!</span>
