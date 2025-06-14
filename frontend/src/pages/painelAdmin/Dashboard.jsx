@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { obterToken } from "../services/auth";
+import { obterToken } from "../../services/api";
 import api from "../../services/api";
 import "../../styles/Dashboard.css";
 
