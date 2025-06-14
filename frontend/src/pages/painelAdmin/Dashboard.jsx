@@ -9,7 +9,6 @@ const Dashboard = () => {
     usuarios: 0,
     produtos: 0,
     pedidos: 0,
-    cadastroProdutos: 0,
   });
 
   const [novoProduto, setNovoProduto] = useState({
@@ -85,10 +84,6 @@ const Dashboard = () => {
           <div className="card">
             <h3>Pedidos</h3>
             <p>{dados.pedidos}</p>
-          </div>
-          <div className="card">
-            <h3>Cadastro Produto</h3>
-            <p>{dados.cadastroProdutos}</p>
           </div>
           <div className="cadastro-produto">
             <h3>Cadastrar Novo Produto</h3>
