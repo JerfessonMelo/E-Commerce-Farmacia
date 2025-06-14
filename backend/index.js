@@ -18,8 +18,14 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Middlewares
-app.use(cors());
 app.use(express.json());
+app.use(
+  cors({
+    origin: ["https://e-commerce-farmacia-rho.vercel.app"],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    credentials: true,
+  })
+);
 
 // Rotas da API
 app.use("/api/usuarios", usuarioRoutes);
