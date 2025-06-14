@@ -6,6 +6,7 @@ import "../styles/ContadorSessao.css";
 
 const ContadorSessao = () => {
   const [tempoRestante, setTempoRestante] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   const calcularTempoRestante = () => {
     const token = obterToken();
