@@ -30,21 +30,23 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div className="dashboard">
+    <div>
       <Cabecalho />
-      <h2>Painel Administrativo</h2>
-      <div className="dashboard-cards">
-        <div className="card">
-          <h3>Usuários</h3>
-          <p>{dados.usuarios}</p>
-        </div>
-        <div className="card">
-          <h3>Produtos Ativos</h3>
-          <p>{dados.produtos}</p>
-        </div>
-        <div className="card">
-          <h3>Pedidos</h3>
-          <p>{dados.pedidos}</p>
+      <div className="dashboard">
+        <h2>Painel Administrativo</h2>
+        <div className="dashboard-cards">
+          <div className="card">
+            <h3>Usuários</h3>
+            <p>{dados.usuarios}</p>
+          </div>
+          <div className="card">
+            <h3>Produtos Ativos</h3>
+            <p>{dados.produtos}</p>
+          </div>
+          <div className="card">
+            <h3>Pedidos</h3>
+            <p>{dados.pedidos}</p>
+          </div>
         </div>
       </div>
     </div>
