@@ -7,6 +7,7 @@ import "../styles/ProdutoDetalhe.css";
 const ProdutoDetalhe = () => {
   const { id } = useParams();
   const [produto, setProduto] = useState(null);
+  const usuario = obterDadosUsuario() || {};
   const nomeUsuario = usuario.nome?.split(" ");
 
   useEffect(() => {
@@ -38,6 +39,11 @@ const ProdutoDetalhe = () => {
           <Link to="/">Início</Link>
           <Link to="/login">Entrar</Link>
           <Link to="/pedido">Carrinho</Link>
+          {usuario.email && (
+            <button className="sair-btn" onClick={handleLogout}>
+              Sair
+            </button>
+          )}
         </nav>
       </header>
 

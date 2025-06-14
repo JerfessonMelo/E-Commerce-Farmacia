@@ -15,6 +15,7 @@ const Pedido = () => {
   const [enderecoEntrega, setEnderecoEntrega] = useState("");
   const [freteInfo, setFreteInfo] = useState(null);
   const [frete, setFrete] = useState(0);
+  const usuario = obterDadosUsuario() || {};
   const nomeUsuario = usuario.nome?.split(" ");
 
   useEffect(() => {
@@ -81,6 +82,11 @@ const Pedido = () => {
           )}
           <Link to="/">Início</Link>
           <Link to="/login">Entrar</Link>
+          {usuario.email && (
+            <button className="sair-btn" onClick={handleLogout}>
+              Sair
+            </button>
+          )}
         </nav>
       </header>
 
