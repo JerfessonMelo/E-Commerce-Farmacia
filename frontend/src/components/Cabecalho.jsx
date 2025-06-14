@@ -1,6 +1,7 @@
 import React from "react";
 import { useLocation, Link, useNavigate } from "react-router-dom";
 import { obterDadosUsuario, removerToken } from "../services/auth";
+import ContadorSessao from "./ContadorSessao";
 import "../styles/Home.css";
 
 const Cabecalho = () => {
@@ -38,6 +39,7 @@ const Cabecalho = () => {
           </button>
         )}
       </nav>
+      <ContadorSessao />
     </header>
   );
 };

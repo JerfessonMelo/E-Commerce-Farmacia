@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import { obterToken, salvarToken } from "../services/auth";
 import api from "../services/api";
+import "../styles/ContadorSessao.css";
 
 const ContadorSessao = () => {
   const [tempoRestante, setTempoRestante] = useState(null);
@@ -12,6 +13,7 @@ const ContadorSessao = () => {
 
     try {
       const decoded = jwtDecode(token);
+      setIsAdmin(decoded.isAdmin);
       const exp = decoded.exp * 1000;
       const agora = Date.now();
       const restante = exp - agora;
@@ -52,18 +54,17 @@ const ContadorSessao = () => {
     }
   };
 
-  if (tempoRestante === null) return null;
+  if (!isAdmin || tempoRestante === null) return null;
 
   return (
-    <div style={{ margin: "1rem", padding: "1rem", border: "1px solid gray" }}>
-      <strong>Tempo restante da sessão:</strong>{" "}
-      {tempoRestante > 0 ? formatarTempo(tempoRestante) : "Expirada"}
-      <button
-        onClick={renovarSessao}
-        style={{ marginLeft: "1rem", padding: "0.5rem" }}
-      >
-        Renovar Sessão (+1h)
-      </button>
+    <div className="contador-sessao">
+      <span>
+        Sessão expira em:{" "}
+        <strong>
+          {tempoRestante > 0 ? formatarTempo(tempoRestante) : "Expirada"}
+        </strong>
+      </span>
+      <button onClick={renovarSessao}>Renovar (+1h)</button>
     </div>
   );
 };
