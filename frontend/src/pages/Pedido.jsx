@@ -15,6 +15,7 @@ const Pedido = () => {
   const [enderecoEntrega, setEnderecoEntrega] = useState("");
   const [freteInfo, setFreteInfo] = useState(null);
   const [frete, setFrete] = useState(0);
+  const nomeUsuario = usuario.nome?.split(" ");
 
   useEffect(() => {
     setProdutos(obterCarrinho());
@@ -75,6 +76,9 @@ const Pedido = () => {
           <img src="/logo.png" alt="Drogaria Poupe Já" className="logo" />
         </Link>
         <nav>
+          {usuario.nome && (
+            <span className="usuario-nome">Olá, {nomeUsuario}!</span>
+          )}
           <Link to="/">Início</Link>
           <Link to="/login">Entrar</Link>
         </nav>

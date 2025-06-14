@@ -7,6 +7,7 @@ import "../styles/ProdutoDetalhe.css";
 const ProdutoDetalhe = () => {
   const { id } = useParams();
   const [produto, setProduto] = useState(null);
+  const nomeUsuario = usuario.nome?.split(" ");
 
   useEffect(() => {
     const carregarProduto = async () => {
@@ -31,6 +32,9 @@ const ProdutoDetalhe = () => {
           <img src="/logo.png" alt="Drogaria Poupe Já" className="logo" />
         </Link>
         <nav>
+          {usuario.nome && (
+            <span className="usuario-nome">Olá, {nomeUsuario}!</span>
+          )}
           <Link to="/">Início</Link>
           <Link to="/login">Entrar</Link>
           <Link to="/pedido">Carrinho</Link>
