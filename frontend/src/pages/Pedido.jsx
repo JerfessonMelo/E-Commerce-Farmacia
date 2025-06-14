@@ -5,6 +5,7 @@ import {
   limparCarrinho,
 } from "../services/carrinho";
 import { obterToken } from "../services/auth";
+import { obterDadosUsuario } from "../services/auth";
 import { Link } from "react-router-dom";
 import api from "../services/api";
 import "../styles/Pedido.css";

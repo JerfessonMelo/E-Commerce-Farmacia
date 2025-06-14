@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import api from "../services/api";
 import { adicionarAoCarrinho } from "../services/carrinho";
+import { obterDadosUsuario } from "../services/auth";
 import "../styles/ProdutoDetalhe.css";
 
 const ProdutoDetalhe = () => {
