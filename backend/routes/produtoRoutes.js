@@ -1,11 +1,10 @@
 const express = require("express");
+const router = express.Router();
 const Produto = require("../models/Produto");
 const {
   authMiddleware,
   adminMiddleware,
 } = require("../middlewares/authMiddleware");
-
-const router = express.Router();
 
 // 🔓 Listar produtos ativos (visível para todos os usuários)
 router.get("/", async (req, res) => {
