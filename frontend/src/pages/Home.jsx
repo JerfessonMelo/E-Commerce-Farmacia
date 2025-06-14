@@ -10,17 +10,20 @@ console.log("API base:", process.env.REACT_APP_API_URL);
 const Home = () => {
   const [produtos, setProdutos] = useState([]);
   const navigate = useNavigate();
-  const usuario = obterDadosUsuario();
+
+  const usuario = obterDadosUsuario(); // Isso pode ser null
 
   useEffect(() => {
     const carregarProdutos = async () => {
       try {
         const resposta = await api.get("/produtos");
+        console.log("Produtos carregados:", resposta.data); // Debug
         setProdutos(resposta.data);
       } catch (erro) {
         console.error("Erro ao carregar produtos:", erro);
       }
     };
+
     carregarProdutos();
   }, []);
 
@@ -56,12 +59,12 @@ const Home = () => {
       <section className="home-produtos">
         <h2>Produtos em Destaque</h2>
         <div className="lista-produtos">
-          {Array.isArray(produtos) && produtos.length > 0 ? (
+          {produtos.length > 0 ? (
             produtos.map((produto) => (
               <ProdutoCard key={produto._id} produto={produto} />
             ))
           ) : (
-            <p>Nenhum produto encontrado ou erro de carregamento.</p>
+            <p>Nenhum produto encontrado.</p>
           )}
         </div>
       </section>
