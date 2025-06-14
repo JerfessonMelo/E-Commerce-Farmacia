@@ -20,8 +20,8 @@ const Cabecalho = () => {
       <Link to="/">
         <img src="/logo.png" alt="Drogaria Poupe Já" className="logo" />
       </Link>
+      <ContadorSessao />
       <nav>
-        <ContadorSessao />
         {usuario.nome && (
           <span className="usuario-nome">Olá, {nomeUsuario}!</span>
         )}
