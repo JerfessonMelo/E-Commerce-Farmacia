@@ -33,7 +33,7 @@ const ProdutoDetalhe = () => {
         <nav>
           <Link to="/">Início</Link>
           <Link to="/login">Entrar</Link>
-          <Link to="/pedido">🛒 Carrinho</Link>
+          <Link to="/pedido">Carrinho</Link>
         </nav>
       </header>
 
