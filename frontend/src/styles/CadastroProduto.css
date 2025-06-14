@@ -53,3 +53,13 @@
 .cadastro-produto button:hover {
   background-color: #cc0000;
 }
+
+.cadastro-produto .cancelar-btn {
+  background-color: #bbb;
+  color: #333;
+  margin-top: 10px;
+}
+
+.cadastro-produto .cancelar-btn:hover {
+  background-color: #999;
+}

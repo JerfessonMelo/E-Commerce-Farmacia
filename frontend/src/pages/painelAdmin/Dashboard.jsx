@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { obterToken } from "../../services/auth";
 import Cabecalho from "../../components/Cabecalho";
-import FormularioProduto from "../../components/FormularioProduto";
+import CadastroProduto from "../../components/CadastroProduto";
 import api from "../../services/api";
 import "../../styles/Dashboard.css";
 
@@ -120,12 +120,12 @@ const Dashboard = () => {
         <div className="cadastro-produto">
           <h3>{modoEdicao ? "Editar Produto" : "Cadastrar Novo Produto"}</h3>
 
-          <FormularioProduto
-            novoProduto={novoProduto}
-            setNovoProduto={setNovoProduto}
-            handleSalvarProduto={handleCadastrarProduto}
+          <CadastroProduto
+            produtoInicial={novoProduto}
+            setProduto={setNovoProduto}
             modoEdicao={modoEdicao}
-            cancelarEdicao={() => {
+            onSalvar={handleCadastrarProduto}
+            onCancelar={() => {
               setModoEdicao(false);
               setIdProdutoEditando(null);
               setNovoProduto({
