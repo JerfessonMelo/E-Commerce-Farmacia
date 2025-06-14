@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import jwt_decode from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 import { obterToken, salvarToken } from "../services/auth";
 import api from "../services/api";
 
@@ -11,8 +11,8 @@ const ContadorSessao = () => {
     if (!token) return;
 
     try {
-      const decoded = jwt_decode(token);
-      const exp = decoded.exp * 1000; // JWT exp é em segundos
+      const decoded = jwtDecode(token);
+      const exp = decoded.exp * 1000;
       const agora = Date.now();
       const restante = exp - agora;
       setTempoRestante(restante > 0 ? restante : 0);
