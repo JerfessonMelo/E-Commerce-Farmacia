@@ -12,7 +12,8 @@ const Cabecalho = () => {
   const [busca, setBusca] = useState("");
 
   const realizarBusca = () => {
-    navigate(`/produtos?busca=${encodeURIComponent(busca)}`);
+    const destino = location.pathname === "/" ? "/" : "/produtos";
+    navigate(`${destino}?busca=${encodeURIComponent(busca)}`);
   };
 
   const handleLogout = () => {

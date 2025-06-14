@@ -2,64 +2,122 @@ import React, { useEffect, useState } from "react";
 import api from "../services/api";
 import ProdutoCard from "../components/ProdutoCard";
 import { obterToken, removerToken, obterDadosUsuario } from "../services/auth";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 import Cabecalho from "../components/Cabecalho";
 import "../styles/Home.css";
 
-console.log("API base:", process.env.REACT_APP_API_URL);
-
 const Home = () => {
   const [produtos, setProdutos] = useState([]);
-  const navigate = useNavigate();
+  const [categoriaSelecionada, setCategoriaSelecionada] = useState("");
+  const [ordenacao, setOrdenacao] = useState("");
+  const [paginaAtual, setPaginaAtual] = useState(1);
+  const itensPorPagina = 6;
 
+  const navigate = useNavigate();
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const termoBusca = params.get("busca")?.toLowerCase() || "";
   const usuario = obterDadosUsuario() || {};
-  const nomeUsuario = usuario.nome?.split(" ");
 
   useEffect(() => {
     const carregarProdutos = async () => {
       try {
         const resposta = await api.get("/produtos");
-        console.log("Produtos carregados:", resposta.data); // Debug
         setProdutos(resposta.data);
       } catch (erro) {
         console.error("Erro ao carregar produtos:", erro);
       }
     };
-
     carregarProdutos();
   }, []);
 
-  const handleLogout = () => {
-    removerToken();
-    navigate("/login");
-  };
+  let filtrados = produtos
+    .filter((p) =>
+      [p.nome, p.descricao, p.marca].some((campo) =>
+        campo?.toLowerCase().includes(termoBusca)
+      )
+    )
+    .filter((p) =>
+      categoriaSelecionada
+        ? p.categoria?.toLowerCase() === categoriaSelecionada
+        : true
+    );
+
+  if (ordenacao === "nome-asc")
+    filtrados.sort((a, b) => a.nome.localeCompare(b.nome));
+  if (ordenacao === "nome-desc")
+    filtrados.sort((a, b) => b.nome.localeCompare(a.nome));
+  if (ordenacao === "preco-asc") filtrados.sort((a, b) => a.preco - b.preco);
+  if (ordenacao === "preco-desc") filtrados.sort((a, b) => b.preco - a.preco);
+
+  const inicio = (paginaAtual - 1) * itensPorPagina;
+  const fim = inicio + itensPorPagina;
+  const paginaProdutos = filtrados.slice(inicio, fim);
 
   return (
     <div className="home">
-      {/* Cabeçalho */}
       <Cabecalho />
 
-      {/* Banner */}
       <section className="home-banner">
         <h1>Bem-vindo à Drogaria Poupe Já</h1>
         <p>Os melhores preços em medicamentos e saúde para sua família</p>
       </section>
 
-      {/* Lista de Produtos */}
       <section className="home-produtos">
         <h2>Produtos em Destaque</h2>
+
+        <section className="filtros">
+          <input
+            type="text"
+            placeholder="Buscar por nome..."
+            value={termoBusca}
+            onChange={(e) => {
+              const novaBusca = e.target.value;
+              navigate(`/produtos?busca=${encodeURIComponent(novaBusca)}`);
+            }}
+          />
+
+          <select onChange={(e) => setCategoriaSelecionada(e.target.value)}>
+            <option value="">Todas as categorias</option>
+            <option value="vitaminas">Vitaminas</option>
+            <option value="analgésicos">Analgésicos</option>
+            <option value="higiene">Higiene</option>
+          </select>
+
+          <select onChange={(e) => setOrdenacao(e.target.value)}>
+            <option value="">Ordenar por</option>
+            <option value="nome-asc">Nome (A-Z)</option>
+            <option value="nome-desc">Nome (Z-A)</option>
+            <option value="preco-asc">Preço (menor)</option>
+            <option value="preco-desc">Preço (maior)</option>
+          </select>
+        </section>
+
         <div className="lista-produtos">
-          {produtos.length > 0 ? (
-            produtos.map((produto) => (
+          {paginaProdutos.length > 0 ? (
+            paginaProdutos.map((produto) => (
               <ProdutoCard key={produto._id} produto={produto} />
             ))
           ) : (
-            <p>Nenhum produto encontrado.</p>
+            <p>Nenhum produto encontrado para "{termoBusca}".</p>
           )}
+        </div>
+
+        <div className="paginacao">
+          {Array.from({
+            length: Math.ceil(filtrados.length / itensPorPagina),
+          }).map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setPaginaAtual(i + 1)}
+              className={paginaAtual === i + 1 ? "ativo" : ""}
+            >
+              {i + 1}
+            </button>
+          ))}
         </div>
       </section>
 
-      {/* Rodapé */}
       <footer className="home-footer">
         <p>
           &copy; {new Date().getFullYear()} Drogaria Poupe Já. Todos os direitos
