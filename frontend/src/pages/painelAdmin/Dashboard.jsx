@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { obterToken } from "../services/auth";
 import api from "../../services/api";
 import "../../styles/Dashboard.css";
 
@@ -12,6 +13,7 @@ const Dashboard = () => {
   useEffect(() => {
     const carregarDados = async () => {
       try {
+        const token = obterToken();
         const res = await api.get("/admin/dashboard");
         setDados(res.data);
       } catch (erro) {
