@@ -48,10 +48,3 @@
 .produto-card button:hover {
   background-color: #cc0000;
 }
-
-@media (max-width: 600px) {
-  .produto-card {
-    width: 100%;
-    max-width: 300px;
-  }
-}
