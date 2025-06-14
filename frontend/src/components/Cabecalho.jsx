@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { obterDadosUsuario, removerToken } from "../services/auth";
-import "../styles/Header.css";
+import "../styles/Home.css";
 
 const Cabecalho = () => {
   const navigate = useNavigate();
