@@ -18,6 +18,23 @@ router.get("/todos", authMiddleware, adminMiddleware, async (req, res) => {
   res.json(produtos);
 });
 
+// 🔓 Buscar um produto por ID (visível para todos os usuários)
+router.get("/:id", async (req, res) => {
+  try {
+    const produto = await Produto.findById(req.params.id);
+
+    if (!produto || !produto.ativo) {
+      return res.status(404).json({ mensagem: "Produto não encontrado" });
+    }
+
+    res.json(produto);
+  } catch (err) {
+    return res
+      .status(500)
+      .json({ mensagem: "Erro ao buscar produto", erro: err.message });
+  }
+});
+
 // 🔐 Alterar status (ativo/inativo) de um produto
 router.put("/:id/status", authMiddleware, adminMiddleware, async (req, res) => {
   const { ativo } = req.body;
