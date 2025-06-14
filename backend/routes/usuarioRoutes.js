@@ -13,7 +13,6 @@ router.post("/registro", async (req, res) => {
     if (existente)
       return res.status(400).json({ mensagem: "E-mail já cadastrado" });
 
-    const hash = await bcrypt.hash(senha, 10);
     const novoUsuario = new Usuario({ nome, email, senha: hash });
     await novoUsuario.save();
 

@@ -8,7 +8,6 @@ const usuarioSchema = new mongoose.Schema({
   isAdmin: { type: Boolean, default: false },
 });
 
-// Criptografar senha antes de salvar
 usuarioSchema.pre("save", async function (next) {
   if (!this.isModified("senha")) return next();
   this.senha = await bcrypt.hash(this.senha, 10);
