@@ -41,10 +41,10 @@ const Home = () => {
           <img src="/logo.png" alt="Drogaria Poupe Já" className="logo" />
         </Link>
         <nav>
-          <Link to="/">Início</Link>
           {usuario.nome && (
             <span className="usuario-nome">Olá, {nomeUsuario}!</span>
           )}
+          <Link to="/">Início</Link>
           {!usuario.email && <Link to="/login">Entrar</Link>}
           {usuario.email && <Link to="/perfil">Perfil</Link>}
           {usuario.isAdmin && <Link to="/admin">Painel Admin</Link>}
