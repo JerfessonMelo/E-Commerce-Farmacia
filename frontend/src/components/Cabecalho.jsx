@@ -51,19 +51,19 @@ const Cabecalho = () => {
         <button onClick={realizarBusca}>🔍</button>
       </div>
       <nav>
-        {usuario.nome && (
-          <span className="usuario-nome">Olá, {nomeUsuario}!</span>
+        {usuario?.nome && (
+          <span className="usuario-nome">Olá, {nomeUsuario[0]}!</span>
         )}
         <Link to="/">Início</Link>
-        {!usuario.email && <Link to="/login">Entrar</Link>}
-        {usuario.email && <Link to="/perfil">Perfil</Link>}
+        {!usuario?.email && <Link to="/login">Entrar</Link>}
+        {usuario?.email && <Link to="/perfil">Perfil</Link>}
         {location.pathname !== "/pedido" && location.pathname !== "/admin" && (
           <Link to="/pedido">Carrinho</Link>
         )}
-        {usuario.isAdmin && location.pathname !== "/admin" && (
+        {usuario?.isAdmin && location.pathname !== "/admin" && (
           <Link to="/admin">Painel Admin</Link>
         )}
-        {usuario && (
+        {usuario?.email && (
           <button className="btn-sair" onClick={handleLogout}>
             Sair
           </button>
