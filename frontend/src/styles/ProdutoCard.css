@@ -1,11 +1,13 @@
 .produto-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 16px;
-  width: 200px;
-  background-color: white;
-  text-align: center;
-  transition: box-shadow 0.3s;
+  border-radius: 10px;
+  padding: 15px;
+  margin: 10px;
+  width: 220px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .produto-card:hover {
@@ -47,6 +49,15 @@
 
 .produto-card button:hover {
   background-color: #cc0000;
+}
+
+.imagem-produto {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 10px;
 }
 
 @media (max-width: 600px) {
