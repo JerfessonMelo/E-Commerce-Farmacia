@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
+const path = require("path");
 const conectarDB = require("./config/db");
 const usuarioRoutes = require("./routes/usuarioRoutes");
 const produtoRoutes = require("./routes/produtoRoutes");
@@ -23,6 +24,7 @@ app.use(
   })
 );
 
+app.use("/produtos", express.static(path.join(__dirname, "public/produtos")));
 app.use("/api/usuarios", usuarioRoutes);
 app.use("/api/produtos", produtoRoutes);
 app.use("/api/pedidos", pedidoRoutes);
