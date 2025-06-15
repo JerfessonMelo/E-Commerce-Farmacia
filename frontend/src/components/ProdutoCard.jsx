@@ -8,9 +8,9 @@ const ProdutoCard = ({ produto }) => {
   return (
     <div className="produto-card">
       <img
-        src={produto.imagemUrl || "/sem-imagem.png"}
+        src={`https://e-commerce-farmacia.onrender.com${produto.imagemUrl}`}
         alt={produto.nome}
-        className="produto-img"
+        className="imagem-produto"
       />
       <h3>{produto.nome}</h3>
       <p>Marca: {produto.marca}</p>

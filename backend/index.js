@@ -24,7 +24,7 @@ app.use(
   })
 );
 
-app.use("/produtos", express.static(path.join(__dirname, "public/produtos")));
+app.use("/produtos", express.static("public/produtos"));
 app.use("/api/usuarios", usuarioRoutes);
 app.use("/api/produtos", produtoRoutes);
 app.use("/api/pedidos", pedidoRoutes);
