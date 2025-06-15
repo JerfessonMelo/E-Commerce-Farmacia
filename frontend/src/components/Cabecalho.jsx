@@ -1,16 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, Link, useNavigate } from "react-router-dom";
-import { obterDadosUsuario, removerToken } from "../services/auth";
+import {
+  obterDadosUsuario,
+  estaAutenticado,
+  removerToken,
+} from "../services/auth";
 import ContadorSessao from "./ContadorSessao";
 import "../styles/Home.css";
 
 const Cabecalho = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const usuario = obterDadosUsuario();
-  const nomeUsuario = usuario?.nome?.split(" ");
+  const [usuario, setUsuario] = useState(null);
   const [busca, setBusca] = useState("");
 
+  useEffect(() => {
+    if (estaAutenticado()) {
+      setUsuario(obterDadosUsuario());
+    } else {
+      setUsuario(null);
+    }
+  }, [location.pathname]);
+
+  const nomeUsuario = usuario?.nome?.split(" ");
   const realizarBusca = () => {
     const destino = location.pathname === "/" ? "/" : "/produtos";
     navigate(`${destino}?busca=${encodeURIComponent(busca)}`);
@@ -18,6 +30,7 @@ const Cabecalho = () => {
 
   const handleLogout = () => {
     removerToken();
+    setUsuario(null);
     navigate("/login");
   };
 

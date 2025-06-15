@@ -11,7 +11,7 @@ const Home = () => {
   const [categoriaSelecionada, setCategoriaSelecionada] = useState("");
   const [ordenacao, setOrdenacao] = useState("");
   const [paginaAtual, setPaginaAtual] = useState(1);
-  const itensPorPagina = 24;
+  const itensPorPagina = 12;
 
   const navigate = useNavigate();
   const location = useLocation();
