@@ -47,13 +47,13 @@
 .produto-img-wrapper {
   width: 150px;
   height: 150px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   background-color: white;
   border-radius: 6px;
   overflow: hidden;
   margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .imagem-produto {
@@ -61,11 +61,4 @@
   max-height: 100%;
   object-fit: contain;
   display: block;
-}
-
-@media (max-width: 600px) {
-  .produto-card {
-    width: 100%;
-    max-width: 300px;
-  }
 }
