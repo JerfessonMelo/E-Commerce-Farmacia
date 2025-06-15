@@ -1,3 +1,5 @@
+const multer = require("multer");
+const path = require("path");
 const express = require("express");
 const router = express.Router();
 const Produto = require("../models/Produto");
@@ -6,27 +8,34 @@ const {
   adminMiddleware,
 } = require("../middlewares/authMiddleware");
 
-// 🔓 Listar produtos ativos (visível para todos os usuários)
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "public/produtos/");
+  },
+  filename: (req, file, cb) => {
+    const uniqueName =
+      Date.now() + "-" + file.originalname.replace(/\s+/g, "_");
+    cb(null, uniqueName);
+  },
+});
+const upload = multer({ storage });
+
 router.get("/", async (req, res) => {
   const produtos = await Produto.find({ ativo: true });
   res.json(produtos);
 });
 
-// 🔐 Listar todos os produtos (admin)
 router.get("/todos", authMiddleware, adminMiddleware, async (req, res) => {
-  const produtos = await Produto.find(); // Ativos e inativos
+  const produtos = await Produto.find();
   res.json(produtos);
 });
 
-// 🔓 Buscar um produto por ID (visível para todos os usuários)
 router.get("/:id", async (req, res) => {
   try {
     const produto = await Produto.findById(req.params.id);
-
     if (!produto || !produto.ativo) {
       return res.status(404).json({ mensagem: "Produto não encontrado" });
     }
-
     res.json(produto);
   } catch (err) {
     return res
@@ -35,7 +44,6 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// 🔐 Alterar status (ativo/inativo) de um produto
 router.put("/:id/status", authMiddleware, adminMiddleware, async (req, res) => {
   const { ativo } = req.body;
   const produto = await Produto.findByIdAndUpdate(
@@ -46,18 +54,33 @@ router.put("/:id/status", authMiddleware, adminMiddleware, async (req, res) => {
   res.json(produto);
 });
 
-// 🔐 Criar novo produto (admin)
-router.post("/", authMiddleware, adminMiddleware, async (req, res) => {
-  try {
-    const novo = new Produto(req.body);
-    await novo.save();
-    res.status(201).json(novo);
-  } catch (err) {
-    res.status(500).json({
-      mensagem: "Erro ao criar produto",
-      erro: err.message,
-    });
+router.post(
+  "/",
+  authMiddleware,
+  adminMiddleware,
+  upload.single("imagem"),
+  async (req, res) => {
+    try {
+      const { nome, descricao, preco, marca } = req.body;
+      const imagemUrl = req.file ? `/produtos/${req.file.filename}` : "";
+
+      const novoProduto = new Produto({
+        nome,
+        descricao,
+        preco,
+        marca,
+        imagemUrl,
+      });
+
+      await novoProduto.save();
+      res.status(201).json(novoProduto);
+    } catch (err) {
+      res.status(500).json({
+        mensagem: "Erro ao criar produto",
+        erro: err.message,
+      });
+    }
   }
-});
+);
 
 module.exports = router;
