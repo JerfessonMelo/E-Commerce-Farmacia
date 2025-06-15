@@ -7,11 +7,13 @@ const ProdutoCard = ({ produto }) => {
 
   return (
     <div className="produto-card">
-      <img
-        src={`https://e-commerce-farmacia.onrender.com${produto.imagemUrl}`}
-        alt={produto.nome}
-        className="imagem-produto"
-      />
+      <div className="produto-img-wrapper">
+        <img
+          src={`https://e-commerce-farmacia.onrender.com${produto.imagemUrl}`}
+          alt={produto.nome}
+          className="imagem-produto"
+        />
+      </div>
       <h3>{produto.nome}</h3>
       <p>Marca: {produto.marca}</p>
       <p className="preco">R$ {produto.preco.toFixed(2)}</p>
