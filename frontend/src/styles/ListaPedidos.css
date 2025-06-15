@@ -29,3 +29,15 @@
 .lista-pedidos ul {
   padding-left: 20px;
 }
+
+@media (max-width: 600px) {
+  .lista-pedidos {
+    margin: 20px;
+    padding: 10px;
+  }
+
+  .lista-pedidos table {
+    display: block;
+    overflow-x: auto;
+  }
+}

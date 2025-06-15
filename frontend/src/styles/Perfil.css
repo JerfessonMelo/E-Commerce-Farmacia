@@ -31,3 +31,10 @@
 .perfil button:hover {
   background-color: #cc0000;
 }
+
+@media (max-width: 600px) {
+  .perfil {
+    margin: 20px;
+    padding: 20px;
+  }
+}

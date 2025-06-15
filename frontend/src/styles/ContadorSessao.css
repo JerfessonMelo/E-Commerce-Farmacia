@@ -24,3 +24,11 @@
 .contador-sessao button:hover {
   background-color: #c20011;
 }
+
+@media (max-width: 600px) {
+  .contador-sessao {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}

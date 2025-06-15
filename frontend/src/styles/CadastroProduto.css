@@ -63,3 +63,13 @@
 .cadastro-produto .cancelar-btn:hover {
   background-color: #999;
 }
+
+@media (max-width: 600px) {
+  .cadastro-produto form {
+    flex-direction: column;
+  }
+
+  .cadastro-produto input {
+    flex-basis: 100%;
+  }
+}

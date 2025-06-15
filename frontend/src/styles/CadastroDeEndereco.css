@@ -32,3 +32,11 @@
 .form-endereco button:hover {
   background-color: #c20011;
 }
+
+@media (max-width: 600px) {
+  .form-endereco {
+    margin: 20px auto;
+    padding: 10px;
+    width: 100%;
+  }
+}
