@@ -7,8 +7,8 @@ import "../styles/Home.css";
 const Cabecalho = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const usuario = obterDadosUsuario() || {};
-  const nomeUsuario = usuario.nome?.split(" ");
+  const usuario = obterDadosUsuario();
+  const nomeUsuario = usuario?.nome?.split(" ");
   const [busca, setBusca] = useState("");
 
   const realizarBusca = () => {
