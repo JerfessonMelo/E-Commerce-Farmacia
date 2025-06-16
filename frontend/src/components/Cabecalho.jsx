@@ -64,9 +64,9 @@ const Cabecalho = () => {
           <Link to="/admin">Painel Admin</Link>
         )}
         {usuario?.email && (
-          <button className="btn-sair" onClick={handleLogout}>
+          <Link to="#" className="btn-sair" onClick={handleLogout}>
             Sair
-          </button>
+          </Link>
         )}
       </nav>
     </header>
