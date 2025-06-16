@@ -1,14 +1,11 @@
 import React, { useState } from "react";
 import api from "../services/api";
-import { useNavigate } from "react-router-dom";
 import { salvarToken } from "../services/auth";
-import { Link } from "react-router-dom";
 import "../styles/AuthForm.css";
 
-const Login = () => {
+const FormularioLogin = ({ trocarParaCadastro, aoLogar }) => {
   const [form, setForm] = useState({ email: "", senha: "" });
   const [erro, setErro] = useState("");
-  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -22,12 +19,7 @@ const Login = () => {
       salvarToken(res.data.token);
       localStorage.setItem("usuario", JSON.stringify(res.data.usuario));
       alert("Login realizado com sucesso!");
-
-      if (res.data.usuario.isAdmin) {
-        navigate("/admin");
-      } else {
-        navigate("/");
-      }
+      aoLogar(res.data.usuario); // Fecha o menu lateral e redireciona
     } catch (erro) {
       setErro(erro.response?.data?.mensagem || "Erro ao realizar login.");
     }
@@ -52,16 +44,22 @@ const Login = () => {
           required
         />
         {erro && <p className="erro-texto">{erro}</p>}
-        <button type="submit">Entrar</button>
+        <button type="submit" className="btn-vermelho">
+          Entrar
+        </button>
       </form>
       <p className="link-cadastro">
         Não tem conta?
-        <Link to="/cadastro" className="btn-cadastro">
+        <button
+          type="button"
+          className="btn-cadastro"
+          onClick={trocarParaCadastro}
+        >
           Cadastre-se
-        </Link>
+        </button>
       </p>
     </div>
   );
 };
 
-export default Login;
+export default FormularioLogin;

@@ -1,17 +1,14 @@
 import React, { useState } from "react";
 import api from "../services/api";
-import { useNavigate, Link } from "react-router-dom";
 import "../styles/AuthForm.css";
 
-const CadastroUsuario = () => {
+const FormularioCadastro = ({ trocarParaLogin }) => {
   const [form, setForm] = useState({
     nome: "",
     email: "",
     senha: "",
   });
-
   const [erro, setErro] = useState("");
-  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -23,7 +20,7 @@ const CadastroUsuario = () => {
     try {
       await api.post("/usuarios/registro", form);
       alert("Usuário cadastrado com sucesso!");
-      navigate("/login");
+      trocarParaLogin();
     } catch (err) {
       setErro(err.response?.data?.mensagem || "Erro ao cadastrar.");
     }
@@ -55,16 +52,22 @@ const CadastroUsuario = () => {
           required
         />
         {erro && <p className="erro-texto">{erro}</p>}
-        <button type="submit">Cadastrar</button>
+        <button type="submit" className="btn-vermelho">
+          Cadastrar
+        </button>
       </form>
       <p className="link-login">
         Já tem conta?
-        <Link to="/login" className="btn-cadastro">
+        <button
+          type="button"
+          className="btn-cadastro"
+          onClick={trocarParaLogin}
+        >
           Faça login
-        </Link>
+        </button>
       </p>
     </div>
   );
 };
 
-export default CadastroUsuario;
+export default FormularioCadastro;
