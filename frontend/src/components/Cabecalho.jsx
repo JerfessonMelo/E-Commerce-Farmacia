@@ -6,7 +6,7 @@ import {
   removerToken,
 } from "../services/auth";
 import ContadorSessao from "./ContadorSessao";
-import "../styles/Home.css";
+import "../styles/Cabecalho.css";
 
 const Cabecalho = () => {
   const navigate = useNavigate();

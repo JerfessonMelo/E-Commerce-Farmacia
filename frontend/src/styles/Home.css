@@ -6,44 +6,6 @@ body {
   font-family: var(--font-family-base);
 }
 
-.home-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  min-height: 40px;
-  display: flex;
-  justify-content: space-between;
-  border-radius: 15px;
-  align-items: center;
-  padding: 15px 30px;
-  background-color: var(--primary-color);
-  color: white;
-  z-index: 1000;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-}
-
-.home-header .logo {
-  height: 40px;
-}
-
-.home-header nav {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.home-header nav a {
-  margin-left: 15px;
-  color: white;
-  font-weight: bold;
-  text-decoration: none;
-}
-
-.home-header nav a:hover {
-  text-decoration: underline;
-}
-
 .home-banner {
   text-align: center;
   padding: 40px 20px;
@@ -75,50 +37,6 @@ body {
   background-color: var(--gray-light);
   font-size: 0.9rem;
   color: var(--muted-text-color);
-}
-
-.btn-sair {
-  background: none;
-  border: none;
-  color: var(--primary-color);
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.btn-sair:hover {
-  text-decoration: underline;
-}
-
-.usuario-nome {
-  margin-right: 10px;
-  font-weight: bold;
-  color: var(--primary-color);
-}
-
-.barra-busca {
-  display: flex;
-  align-items: center;
-  background-color: white;
-  border-radius: 20px;
-  padding: 4px 10px;
-  margin: 0 20px;
-  height: 34px;
-}
-
-.barra-busca input {
-  border: none;
-  outline: none;
-  padding: 5px 10px;
-  border-radius: 20px;
-  width: 180px;
-}
-
-.barra-busca button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 1rem;
-  margin-left: 5px;
 }
 
 .filtros {
@@ -157,21 +75,6 @@ body {
 }
 
 @media (max-width: 600px) {
-  .home-header {
-    flex-direction: column;
-    height: auto;
-    padding: 10px;
-  }
-
-  .barra-busca {
-    width: 100%;
-    margin: 10px 0;
-  }
-
-  .barra-busca input {
-    width: 100%;
-  }
-
   .lista-produtos {
     flex-direction: column;
     align-items: center;
