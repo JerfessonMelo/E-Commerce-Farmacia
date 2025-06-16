@@ -1,92 +1,78 @@
-.home-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  min-height: 40px;
+.header-drogaria {
   display: flex;
-  justify-content: space-between;
-  border-radius: 15px;
   align-items: center;
-  padding: 10px 15px;
-  background-color: var(--primary-color);
-  color: white;
-  z-index: 1000;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-  box-sizing: border-box;
+  justify-content: space-between;
+  background: white;
+  padding: 10px 30px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  flex-wrap: wrap;
 }
 
-.home-header .logo {
+.logo img {
   height: 40px;
-}
-
-.nav a,
-.nav :link {
-  margin-left: 15px;
-  color: white !important;
-  font-weight: bold;
-  text-decoration: none !important;
-  background-color: var(--primary-color);
-  padding: 8px 12px;
   border-radius: 8px;
-  transition: background-color 0.3s ease;
-  border: none;
-  display: inline-block;
-  cursor: pointer;
-}
-
-.nav a:hover,
-.nav link:hover {
-  background-color: var(--primary-hover);
-  text-decoration: underline;
-  color: white;
-}
-
-.usuario-nome {
-  margin-right: 10px;
-  font-weight: bold;
-  color: var(--primary-color);
 }
 
 .barra-busca {
+  flex: 1;
   display: flex;
+  max-width: 600px;
+  margin: 0 30px;
+  background-color: #eaeaea;
+  border-radius: 30px;
+  padding: 4px 15px;
   align-items: center;
-  background-color: white;
-  border-radius: 20px;
-  padding: 4px 10px;
-  margin: 0 20px;
-  height: 34px;
 }
 
 .barra-busca input {
+  flex: 1;
   border: none;
+  background: transparent;
+  font-size: 16px;
   outline: none;
-  padding: 5px 10px;
-  border-radius: 20px;
-  width: 180px;
+  padding: 8px;
 }
 
 .barra-busca button {
   background: none;
   border: none;
+  font-size: 16px;
   cursor: pointer;
-  font-size: 1rem;
-  margin-left: 5px;
+  color: #333;
 }
 
-@media (max-width: 600px) {
-  .home-header {
-    flex-direction: column;
-    height: auto;
-    padding: 10px;
-  }
+.acoes-usuario {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
 
-  .barra-busca {
-    width: 100%;
-    margin: 10px 0;
-  }
+.acao {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #800000;
+}
 
-  .barra-busca input {
-    width: 100%;
-  }
+.acao i {
+  font-size: 18px;
+}
+
+.acao span {
+  font-size: 14px;
+  line-height: 1.2;
+  color: #333;
+}
+
+.acao strong {
+  font-weight: bold;
+  color: #000;
+}
+
+.acao button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-weight: bold;
+  color: #800000;
 }

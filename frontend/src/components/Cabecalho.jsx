@@ -35,40 +35,77 @@ const Cabecalho = () => {
   };
 
   return (
-    <header className="home-header">
-      <Link to="/">
-        <img src="/logo.png" alt="Drogaria Poupe Já" className="logo" />
+    <header className="header-drogaria">
+      <Link className="logo" to="/">
+        <img src="/logo.png" alt="Drogaria Poupe Já" />
       </Link>
+
       <ContadorSessao />
+
       <div className="barra-busca">
         <input
           type="text"
-          placeholder="Buscar produto..."
+          placeholder="O que você está buscando?"
           value={busca}
           onChange={(e) => setBusca(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && realizarBusca()}
         />
-        <button onClick={realizarBusca}>🔍</button>
+        <button onClick={realizarBusca}>
+          <i className="fas fa-search" />
+        </button>
       </div>
-      <nav className="nav">
-        {usuario?.nome && (
-          <span className="usuario-nome">Olá, {nomeUsuario[0]}!</span>
+
+      <div className="acoes-usuario">
+        {!usuario?.email ? (
+          <div className="acao">
+            <i className="fas fa-user" />
+            <Link to="/login">
+              <span>
+                Boas-vindas!
+                <br />
+                <strong>Entrar ou cadastrar</strong>
+              </span>
+            </Link>
+          </div>
+        ) : (
+          <div className="acao">
+            <i className="fas fa-user" />
+            <span>
+              Olá, <br />
+              <strong>{nomeUsuario[0]}</strong>
+            </span>
+          </div>
         )}
-        <Link to="/">Início</Link>
-        {!usuario?.email && <Link to="/login">Entrar</Link>}
-        {usuario?.email && <Link to="/perfil">Perfil</Link>}
-        {location.pathname !== "/pedido" && location.pathname !== "/admin" && (
-          <Link to="/pedido">Carrinho</Link>
-        )}
-        {usuario?.isAdmin && location.pathname !== "/admin" && (
-          <Link to="/admin">Painel Admin</Link>
-        )}
-        {usuario?.email && (
-          <Link to="#" onClick={handleLogout}>
-            Sair
+
+        <div className="acao">
+          <i className="fas fa-box" />
+          <Link to="/perfil">
+            <span>
+              Acompanhar
+              <br />
+              <strong>pedidos</strong>
+            </span>
           </Link>
+        </div>
+
+        <div className="acao">
+          <i className="fas fa-shopping-basket" />
+          <Link to="/pedido">
+            <span>
+              Cesta
+              <br />
+              <strong>R$ 0,00</strong>
+            </span>
+          </Link>
+        </div>
+
+        {usuario?.email && (
+          <div className="acao">
+            <i className="fas fa-sign-out-alt" />
+            <button onClick={handleLogout}>Sair</button>
+          </div>
         )}
-      </nav>
+      </div>
     </header>
   );
 };
