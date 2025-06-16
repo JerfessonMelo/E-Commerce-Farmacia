@@ -5,7 +5,6 @@ import {
   estaAutenticado,
   removerToken,
 } from "../services/auth";
-import ContadorSessao from "./ContadorSessao";
 import "../styles/Cabecalho.css";
 
 const Cabecalho = () => {
@@ -54,7 +53,7 @@ const Cabecalho = () => {
       </div>
 
       <div className="acoes-usuario">
-        {!usuario?.email ? (
+        {!usuario?.email && (
           <div className="acao">
             <i className="fas fa-user" />
             <Link to="/login">
@@ -65,21 +64,21 @@ const Cabecalho = () => {
               </span>
             </Link>
           </div>
-        ) : (
-          <div className="acao">
-            <i className="fas fa-user" />
-            <span>
-              Olá, <br />
-              <strong>
-                {nomeUsuario[0]?.charAt(0).toUpperCase() +
-                  nomeUsuario[0]?.slice(1)}
-              </strong>
-            </span>
-          </div>
         )}
 
-        <div className="acao">
-          {usuario?.email && (
+        {usuario?.email && (
+          <>
+            <div className="acao">
+              <i className="fas fa-user" />
+              <span>
+                Olá, <br />
+                <strong>
+                  {nomeUsuario[0]?.charAt(0).toUpperCase() +
+                    nomeUsuario[0]?.slice(1)}
+                </strong>
+              </span>
+            </div>
+
             <div className="acao">
               <i className="fas fa-id-card" />
               <Link to="/perfil">
@@ -90,30 +89,48 @@ const Cabecalho = () => {
                 </span>
               </Link>
             </div>
-          )}
-        </div>
+
+            {usuario.isAdmin && location.pathname !== "/admin" && (
+              <div className="acao">
+                <i className="fas fa-tools" />
+                <Link to="/admin">
+                  <span>
+                    Painel
+                    <br />
+                    <strong>Admin</strong>
+                  </span>
+                </Link>
+              </div>
+            )}
+          </>
+        )}
 
         <div className="acao">
           <i className="fas fa-box" />
-          <Link to="/perfil">
+          <button
+            onClick={() => alert("Funcionalidade em desenvolvimento")}
+            style={{ background: "none", border: "none", cursor: "pointer" }}
+          >
             <span>
               Acompanhar
               <br />
               <strong>Pedidos</strong>
             </span>
-          </Link>
+          </button>
         </div>
 
-        <div className="acao">
-          <i className="fas fa-shopping-basket" />
-          <Link to="/pedido">
-            <span>
-              Carrinho
-              <br />
-              <strong>R$ 0,00</strong>
-            </span>
-          </Link>
-        </div>
+        {location.pathname !== "/pedido" && location.pathname !== "/admin" && (
+          <div className="acao">
+            <i className="fas fa-shopping-basket" />
+            <Link to="/pedido">
+              <span>
+                Carrinho
+                <br />
+                <strong>R$ 0,00</strong>
+              </span>
+            </Link>
+          </div>
+        )}
 
         {usuario?.email && (
           <div className="acao">
