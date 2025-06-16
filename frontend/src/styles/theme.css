@@ -1,0 +1,23 @@
+:root {
+  --primary-color: #d50000;
+  --primary-hover: #b00000;
+  --secondary-color: #ffeaea;
+  --gray-light: #f2f2f2;
+  --text-color: #333;
+  --muted-text-color: #555;
+  --font-family-base: "Roboto", Arial, sans-serif;
+}
+
+body {
+  font-family: var(--font-family-base);
+  background-color: var(--gray-light);
+  color: var(--text-color);
+}
+
+a {
+  color: var(--primary-color);
+}
+
+a:hover {
+  color: var(--primary-hover);
+}

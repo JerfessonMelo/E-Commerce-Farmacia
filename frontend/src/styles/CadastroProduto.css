@@ -14,7 +14,7 @@
 .cadastro-produto h3 {
   text-align: center;
   margin-bottom: 20px;
-  color: #e60000;
+  color: var(--primary-color);
 }
 
 .cadastro-produto form {
@@ -41,7 +41,7 @@
   margin-top: 20px;
   padding: 12px;
   width: 100%;
-  background-color: #e60000;
+  color: var(--primary-color);
   color: #fff;
   font-weight: bold;
   border: none;
@@ -51,7 +51,7 @@
 }
 
 .cadastro-produto button:hover {
-  background-color: #cc0000;
+  background-color: var(--primary-hover);
 }
 
 .cadastro-produto .cancelar-btn {

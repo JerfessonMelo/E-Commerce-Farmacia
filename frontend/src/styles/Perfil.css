@@ -20,7 +20,7 @@
 .perfil button {
   width: 100%;
   padding: 12px;
-  background-color: #e60000;
+  background-color: var(--primary-color);
   color: white;
   font-weight: bold;
   border: none;
@@ -29,7 +29,7 @@
 }
 
 .perfil button:hover {
-  background-color: #cc0000;
+  background-color: var(--primary-hover);
 }
 
 @media (max-width: 600px) {
