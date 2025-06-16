@@ -32,7 +32,7 @@ const Cabecalho = () => {
   const handleLogout = () => {
     removerToken();
     setUsuario(null);
-    navigate("/login");
+    navigate("/");
   };
 
   const aoLogar = (usuarioLogado) => {
