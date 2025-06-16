@@ -72,7 +72,7 @@ const Pedido = () => {
   };
 
   return (
-    <>
+    <div>
       <Cabecalho />
 
       <div className="pedido">
@@ -85,7 +85,9 @@ const Pedido = () => {
             <ul>
               {produtos.map((p) => (
                 <li key={p._id}>
-                  {p.nome} - R$ {p.preco.toFixed(2)}
+                  <span>
+                    {p.nome} - R$ {p.preco.toFixed(2)}
+                  </span>
                   <button
                     onClick={() => {
                       removerDoCarrinho(p._id);
@@ -136,7 +138,7 @@ const Pedido = () => {
           </>
         )}
       </div>
-    </>
+    </div>
   );
 };
 
