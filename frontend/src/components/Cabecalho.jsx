@@ -72,10 +72,28 @@ const Cabecalho = () => {
             <i className="fas fa-user" />
             <span>
               Olá, <br />
-              <strong>{nomeUsuario[0]}</strong>
+              <strong>
+                {nomeUsuario[0]?.charAt(0).toUpperCase() +
+                  nomeUsuario[0]?.slice(1)}
+              </strong>
             </span>
           </div>
         )}
+
+        <div className="acao">
+          {usuario?.email && (
+            <div className="acao">
+              <i className="fas fa-id-card" />
+              <Link to="/perfil">
+                <span>
+                  Acessar
+                  <br />
+                  <strong>Perfil</strong>
+                </span>
+              </Link>
+            </div>
+          )}
+        </div>
 
         <div className="acao">
           <i className="fas fa-box" />
