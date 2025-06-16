@@ -33,6 +33,10 @@
   flex-wrap: wrap;
 }
 
+.pedido li span {
+  flex: 1;
+}
+
 .info-produto {
   flex: 1;
 }
@@ -72,16 +76,6 @@
   background-color: var(--primary-hover);
 }
 
-.pedido li span {
-  flex: 1;
-}
-
-.frete-info {
-  margin-top: 10px;
-  font-size: 0.95rem;
-  color: #555;
-}
-
 .btn-acao {
   width: 100%;
   padding: 12px;
@@ -100,6 +94,12 @@
   background-color: var(--primary-hover);
 }
 
+.frete-info {
+  margin-top: 10px;
+  font-size: 0.95rem;
+  color: #555;
+}
+
 @media (max-width: 600px) {
   .pedido {
     margin: 20px;
@@ -109,9 +109,5 @@
   .pedido li {
     flex-direction: column;
     align-items: flex-start;
-  }
-
-  .pedido button {
-    width: 100%;
   }
 }
