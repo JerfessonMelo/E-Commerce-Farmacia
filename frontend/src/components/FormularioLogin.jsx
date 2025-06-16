@@ -19,7 +19,7 @@ const FormularioLogin = ({ trocarParaCadastro, aoLogar }) => {
       salvarToken(res.data.token);
       localStorage.setItem("usuario", JSON.stringify(res.data.usuario));
       alert("Login realizado com sucesso!");
-      aoLogar(res.data.usuario); // Fecha o menu lateral e redireciona
+      aoLogar(res.data.usuario);
     } catch (erro) {
       setErro(erro.response?.data?.mensagem || "Erro ao realizar login.");
     }
