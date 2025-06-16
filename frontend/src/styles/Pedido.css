@@ -26,12 +26,23 @@
 }
 
 .pedido li {
-  margin-bottom: 12px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 10px;
   flex-wrap: wrap;
+}
+
+.info-produto {
+  flex: 1;
+}
+
+.campo-quantidade {
+  width: 60px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
 }
 
 .pedido input {
@@ -44,20 +55,20 @@
   font-size: 1rem;
 }
 
-.pedido button {
-  width: 100%;
-  padding: 12px;
+.btn-remover {
+  padding: 10px 12px;
   background-color: var(--primary-color);
   color: white;
   border: none;
   border-radius: 6px;
   font-weight: bold;
   cursor: pointer;
-  margin-top: 15px;
+  margin-top: 0;
+  width: auto;
   font-size: 1rem;
 }
 
-.pedido button:hover {
+.btn-remover:hover {
   background-color: var(--primary-hover);
 }
 

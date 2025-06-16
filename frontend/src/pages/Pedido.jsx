@@ -18,13 +18,19 @@ const Pedido = () => {
   const [frete, setFrete] = useState(0);
   const usuario = obterDadosUsuario() || {};
   const nomeUsuario = usuario.nome?.split(" ");
+  const totalProdutos = produtos.reduce(
+    (soma, p) => soma + p.preco * p.quantidade,
+    0
+  );
+  const totalGeral = totalProdutos + frete;
 
   useEffect(() => {
-    setProdutos(obterCarrinho());
+    const carrinho = obterCarrinho().map((p) => ({
+      ...p,
+      quantidade: p.quantidade || 1,
+    }));
+    setProdutos(carrinho);
   }, []);
-
-  const totalProdutos = produtos.reduce((soma, p) => soma + p.preco, 0);
-  const totalGeral = totalProdutos + frete;
 
   const calcularFrete = async () => {
     try {
@@ -85,14 +91,34 @@ const Pedido = () => {
             <ul>
               {produtos.map((p) => (
                 <li key={p._id}>
-                  <span>
-                    {p.nome} - R$ {p.preco.toFixed(2)}
-                  </span>
+                  <div className="info-produto">
+                    <strong>{p.nome}</strong>
+                    <p>R$ {p.preco.toFixed(2)}</p>
+                  </div>
+
+                  <input
+                    type="number"
+                    min="1"
+                    value={p.quantidade}
+                    onChange={(e) => {
+                      const novaQtd = parseInt(e.target.value) || 1;
+                      setProdutos((prev) =>
+                        prev.map((item) =>
+                          item._id === p._id
+                            ? { ...item, quantidade: novaQtd }
+                            : item
+                        )
+                      );
+                    }}
+                    className="campo-quantidade"
+                  />
+
                   <button
                     onClick={() => {
                       removerDoCarrinho(p._id);
                       setProdutos(obterCarrinho());
                     }}
+                    className="btn-remover"
                   >
                     Remover
                   </button>
