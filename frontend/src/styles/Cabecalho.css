@@ -20,14 +20,8 @@
   height: 40px;
 }
 
-.home-header nav {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 10px;
-}
-
-.home-header nav a {
+.nav a,
+.nav :link {
   margin-left: 15px;
   color: white !important;
   font-weight: bold;
@@ -36,29 +30,16 @@
   padding: 8px 12px;
   border-radius: 8px;
   transition: background-color 0.3s ease;
+  border: none;
+  display: inline-block;
+  cursor: pointer;
 }
 
-.home-header nav a:hover {
+.nav a:hover,
+.nav link:hover {
   background-color: var(--primary-hover);
   text-decoration: underline;
-}
-
-.btn-sair {
-  background-color: var(--vermelho);
-  color: white !important;
-  font-weight: bold;
-  text-decoration: none !important;
-  padding: 8px 12px;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  display: inline-block;
-}
-
-.btn-sair:hover {
-  background-color: var(--vermelho-hover);
-  text-decoration: underline;
+  color: white;
 }
 
 .usuario-nome {

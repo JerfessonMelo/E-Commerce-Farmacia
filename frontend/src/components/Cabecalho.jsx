@@ -50,7 +50,7 @@ const Cabecalho = () => {
         />
         <button onClick={realizarBusca}>🔍</button>
       </div>
-      <nav>
+      <nav className="nav">
         {usuario?.nome && (
           <span className="usuario-nome">Olá, {nomeUsuario[0]}!</span>
         )}
@@ -64,7 +64,7 @@ const Cabecalho = () => {
           <Link to="/admin">Painel Admin</Link>
         )}
         {usuario?.email && (
-          <Link to="#" className="btn-sair" onClick={handleLogout}>
+          <Link to="#" onClick={handleLogout}>
             Sair
           </Link>
         )}
