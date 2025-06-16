@@ -1,4 +1,3 @@
-// src/services/carrinho.js
 export const adicionarAoCarrinho = (produto) => {
   const atual = JSON.parse(localStorage.getItem("carrinho") || "[]");
   localStorage.setItem("carrinho", JSON.stringify([...atual, produto]));
