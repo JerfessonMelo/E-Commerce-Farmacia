@@ -24,7 +24,7 @@
   display: flex;
   max-width: 600px;
   margin: 0 30px;
-  background-color: #eaeaea;
+  background-color: var(--gray-light);
   border-radius: 15px;
   padding: 4px 15px;
   align-items: center;
@@ -37,6 +37,7 @@
   font-size: 16px;
   outline: none;
   padding: 8px;
+  color: var(--text-color);
 }
 
 .barra-busca button {
@@ -44,7 +45,7 @@
   border: none;
   font-size: 16px;
   cursor: pointer;
-  color: #333;
+  color: var(--text-color);
 }
 
 .acoes-usuario {
@@ -57,7 +58,7 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  color: #800000;
+  color: var(--primary-color);
 }
 
 .acao a {
@@ -67,7 +68,7 @@
 
 .acao a:hover {
   text-decoration: none;
-  color: inherit;
+  color: var(--primary-hover);
 }
 
 .acao i {
@@ -77,12 +78,12 @@
 .acao span {
   font-size: 14px;
   line-height: 1.2;
-  color: #333;
+  color: var(--muted-text-color);
 }
 
 .acao strong {
   font-weight: bold;
-  color: #000;
+  color: var(--text-color);
 }
 
 .acao button {
@@ -90,5 +91,9 @@
   background: none;
   cursor: pointer;
   font-weight: bold;
-  color: #800000;
+  color: var(--primary-color);
+}
+
+.acao button:hover {
+  color: var(--primary-hover);
 }
