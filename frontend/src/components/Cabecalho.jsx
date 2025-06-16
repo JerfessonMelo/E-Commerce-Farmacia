@@ -105,32 +105,36 @@ const Cabecalho = () => {
           </>
         )}
 
-        <div className="acao">
-          <i className="fas fa-box" />
-          <button
-            onClick={() => alert("Funcionalidade em desenvolvimento")}
-            style={{ background: "none", border: "none", cursor: "pointer" }}
-          >
-            <span>
-              Acompanhar
-              <br />
-              <strong>Pedidos</strong>
-            </span>
-          </button>
-        </div>
-
-        {location.pathname !== "/pedido" && location.pathname !== "/admin" && (
+        {!usuario?.isAdmin && (
           <div className="acao">
-            <i className="fas fa-shopping-basket" />
-            <Link to="/pedido">
+            <i className="fas fa-box" />
+            <button
+              onClick={() => alert("Funcionalidade em desenvolvimento")}
+              style={{ background: "none", border: "none", cursor: "pointer" }}
+            >
               <span>
-                Carrinho
+                Acompanhar
                 <br />
-                <strong>R$ 0,00</strong>
+                <strong>Pedidos</strong>
               </span>
-            </Link>
+            </button>
           </div>
         )}
+
+        {!usuario?.isAdmin &&
+          location.pathname !== "/pedido" &&
+          location.pathname !== "/admin" && (
+            <div className="acao">
+              <i className="fas fa-shopping-basket" />
+              <Link to="/pedido">
+                <span>
+                  Carrinho
+                  <br />
+                  <strong>R$ 0,00</strong>
+                </span>
+              </Link>
+            </div>
+          )}
 
         {usuario?.email && (
           <div className="acao">
