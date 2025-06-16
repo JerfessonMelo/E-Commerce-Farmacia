@@ -136,7 +136,9 @@ const Pedido = () => {
               value={cep}
               onChange={(e) => setCep(e.target.value)}
             />
-            <button onClick={calcularFrete}>Calcular Frete</button>
+            <button className="btn-acao" onClick={calcularFrete}>
+              Calcular Frete
+            </button>
 
             {freteInfo && (
               <div className="frete-info">
@@ -160,7 +162,9 @@ const Pedido = () => {
               <strong>Total Geral:</strong> R$ {totalGeral.toFixed(2)}
             </p>
 
-            <button onClick={finalizarPedido}>Finalizar Pedido</button>
+            <button className="btn-acao" onClick={finalizarPedido}>
+              Finalizar Pedido
+            </button>
           </>
         )}
       </div>

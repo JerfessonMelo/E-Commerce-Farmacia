@@ -82,6 +82,24 @@
   color: #555;
 }
 
+.btn-acao {
+  width: 100%;
+  padding: 12px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 15px;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.btn-acao:hover {
+  background-color: var(--primary-hover);
+}
+
 @media (max-width: 600px) {
   .pedido {
     margin: 20px;
