@@ -66,7 +66,7 @@ router.post("/login", async (req, res) => {
         isAdmin: usuario.isAdmin,
       },
       process.env.JWT_SECRET,
-      { expiresIn: "1h" }
+      { expiresIn: "8h" }
     );
 
     console.log("Login realizado com sucesso");
@@ -88,30 +88,6 @@ router.post("/login", async (req, res) => {
 router.get("/perfil", authMiddleware, async (req, res) => {
   const usuario = await Usuario.findById(req.usuario.id).select("-senha");
   res.json(usuario);
-});
-
-router.post("/renovar-token", authMiddleware, async (req, res) => {
-  try {
-    const usuario = await Usuario.findById(req.usuario.id);
-    if (!usuario) {
-      return res.status(404).json({ mensagem: "Usuário não encontrado" });
-    }
-
-    const novoToken = jwt.sign(
-      {
-        id: usuario._id,
-        email: usuario.email,
-        nome: usuario.nome,
-        isAdmin: usuario.isAdmin,
-      },
-      process.env.JWT_SECRET,
-      { expiresIn: "1h" }
-    );
-
-    res.json({ token: novoToken });
-  } catch (erro) {
-    res.status(500).json({ mensagem: "Erro ao renovar token" });
-  }
 });
 
 module.exports = router;

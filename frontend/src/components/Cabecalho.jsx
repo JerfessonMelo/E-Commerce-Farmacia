@@ -40,8 +40,6 @@ const Cabecalho = () => {
         <img src="/logo.png" alt="Drogaria Poupe Já" />
       </Link>
 
-      <ContadorSessao />
-
       <div className="barra-busca">
         <input
           type="text"
