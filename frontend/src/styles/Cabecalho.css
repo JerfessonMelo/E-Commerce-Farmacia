@@ -29,9 +29,9 @@
 
 .home-header nav a {
   margin-left: 15px;
-  color: white;
+  color: white !important;
   font-weight: bold;
-  text-decoration: none;
+  text-decoration: none !important;
   background-color: var(--primary-color);
   padding: 8px 12px;
   border-radius: 8px;
@@ -45,9 +45,9 @@
 
 .btn-sair {
   background-color: var(--vermelho);
-  color: white;
+  color: white !important;
   font-weight: bold;
-  text-decoration: none;
+  text-decoration: none !important;
   padding: 8px 12px;
   border-radius: 8px;
   border: none;
