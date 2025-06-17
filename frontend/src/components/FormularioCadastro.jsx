@@ -30,14 +30,6 @@ const FormularioCadastro = ({ trocarParaLogin }) => {
     <div className="auth-form">
       <h2>Cadastro</h2>
       <form onSubmit={cadastrar}>
-        <label>CPF</label>
-        <input
-          type="text"
-          name="cpf"
-          placeholder="CPF"
-          onChange={handleChange}
-          required
-        />
         <label>Nome Completo</label>
         <input
           type="text"
