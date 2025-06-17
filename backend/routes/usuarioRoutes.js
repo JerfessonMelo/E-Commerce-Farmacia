@@ -130,3 +130,5 @@ router.delete("/perfil/enderecos/:indice", authMiddleware, async (req, res) => {
       .json({ mensagem: "Erro ao remover endereço", erro: err.message });
   }
 });
+
+module.exports = router;
