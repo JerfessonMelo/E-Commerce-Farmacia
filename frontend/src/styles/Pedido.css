@@ -1,90 +1,97 @@
 .pedido {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 30px;
+  padding: 40px 5vw;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
   margin: 40px auto;
-  padding: 20px;
-  background-color: #ffffff;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-  box-sizing: border-box;
 }
 
-.pedido * {
-  box-sizing: border-box;
-}
-
-.pedido h2 {
-  text-align: center;
-  margin-bottom: 20px;
+.titulo-pedido {
   font-size: 1.5rem;
+  color: var(--primary-color);
+  margin-bottom: 20px;
 }
 
-.pedido ul {
+.col-esquerda {
+  flex: 1 1 60%;
+  min-width: 300px;
+}
+
+.col-direita {
+  flex: 1 1 30%;
+  min-width: 280px;
+  border-left: 1px solid #eee;
+  padding-left: 20px;
+}
+
+.lista-produtos {
   list-style: none;
   padding: 0;
-  margin: 0;
-}
-
-.pedido li {
+  margin: 0 0 30px 0;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.produto-item {
+  display: flex;
   align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 15px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
 }
 
-.pedido li span {
-  flex: 1;
-}
-
-.info-produto {
+.produto-info {
   flex: 1;
 }
 
 .campo-quantidade {
   width: 60px;
-  padding: 8px;
+  padding: 6px 10px;
+  font-size: 1rem;
   border: 1px solid #ccc;
   border-radius: 6px;
-  font-size: 1rem;
 }
 
-.pedido input[type="text"] {
+.campo-texto {
   width: 100%;
-  padding: 10px;
-  margin-top: 8px;
-  margin-bottom: 8px;
+  padding: 10px 12px;
+  margin-bottom: 16px;
+  font-size: 1rem;
   border-radius: 6px;
   border: 1px solid #ccc;
-  font-size: 1rem;
+  box-sizing: border-box;
 }
 
 .btn-remover {
-  padding: 10px 12px;
-  background-color: var(--primary-color);
-  color: white;
+  background-color: #eee;
   border: none;
+  color: #333;
+  font-weight: 500;
+  padding: 8px 12px;
   border-radius: 6px;
-  font-weight: bold;
   cursor: pointer;
-  margin-top: 0;
-  width: auto;
-  font-size: 1rem;
 }
 
 .btn-remover:hover {
-  background-color: var(--primary-hover);
+  background-color: #ddd;
 }
 
 .btn-acao {
   width: 100%;
-  padding: 12px;
+  padding: 14px;
   background-color: var(--primary-color);
   color: white;
   border: none;
   border-radius: 6px;
   font-weight: bold;
   cursor: pointer;
-  margin-top: 15px;
+  margin-top: 20px;
   font-size: 1rem;
   transition: background-color 0.3s ease;
 }
@@ -93,20 +100,86 @@
   background-color: var(--primary-hover);
 }
 
-.frete-info {
-  margin-top: 10px;
-  font-size: 0.95rem;
-  color: #555;
+.resumo-linha {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  font-size: 1rem;
 }
 
-@media (max-width: 600px) {
+.pedido hr {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin: 20px 0;
+}
+
+.bloco {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 30px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.bloco h3 {
+  font-size: 1.1rem;
+  margin-bottom: 15px;
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.resumo.total {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.linha-cep-frete {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.campo-cep {
+  flex: 1;
+  padding: 10px 12px;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.btn-calcular-frete {
+  padding: 10px 18px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 1rem;
+  white-space: nowrap;
+  transition: background-color 0.3s ease;
+}
+
+.btn-calcular-frete:hover {
+  background-color: var(--primary-hover);
+}
+
+@media (max-width: 768px) {
   .pedido {
-    margin: 20px;
-    padding: 15px;
+    flex-direction: column;
+    padding: 20px;
   }
 
-  .pedido li {
-    flex-direction: column;
-    align-items: flex-start;
+  .col-direita {
+    padding-left: 0;
+    border-left: none;
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+    margin-top: 20px;
   }
 }

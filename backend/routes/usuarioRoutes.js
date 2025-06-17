@@ -131,4 +131,30 @@ router.delete("/perfil/enderecos/:indice", authMiddleware, async (req, res) => {
   }
 });
 
+router.get("/perfil/enderecos", authMiddleware, async (req, res) => {
+  try {
+    const usuario = await Usuario.findById(req.usuario.id);
+    if (!usuario)
+      return res.status(404).json({ mensagem: "Usuário não encontrado" });
+
+    const { cep } = req.query;
+
+    if (!cep) {
+      return res.json(usuario.endereco);
+    }
+
+    const cepSemMascara = cep.replace("-", "").trim();
+
+    const filtrados = usuario.endereco.filter(
+      (e) => e.cep?.replace("-", "").trim() === cepSemMascara
+    );
+
+    res.json(filtrados);
+  } catch (err) {
+    res
+      .status(500)
+      .json({ mensagem: "Erro ao buscar endereços", erro: err.message });
+  }
+});
+
 module.exports = router;

@@ -4,8 +4,7 @@ import {
   removerDoCarrinho,
   limparCarrinho,
 } from "../services/carrinho";
-import { obterToken } from "../services/auth";
-import { obterDadosUsuario } from "../services/auth";
+import { obterToken, obterDadosUsuario } from "../services/auth";
 import Cabecalho from "../components/Cabecalho";
 import api from "../services/api";
 import "../styles/Pedido.css";
@@ -13,11 +12,11 @@ import "../styles/Pedido.css";
 const Pedido = () => {
   const [produtos, setProdutos] = useState([]);
   const [cep, setCep] = useState("");
+  const [enderecosDisponiveis, setEnderecosDisponiveis] = useState([]);
   const [enderecoEntrega, setEnderecoEntrega] = useState("");
   const [freteInfo, setFreteInfo] = useState(null);
   const [frete, setFrete] = useState(0);
   const usuario = obterDadosUsuario() || {};
-  const nomeUsuario = usuario.nome?.split(" ");
   const totalProdutos = produtos.reduce(
     (soma, p) => soma + p.preco * p.quantidade,
     0
@@ -43,6 +42,18 @@ const Pedido = () => {
       });
       setFreteInfo(res.data);
       setFrete(parseFloat(res.data.Valor.replace(",", ".")));
+
+      const endRes = await api.get(`/usuarios/perfil/enderecos?cep=${cep}`, {
+        headers: { Authorization: `Bearer ${obterToken()}` },
+      });
+
+      setEnderecosDisponiveis(endRes.data);
+      if (endRes.data.length === 1) {
+        const e = endRes.data[0];
+        setEnderecoEntrega(`${e.rua}, ${e.numero} - ${e.bairro}`);
+      } else {
+        setEnderecoEntrega("");
+      }
     } catch (err) {
       alert("Erro ao calcular o frete.");
       console.error(err);
@@ -56,7 +67,7 @@ const Pedido = () => {
         {
           produtos: produtos.map((p) => ({
             produtoId: p._id,
-            quantidade: 1,
+            quantidade: p.quantidade,
           })),
           total: totalGeral,
           enderecoEntrega,
@@ -80,26 +91,24 @@ const Pedido = () => {
   return (
     <div>
       <Cabecalho />
-
       <div className="pedido">
-        <h2>Seu Pedido</h2>
-
-        {produtos.length === 0 ? (
-          <p>Seu carrinho está vazio.</p>
-        ) : (
-          <>
-            <ul>
+        <div className="col-esquerda">
+          <div className="bloco">
+            <h3>
+              <i className="fas fa-shopping-cart"></i> Meu Carrinho
+            </h3>
+            <ul className="lista-produtos">
               {produtos.map((p) => (
-                <li key={p._id}>
-                  <div className="info-produto">
+                <li className="produto-item" key={p._id}>
+                  <div className="produto-info">
                     <strong>{p.nome}</strong>
                     <p>R$ {p.preco.toFixed(2)}</p>
                   </div>
-
                   <input
                     type="number"
-                    min="1"
+                    className="campo-quantidade"
                     value={p.quantidade}
+                    min="1"
                     onChange={(e) => {
                       const novaQtd = parseInt(e.target.value) || 1;
                       setProdutos((prev) =>
@@ -110,63 +119,101 @@ const Pedido = () => {
                         )
                       );
                     }}
-                    className="campo-quantidade"
                   />
-
                   <button
+                    className="btn-remover"
                     onClick={() => {
                       removerDoCarrinho(p._id);
                       setProdutos(obterCarrinho());
                     }}
-                    className="btn-remover"
                   >
-                    Remover
+                    <i className="fas fa-trash-alt"></i>
                   </button>
                 </li>
               ))}
             </ul>
+          </div>
 
-            <p>
-              <strong>Total Produtos:</strong> R$ {totalProdutos.toFixed(2)}
-            </p>
-
-            <input
-              type="text"
-              placeholder="CEP"
-              value={cep}
-              onChange={(e) => setCep(e.target.value)}
-            />
-            <button className="btn-acao" onClick={calcularFrete}>
-              Calcular Frete
-            </button>
+          <div className="bloco">
+            <h3>
+              <i className="fas fa-map-marker-alt"></i> Endereço de Entrega
+            </h3>
+            <div className="linha-cep-frete">
+              <input
+                type="text"
+                className="campo-cep"
+                placeholder="Digite seu CEP"
+                value={cep}
+                onChange={(e) => setCep(e.target.value)}
+              />
+              <button className="btn-calcular-frete" onClick={calcularFrete}>
+                <i className="fas fa-truck"></i> Calcular
+              </button>
+            </div>
 
             {freteInfo && (
-              <div className="frete-info">
-                <p>
-                  <strong>Frete:</strong> R$ {freteInfo.Valor}
-                </p>
-                <p>
-                  <strong>Prazo:</strong> {freteInfo.PrazoEntrega} dias
-                </p>
-              </div>
+              <>
+                {enderecosDisponiveis.length > 0 ? (
+                  <select
+                    className="campo-texto"
+                    value={enderecoEntrega}
+                    onChange={(e) => setEnderecoEntrega(e.target.value)}
+                  >
+                    <option value="">Selecione um endereço</option>
+                    {enderecosDisponiveis.map((e, index) => (
+                      <option key={index} value={e.logradouro}>
+                        {`${e.logradouro}, ${e.numero} - ${e.bairro}`}
+                      </option>
+                    ))}
+                  </select>
+                ) : (
+                  <input
+                    type="text"
+                    className="campo-texto"
+                    placeholder="Rua, número, bairro..."
+                    value={enderecoEntrega}
+                    onChange={(e) => setEnderecoEntrega(e.target.value)}
+                  />
+                )}
+              </>
+            )}
+          </div>
+        </div>
+
+        <div className="col-direita">
+          <div className="bloco resumo">
+            <h3>
+              <i className="fas fa-receipt"></i> Resumo
+            </h3>
+            <div className="resumo-linha">
+              <span>Total Produtos:</span>
+              <span>R$ {totalProdutos.toFixed(2)}</span>
+            </div>
+
+            {freteInfo && (
+              <>
+                <div className="resumo-linha">
+                  <span>Frete:</span>
+                  <span>R$ {freteInfo.Valor}</span>
+                </div>
+                <div className="resumo-linha">
+                  <span>Prazo:</span>
+                  <span>{freteInfo.PrazoEntrega} dias</span>
+                </div>
+              </>
             )}
 
-            <input
-              type="text"
-              placeholder="Endereço de Entrega"
-              value={enderecoEntrega}
-              onChange={(e) => setEnderecoEntrega(e.target.value)}
-            />
-
-            <p>
-              <strong>Total Geral:</strong> R$ {totalGeral.toFixed(2)}
-            </p>
+            <hr />
+            <div className="resumo-linha total">
+              <strong>Total Geral:</strong>
+              <strong>R$ {totalGeral.toFixed(2)}</strong>
+            </div>
 
             <button className="btn-acao" onClick={finalizarPedido}>
-              Finalizar Pedido
+              <i className="fas fa-check-circle"></i> Finalizar Pedido
             </button>
-          </>
-        )}
+          </div>
+        </div>
       </div>
     </div>
   );
