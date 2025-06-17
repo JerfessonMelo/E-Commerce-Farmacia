@@ -6,14 +6,16 @@ const usuarioSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
   senha: { type: String, required: true },
   isAdmin: { type: Boolean, default: false },
-  endereco: {
-    rua: String,
-    numero: String,
-    bairro: String,
-    cidade: String,
-    estado: String,
-    cep: String,
-  },
+  endereco: [
+    {
+      rua: String,
+      numero: String,
+      bairro: String,
+      cidade: String,
+      estado: String,
+      cep: String,
+    },
+  ],
 });
 
 usuarioSchema.pre("save", async function (next) {
