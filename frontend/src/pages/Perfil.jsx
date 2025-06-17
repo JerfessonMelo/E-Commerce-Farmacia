@@ -78,11 +78,6 @@ const Perfil = () => {
     }
   };
 
-  const sair = () => {
-    removerToken();
-    navigate("/login");
-  };
-
   if (!usuario) return <p>Carregando...</p>;
 
   return (
@@ -165,8 +160,6 @@ const Perfil = () => {
             modoEdicao={indiceEdicao !== null}
           />
         )}
-
-        <button onClick={sair}>Sair</button>
       </div>
     </div>
   );
