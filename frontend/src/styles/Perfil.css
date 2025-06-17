@@ -2,11 +2,11 @@
   max-width: 600px;
   margin: 60px auto;
   padding: 32px;
-  background-color: #ffffff;
+  background-color: white;
   border-radius: 10px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
-  font-family: "Segoe UI", sans-serif;
-  color: #333;
+  font-family: var(--font-family-base);
+  color: var(--text-color);
 }
 
 .perfil h2 {
@@ -27,25 +27,52 @@
   color: #222;
 }
 
-.titulo-enderecos {
+.cabecalho-enderecos {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+.titulo-enderecos {
   font-size: 1.2rem;
   color: var(--primary-color);
   font-weight: 600;
+  margin: 0;
+}
+
+.btn-novo-endereco {
+  padding: 10px 14px;
+  max-width: fit-content;
 }
 
 .lista-enderecos {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
   padding: 0;
 }
 
-.item-endereco {
-  margin-bottom: 18px;
-  padding-bottom: 14px;
+.linha-endereco {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
   border-bottom: 1px solid #ddd;
+  padding-bottom: 12px;
 }
 
-.item-endereco p {
-  margin-bottom: 10px;
+.linha-endereco p {
+  flex: 1;
+  margin: 0;
+  font-size: 1rem;
+}
+
+.grupo-botoes-linha {
+  display: flex;
+  gap: 8px;
 }
 
 .perfil button {
@@ -64,8 +91,6 @@
   background-color: var(--primary-color);
   color: white;
   border: none;
-  width: 100%;
-  margin-top: 5px;
 }
 
 .btn-vermelho:hover {
@@ -73,15 +98,13 @@
 }
 
 .btn-cinza {
-  background-color: #ccc;
-  color: #333;
+  background-color: #e0e0e0;
+  color: var(--muted-text-color);
   border: none;
-  width: 100%;
-  margin-top: 5px;
 }
 
 .btn-cinza:hover {
-  background-color: #bbb;
+  background-color: #cfcfcf;
 }
 
 @media (max-width: 600px) {
@@ -100,5 +123,10 @@
 
   .perfil button {
     font-size: 0.9rem;
+  }
+
+  .grupo-botoes-linha {
+    width: 100%;
+    justify-content: flex-end;
   }
 }

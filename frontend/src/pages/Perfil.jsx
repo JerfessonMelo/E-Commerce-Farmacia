@@ -101,51 +101,55 @@ const Perfil = () => {
           <strong>Tipo:</strong> {usuario.isAdmin ? "Administrador" : "Cliente"}
         </p>
 
-        <h3 className="titulo-enderecos">Endereços</h3>
-        <button
-          className="btn-vermelho"
-          onClick={() => {
-            setEnderecoSelecionado({
-              rua: "",
-              numero: "",
-              bairro: "",
-              cidade: "",
-              estado: "",
-              cep: "",
-            });
-            setIndiceEdicao(null);
-            setModoEdicao(true);
-          }}
-        >
-          <i className="fas fa-plus-circle"></i> Novo Endereço
-        </button>
+        <div className="cabecalho-enderecos">
+          <h3 className="titulo-enderecos">Endereços</h3>
+          <button
+            className="btn-vermelho btn-novo-endereco"
+            onClick={() => {
+              setEnderecoSelecionado({
+                rua: "",
+                numero: "",
+                bairro: "",
+                cidade: "",
+                estado: "",
+                cep: "",
+              });
+              setIndiceEdicao(null);
+              setModoEdicao(true);
+            }}
+          >
+            <i className="fas fa-plus-circle"></i> Novo Endereço
+          </button>
+        </div>
 
         {enderecos.length === 0 ? (
           <p>Nenhum endereço cadastrado.</p>
         ) : (
-          <ul className="lista-enderecos">
+          <div className="lista-enderecos">
             {enderecos.map((end, index) => (
-              <li key={index} className="item-endereco">
+              <div key={index} className="linha-endereco">
                 <p>{`${end.rua}, ${end.numero} - ${end.bairro}, ${end.cidade} - ${end.estado}, ${end.cep}`}</p>
-                <button
-                  className="btn-vermelho"
-                  onClick={() => {
-                    setEnderecoSelecionado(end);
-                    setIndiceEdicao(index);
-                    setModoEdicao(true);
-                  }}
-                >
-                  <i className="fas fa-edit"></i> Alterar Endereço
-                </button>
-                <button
-                  className="btn-cinza"
-                  onClick={() => removerEndereco(index)}
-                >
-                  <i className="fas fa-trash-alt"></i> Remover Endereço
-                </button>
-              </li>
+                <div className="grupo-botoes-linha">
+                  <button
+                    className="btn-vermelho"
+                    onClick={() => {
+                      setEnderecoSelecionado(end);
+                      setIndiceEdicao(index);
+                      setModoEdicao(true);
+                    }}
+                  >
+                    <i className="fas fa-edit"></i>
+                  </button>
+                  <button
+                    className="btn-cinza"
+                    onClick={() => removerEndereco(index)}
+                  >
+                    <i className="fas fa-trash-alt"></i>
+                  </button>
+                </div>
+              </div>
             ))}
-          </ul>
+          </div>
         )}
 
         {modoEdicao && (
