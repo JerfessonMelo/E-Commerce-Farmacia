@@ -49,9 +49,6 @@ const MenuLateralAutenticacao = ({ fecharMenu, aoLogar }) => {
 
         {etapa === "cadastro" && (
           <>
-            <button className="btn-voltar" onClick={() => setEtapa("inicio")}>
-              <i className="fas fa-arrow-left" /> Voltar
-            </button>
             <FormularioCadastro trocarParaLogin={() => setEtapa("login")} />
           </>
         )}

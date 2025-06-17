@@ -1,39 +1,50 @@
 .auth-form {
-  max-width: 400px;
-  margin: 60px auto;
-  padding: 30px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background-color: #ffffff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  animation: fadeIn 0.4s ease-in-out;
-}
-
-.auth-form * {
-  box-sizing: border-box;
+  max-height: 600px;
 }
 
 .auth-form h2 {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   color: #333;
 }
 
 .auth-form input,
-.auth-form button {
+.auth-form select {
   width: 100%;
-  padding: 12px;
+  padding: 10px;
   margin-bottom: 15px;
   font-size: 16px;
   border-radius: 6px;
   box-sizing: border-box;
 }
 
+.auth-form button {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  font-size: 16px;
+  border-radius: 6px;
+  box-sizing: border-box;
+  color: var(--primary-color);
+}
+
 .auth-form input {
   border: 1px solid #ccc;
 }
 
-.auth-form button {
+.auth-form input::placeholder {
+  color: #999;
+}
+
+.auth-form input[type="date"]:not(:focus):invalid {
+  color: #999;
+}
+
+.auth-form select:invalid {
+  color: #999;
+}
+
+.auth-form .btn-vermelho {
   background-color: var(--primary-color);
   color: white;
   font-weight: bold;
@@ -42,14 +53,14 @@
   transition: background-color 0.3s ease;
 }
 
-.auth-form button:hover {
+.auth-form .btn-vermelho:hover {
   background-color: var(--primary-hover);
 }
 
 .link-cadastro,
 .link-login {
   text-align: center;
-  margin-top: 15px;
+  margin-top: 10px;
   font-size: 0.95rem;
 }
 
@@ -64,6 +75,18 @@
 
 .btn-cadastro:hover {
   text-decoration: underline;
+}
+
+.linha-genero-telefone {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+
+.linha-genero-telefone .campo {
+  flex: 1;
+  min-width: 150px;
 }
 
 @keyframes fadeIn {

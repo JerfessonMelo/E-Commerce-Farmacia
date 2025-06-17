@@ -30,6 +30,15 @@ const FormularioCadastro = ({ trocarParaLogin }) => {
     <div className="auth-form">
       <h2>Cadastro</h2>
       <form onSubmit={cadastrar}>
+        <label>CPF</label>
+        <input
+          type="text"
+          name="cpf"
+          placeholder="CPF"
+          onChange={handleChange}
+          required
+        />
+        <label>Nome Completo</label>
         <input
           type="text"
           name="nome"
@@ -37,13 +46,46 @@ const FormularioCadastro = ({ trocarParaLogin }) => {
           onChange={handleChange}
           required
         />
+        <label>Data Nascimento</label>
         <input
-          type="email"
-          name="email"
-          placeholder="Email"
+          type="date"
+          name="dataNascimento"
+          placeholder="Data de Nascimento"
           onChange={handleChange}
           required
         />
+        <div className="linha-genero-telefone">
+          <div className="campo">
+            <label>Seu Gênero</label>
+            <select id="genero" name="genero" onChange={handleChange} required>
+              <option value="" disabled selected hidden>
+                Selecione
+              </option>
+              <option value="masculino">Masculino</option>
+              <option value="feminino">Feminino</option>
+              <option value="outro">Outro</option>
+            </select>
+          </div>
+          <div className="campo">
+            <label>Telefone Celular</label>
+            <input
+              type="text"
+              name="telefone"
+              placeholder="Telefone Celular"
+              onChange={handleChange}
+              required
+            />
+          </div>
+        </div>
+        <label>Seu E-Mail</label>
+        <input
+          type="email"
+          name="email"
+          placeholder="E-mail"
+          onChange={handleChange}
+          required
+        />
+        <label>Sua Senha</label>
         <input
           type="password"
           name="senha"
