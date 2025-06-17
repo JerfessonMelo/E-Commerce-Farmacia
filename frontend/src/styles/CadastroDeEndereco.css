@@ -1,18 +1,54 @@
-.form-endereco .grupo-botoes-endereco {
+.form-endereco {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #ddd;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.form-endereco h3 {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.form-endereco input {
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  font-family: inherit;
+  color: #333;
+  transition: border-color 0.2s;
+}
+
+.form-endereco input:focus {
+  border-color: var(--primary-color);
+  outline: none;
+}
+
+.grupo-botoes-endereco {
   display: flex;
-  gap: 10px;
-  margin-top: 15px;
+  gap: 12px;
+  margin-top: 20px;
+  flex-wrap: wrap;
 }
 
 .form-endereco .btn-vermelho {
   background-color: var(--primary-color);
   color: white;
-  font-weight: bold;
+  font-weight: 500;
   border: none;
-  padding: 10px 16px;
+  padding: 10px 20px;
   border-radius: 6px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .form-endereco .btn-vermelho:hover {
@@ -20,16 +56,29 @@
 }
 
 .form-endereco .btn-cinza {
-  background-color: #888;
-  color: white;
-  font-weight: bold;
+  background-color: #ccc;
+  color: #333;
+  font-weight: 500;
   border: none;
-  padding: 10px 16px;
+  padding: 10px 20px;
   border-radius: 6px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .form-endereco .btn-cinza:hover {
-  background-color: #666;
+  background-color: #bbb;
+}
+
+@media (max-width: 600px) {
+  .grupo-botoes-endereco {
+    flex-direction: column;
+  }
+
+  .form-endereco input {
+    font-size: 0.95rem;
+  }
 }
