@@ -37,6 +37,15 @@ const Pedido = () => {
     carregarEnderecos();
   }, []);
 
+  const [novoEndereco, setNovoEndereco] = useState({
+    rua: "",
+    numero: "",
+    bairro: "",
+    cidade: "",
+    estado: "",
+    cep: "",
+  });
+
   const carregarEnderecos = async () => {
     try {
       const res = await api.get("/usuarios/perfil", {
@@ -162,19 +171,33 @@ const Pedido = () => {
                 {mostrarFormularioEndereco && (
                   <div style={{ marginTop: "15px" }}>
                     <CadastroDeEndereco
-                      onEnderecoSalvo={async () => {
-                        setMostrarFormularioEndereco(false);
-                        await carregarEnderecos();
-                        const res = await api.get("/usuarios/perfil", {
-                          headers: { Authorization: `Bearer ${obterToken()}` },
-                        });
-                        const lista = res.data.endereco || [];
-                        setEnderecos(lista);
-                        if (lista.length > 0) {
-                          const ultimo = lista[lista.length - 1];
-                          setEnderecoEntrega(
-                            `${ultimo.rua}, ${ultimo.numero} - ${ultimo.bairro}`
+                      endereco={novoEndereco}
+                      setEndereco={setNovoEndereco}
+                      modoEdicao={false}
+                      onSalvar={async () => {
+                        try {
+                          await api.put(
+                            "/usuarios/perfil/endereco",
+                            novoEndereco,
+                            {
+                              headers: {
+                                Authorization: `Bearer ${obterToken()}`,
+                              },
+                            }
                           );
+                          setMostrarFormularioEndereco(false);
+                          setNovoEndereco({
+                            rua: "",
+                            numero: "",
+                            bairro: "",
+                            cidade: "",
+                            estado: "",
+                            cep: "",
+                          });
+                          await carregarEnderecos();
+                        } catch (err) {
+                          alert("Erro ao salvar endereço.");
+                          console.error(err);
                         }
                       }}
                     />
@@ -213,5 +236,5 @@ const Pedido = () => {
     </div>
   );
 };
-//
+
 export default Pedido;
