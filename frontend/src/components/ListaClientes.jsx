@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import api from "../services/api";
 import { obterToken } from "../services/auth";
-import "../../styles/ListaClientes.css";
+import "../styles/ListaClientes.css";
 
 const ListaClientes = () => {
   const [clientes, setClientes] = useState([]);
