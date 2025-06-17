@@ -2,9 +2,12 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import "./styles/theme.css";
-import "./styles/Celular.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+
+if (window.matchMedia("(max-width: 600px)").matches) {
+  require("./styles/Celular.css");
+}
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
