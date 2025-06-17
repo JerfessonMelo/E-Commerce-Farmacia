@@ -157,33 +157,6 @@ const Dashboard = () => {
                 });
               }}
             />
-
-            <div className="lista-produtos-admin">
-              <h3>Produtos Cadastrados</h3>
-              <ul>
-                {produtos.map((produto) => (
-                  <li key={produto._id}>
-                    <strong>{produto.nome}</strong> - R${" "}
-                    {parseFloat(produto.preco).toFixed(2)}{" "}
-                    <button
-                      onClick={() => {
-                        setNovoProduto({
-                          nome: produto.nome,
-                          descricao: produto.descricao,
-                          preco: produto.preco,
-                          marca: produto.marca,
-                          imagemUrl: produto.imagemUrl,
-                        });
-                        setModoEdicao(true);
-                        setIdProdutoEditando(produto._id);
-                      }}
-                    >
-                      Editar
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </div>
           </div>
         )}
       </div>
