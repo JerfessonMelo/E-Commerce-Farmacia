@@ -1,5 +1,5 @@
 .perfil {
-  max-width: 500px;
+  max-width: 600px;
   margin: 60px auto;
   padding: 30px;
   background-color: #fff;
@@ -17,7 +17,25 @@
   margin: 10px 0;
 }
 
+.perfil ul {
+  list-style: none;
+  padding: 0;
+}
+
+.perfil li {
+  margin-bottom: 15px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+
 .perfil button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1rem;
+}
+
+.btn-vermelho {
   width: 100%;
   padding: 12px;
   background-color: var(--primary-color);
@@ -26,15 +44,38 @@
   border: none;
   border-radius: 6px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
 }
 
-.perfil button:hover {
+.btn-vermelho:hover {
   background-color: var(--primary-hover);
+}
+
+.btn-cinza {
+  width: 100%;
+  padding: 12px;
+  background-color: #888;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+
+.btn-cinza:hover {
+  background-color: #666;
 }
 
 @media (max-width: 600px) {
   .perfil {
     margin: 20px;
     padding: 20px;
+  }
+
+  .perfil button {
+    font-size: 0.95rem;
   }
 }

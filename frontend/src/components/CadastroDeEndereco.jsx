@@ -62,11 +62,12 @@ const CadastroDeEndereco = ({
 
       <div className="grupo-botoes-endereco">
         <button onClick={onSalvar} className="btn-vermelho">
+          <i className={`fas ${modoEdicao ? "fa-check" : "fa-plus"}`}></i>{" "}
           {modoEdicao ? "Atualizar" : "Adicionar"}
         </button>
         {modoEdicao && (
           <button onClick={onCancelar} className="btn-cinza">
-            Cancelar
+            <i className="fas fa-times"></i> Cancelar
           </button>
         )}
       </div>

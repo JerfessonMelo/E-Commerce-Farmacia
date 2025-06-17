@@ -41,40 +41,46 @@ const Perfil = () => {
 
   const salvarEndereco = async () => {
     try {
-      if (indiceEdicao !== null) {
-        const res = await api.put(
-          `/usuarios/perfil/enderecos/${indiceEdicao}`,
-          enderecoSelecionado,
-          {
-            headers: {
-              Authorization: `Bearer ${obterToken()}`,
-            },
-          }
-        );
-        alert("Endereço atualizado com sucesso!");
-        setUsuario(res.data);
-        setEnderecos(res.data.endereco || []);
-      } else {
-        const res = await api.post(
-          "/usuarios/perfil/enderecos",
-          enderecoSelecionado,
-          {
-            headers: {
-              Authorization: `Bearer ${obterToken()}`,
-            },
-          }
-        );
-        alert("Endereço adicionado com sucesso!");
-        setUsuario(res.data);
-        setEnderecos(res.data.endereco || []);
-      }
+      const endpoint =
+        indiceEdicao !== null
+          ? `/usuarios/perfil/enderecos/${indiceEdicao}`
+          : "/usuarios/perfil/enderecos";
 
+      const metodo = indiceEdicao !== null ? api.put : api.post;
+
+      const res = await metodo(endpoint, enderecoSelecionado, {
+        headers: { Authorization: `Bearer ${obterToken()}` },
+      });
+
+      alert(
+        indiceEdicao !== null
+          ? "Endereço atualizado com sucesso!"
+          : "Endereço adicionado com sucesso!"
+      );
+      setUsuario(res.data);
+      setEnderecos(res.data.endereco || []);
       setModoEdicao(false);
       setEnderecoSelecionado(null);
       setIndiceEdicao(null);
     } catch (err) {
       alert("Erro ao salvar endereço.");
       console.error(err);
+    }
+  };
+
+  const removerEndereco = async (index) => {
+    if (window.confirm("Tem certeza que deseja remover este endereço?")) {
+      try {
+        const res = await api.delete(`/usuarios/perfil/enderecos/${index}`, {
+          headers: { Authorization: `Bearer ${obterToken()}` },
+        });
+        alert("Endereço removido com sucesso!");
+        setUsuario(res.data);
+        setEnderecos(res.data.endereco || []);
+      } catch (err) {
+        alert("Erro ao remover endereço.");
+        console.error(err);
+      }
     }
   };
 
@@ -95,9 +101,9 @@ const Perfil = () => {
           <strong>Tipo:</strong> {usuario.isAdmin ? "Administrador" : "Cliente"}
         </p>
 
-        <h3 style={{ color: "red", marginTop: "30px" }}>Endereços</h3>
+        <h3 className="titulo-enderecos">Endereços</h3>
         <button
-          style={{ marginBottom: "10px" }}
+          className="btn-vermelho"
           onClick={() => {
             setEnderecoSelecionado({
               rua: "",
@@ -111,36 +117,31 @@ const Perfil = () => {
             setModoEdicao(true);
           }}
         >
-          + Novo Endereço
+          <i className="fas fa-plus-circle"></i> Novo Endereço
         </button>
 
         {enderecos.length === 0 ? (
           <p>Nenhum endereço cadastrado.</p>
         ) : (
-          <ul style={{ paddingLeft: 0 }}>
+          <ul className="lista-enderecos">
             {enderecos.map((end, index) => (
-              <li
-                key={index}
-                style={{
-                  marginBottom: "10px",
-                  listStyle: "none",
-                  borderBottom: "1px solid #ccc",
-                  paddingBottom: "10px",
-                }}
-              >
+              <li key={index} className="item-endereco">
                 <p>{`${end.rua}, ${end.numero} - ${end.bairro}, ${end.cidade} - ${end.estado}, ${end.cep}`}</p>
                 <button
-                  style={{
-                    marginBottom: "10px",
-                    backgroundColor: "var(--primary-color)",
-                  }}
+                  className="btn-vermelho"
                   onClick={() => {
                     setEnderecoSelecionado(end);
                     setIndiceEdicao(index);
                     setModoEdicao(true);
                   }}
                 >
-                  Alterar Endereço
+                  <i className="fas fa-edit"></i> Alterar Endereço
+                </button>
+                <button
+                  className="btn-cinza"
+                  onClick={() => removerEndereco(index)}
+                >
+                  <i className="fas fa-trash-alt"></i> Remover Endereço
                 </button>
               </li>
             ))}
