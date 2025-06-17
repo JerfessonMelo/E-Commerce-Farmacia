@@ -1,0 +1,52 @@
+.resumo-vendas {
+  background-color: #ffffff;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  font-family: var(--font-family-base);
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.resumo-vendas h3 {
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  color: var(--primary-color);
+  text-align: center;
+}
+
+.resumo-cards {
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.resumo-card {
+  flex: 1;
+  min-width: 200px;
+  background-color: var(--gray-light);
+  border-radius: 10px;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.resumo-card:hover {
+  transform: scale(1.03);
+}
+
+.resumo-card h4 {
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.resumo-card p {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: var(--primary-color);
+}
