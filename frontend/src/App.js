@@ -5,9 +5,9 @@ import Home from "./pages/Home";
 import ProdutoDetalhe from "./pages/ProdutoDetalhe";
 import Pedido from "./pages/Pedido";
 import Dashboard from "./pages/painelAdmin/Dashboard";
-import ListaProdutos from "./pages/painelAdmin/ListaProdutos";
-import ListaPedidos from "./pages/painelAdmin/ListaPedidos";
-import ListaClientes from "./pages/painelAdmin/ListaClientes";
+import ListaProdutos from "./components/ListaProdutos";
+import ListaPedidos from "./components/ListaPedidos";
+import ListaClientes from "./components/ListaClientes";
 import Perfil from "./pages/Perfil";
 
 function App() {
