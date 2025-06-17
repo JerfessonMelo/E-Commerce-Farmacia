@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import api from "../services/api";
 import { obterToken } from "../services/auth";
-import "../../styles/ListaPedidos.css";
+import "../styles/ListaPedidos.css";
 
 const ListaPedidos = () => {
   const [pedidos, setPedidos] = useState([]);
