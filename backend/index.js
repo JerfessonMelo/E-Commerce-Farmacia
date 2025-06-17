@@ -33,6 +33,7 @@ app.use(
   })
 );
 
+app.use(express.json());
 app.use("/produtos", express.static("public/produtos"));
 app.use("/api/usuarios", usuarioRoutes);
 app.use("/api/produtos", produtoRoutes);
