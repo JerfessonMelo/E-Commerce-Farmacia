@@ -8,15 +8,16 @@ import { obterToken, obterDadosUsuario } from "../services/auth";
 import Cabecalho from "../components/Cabecalho";
 import api from "../services/api";
 import "../styles/Pedido.css";
+import { useNavigate } from "react-router-dom";
 
 const Pedido = () => {
   const [produtos, setProdutos] = useState([]);
-  const [cep, setCep] = useState("");
-  const [enderecosDisponiveis, setEnderecosDisponiveis] = useState([]);
+  const [enderecos, setEnderecos] = useState([]);
   const [enderecoEntrega, setEnderecoEntrega] = useState("");
-  const [freteInfo, setFreteInfo] = useState(null);
   const [frete, setFrete] = useState(0);
   const usuario = obterDadosUsuario() || {};
+  const navigate = useNavigate();
+
   const totalProdutos = produtos.reduce(
     (soma, p) => soma + p.preco * p.quantidade,
     0
@@ -29,36 +30,24 @@ const Pedido = () => {
       quantidade: p.quantidade || 1,
     }));
     setProdutos(carrinho);
-  }, []);
 
-  const calcularFrete = async () => {
-    try {
-      const res = await api.post("/frete/calcular", {
-        cepDestino: cep,
-        peso: 1,
-        comprimento: 20,
-        altura: 10,
-        largura: 15,
-      });
-      setFreteInfo(res.data);
-      setFrete(parseFloat(res.data.Valor.replace(",", ".")));
-
-      const endRes = await api.get(`/usuarios/perfil/enderecos?cep=${cep}`, {
-        headers: { Authorization: `Bearer ${obterToken()}` },
-      });
-
-      setEnderecosDisponiveis(endRes.data);
-      if (endRes.data.length === 1) {
-        const e = endRes.data[0];
-        setEnderecoEntrega(`${e.rua}, ${e.numero} - ${e.bairro}`);
-      } else {
-        setEnderecoEntrega("");
+    const carregarEnderecos = async () => {
+      try {
+        const res = await api.get("/usuarios/perfil", {
+          headers: { Authorization: `Bearer ${obterToken()}` },
+        });
+        setEnderecos(res.data.endereco || []);
+        if (res.data.endereco && res.data.endereco.length > 0) {
+          const e = res.data.endereco[0];
+          setEnderecoEntrega(`${e.rua}, ${e.numero} - ${e.bairro}`);
+        }
+      } catch (err) {
+        console.error("Erro ao carregar endereços:", err);
       }
-    } catch (err) {
-      alert("Erro ao calcular o frete.");
-      console.error(err);
-    }
-  };
+    };
+
+    carregarEnderecos();
+  }, []);
 
   const finalizarPedido = async () => {
     try {
@@ -138,43 +127,33 @@ const Pedido = () => {
             <h3>
               <i className="fas fa-map-marker-alt"></i> Endereço de Entrega
             </h3>
-            <div className="linha-cep-frete">
-              <input
-                type="text"
-                className="campo-cep"
-                placeholder="Digite seu CEP"
-                value={cep}
-                onChange={(e) => setCep(e.target.value)}
-              />
-              <button className="btn-calcular-frete" onClick={calcularFrete}>
-                <i className="fas fa-truck"></i> Calcular
-              </button>
-            </div>
-
-            {freteInfo && (
-              <>
-                {enderecosDisponiveis.length > 0 ? (
-                  <select
-                    className="campo-texto"
-                    value={enderecoEntrega}
-                    onChange={(e) => setEnderecoEntrega(e.target.value)}
+            {enderecos.length > 0 ? (
+              <select
+                className="campo-texto"
+                value={enderecoEntrega}
+                onChange={(e) => setEnderecoEntrega(e.target.value)}
+              >
+                <option value="">Selecione um endereço</option>
+                {enderecos.map((e, index) => (
+                  <option
+                    key={index}
+                    value={`${e.rua}, ${e.numero} - ${e.bairro}`}
                   >
-                    <option value="">Selecione um endereço</option>
-                    {enderecosDisponiveis.map((e, index) => (
-                      <option key={index} value={e.logradouro}>
-                        {`${e.logradouro}, ${e.numero} - ${e.bairro}`}
-                      </option>
-                    ))}
-                  </select>
-                ) : (
-                  <input
-                    type="text"
-                    className="campo-texto"
-                    placeholder="Rua, número, bairro..."
-                    value={enderecoEntrega}
-                    onChange={(e) => setEnderecoEntrega(e.target.value)}
-                  />
-                )}
+                    {`${e.rua}, ${e.numero} - ${e.bairro}`}
+                  </option>
+                ))}
+              </select>
+            ) : (
+              <>
+                <p className="mensagem-sem-endereco">
+                  Nenhum endereço cadastrado.
+                </p>
+                <button
+                  className="btn-cadastrar-endereco"
+                  onClick={() => navigate("/perfil")}
+                >
+                  Cadastrar Endereço
+                </button>
               </>
             )}
           </div>
@@ -189,27 +168,17 @@ const Pedido = () => {
               <span>Total Produtos:</span>
               <span>R$ {totalProdutos.toFixed(2)}</span>
             </div>
-
-            {freteInfo && (
-              <>
-                <div className="resumo-linha">
-                  <span>Frete:</span>
-                  <span>R$ {freteInfo.Valor}</span>
-                </div>
-                <div className="resumo-linha">
-                  <span>Prazo:</span>
-                  <span>{freteInfo.PrazoEntrega} dias</span>
-                </div>
-              </>
-            )}
-
             <hr />
             <div className="resumo-linha total">
               <strong>Total Geral:</strong>
               <strong>R$ {totalGeral.toFixed(2)}</strong>
             </div>
 
-            <button className="btn-acao" onClick={finalizarPedido}>
+            <button
+              className="btn-acao"
+              onClick={finalizarPedido}
+              disabled={!enderecoEntrega}
+            >
               <i className="fas fa-check-circle"></i> Finalizar Pedido
             </button>
           </div>

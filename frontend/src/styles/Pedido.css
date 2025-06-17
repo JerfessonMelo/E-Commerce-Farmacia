@@ -169,6 +169,25 @@
   background-color: var(--primary-hover);
 }
 
+.mensagem-sem-endereco {
+  color: #777;
+  margin-bottom: 10px;
+}
+
+.btn-cadastrar-endereco {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-cadastrar-endereco:hover {
+  background-color: var(--primary-hover);
+}
+
 @media (max-width: 768px) {
   .pedido {
     flex-direction: column;

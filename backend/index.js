@@ -7,7 +7,6 @@ const usuarioRoutes = require("./routes/usuarioRoutes");
 const produtoRoutes = require("./routes/produtoRoutes");
 const pedidoRoutes = require("./routes/pedidoRoutes");
 const adminRoutes = require("./routes/adminRoutes");
-const freteRoutes = require("./routes/freteRoutes");
 
 dotenv.config();
 
@@ -39,7 +38,6 @@ app.use("/api/usuarios", usuarioRoutes);
 app.use("/api/produtos", produtoRoutes);
 app.use("/api/pedidos", pedidoRoutes);
 app.use("/api/admin", adminRoutes);
-app.use("/api/frete", freteRoutes);
 
 app.get("/", (req, res) => {
   res.send("🚀 API da Drogaria Poupe Já está rodando!");
