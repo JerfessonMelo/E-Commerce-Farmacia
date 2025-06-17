@@ -153,7 +153,9 @@ const Pedido = () => {
                     <option
                       key={index}
                       value={`${end.rua}, ${end.numero} - ${end.bairro}, ${end.cidade} - ${end.estado}, ${end.cep}`}
-                    ></option>
+                    >
+                      {`${e.rua}, ${e.numero} - ${e.bairro}, ${e.cidade} - ${e.estado}, ${e.cep}`}
+                    </option>
                   ))}
               </select>
             ) : (
