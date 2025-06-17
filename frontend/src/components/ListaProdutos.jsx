@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import api from "../../services/api";
-import { obterToken } from "../../services/auth";
+import api from "../services/api";
+import { obterToken } from "../services/auth";
 import "../../styles/ListaProdutos.css";
 
 const ListaProdutos = () => {

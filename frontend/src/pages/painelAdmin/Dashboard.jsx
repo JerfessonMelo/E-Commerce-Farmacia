@@ -3,8 +3,8 @@ import api from "../../services/api";
 import { obterToken } from "../../services/auth";
 import Cabecalho from "../../components/Cabecalho";
 import CadastroProduto from "../../components/CadastroProduto";
-import ListaClientes from "./ListaClientes";
-import ListaProdutos from "./ListaProdutos";
+import ListaClientes from "../../components/ListaClientes";
+import ListaProdutos from "../../components/ListaProdutos";
 import RelatorioVendas from "../../components/RelatorioVendas";
 import "../../styles/Dashboard.css";
 
