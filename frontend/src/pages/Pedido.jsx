@@ -152,10 +152,8 @@ const Pedido = () => {
                   .map((e, index) => (
                     <option
                       key={index}
-                      value={`${e.rua}, ${e.numero} - ${e.bairro}`}
-                    >
-                      {`${e.rua}, ${e.numero} - ${e.bairro}`}
-                    </option>
+                      value={`${end.rua}, ${end.numero} - ${end.bairro}, ${end.cidade} - ${end.estado}, ${end.cep}`}
+                    ></option>
                   ))}
               </select>
             ) : (
