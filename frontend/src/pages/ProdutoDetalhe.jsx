@@ -29,7 +29,7 @@ const ProdutoDetalhe = () => {
   }
 
   return (
-    <div className="produto-detalhe-container">
+    <div className="produto-detalhe-container celular-container">
       <Cabecalho />
 
       <div className="detalhe">

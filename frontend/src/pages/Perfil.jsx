@@ -87,7 +87,7 @@ const Perfil = () => {
   if (!usuario) return <p>Carregando...</p>;
 
   return (
-    <div>
+    <div className="celular-container">
       <Cabecalho />
       <div className="perfil">
         <h2>Meu Perfil</h2>

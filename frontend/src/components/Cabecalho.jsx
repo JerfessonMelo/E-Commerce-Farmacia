@@ -47,7 +47,7 @@ const Cabecalho = () => {
 
   return (
     <>
-      <header className="header-drogaria">
+      <header className="header-drogaria celular-header">
         <Link className="logo" to="/">
           <img src="/logo.png" alt="Drogaria Poupe Já" />
         </Link>

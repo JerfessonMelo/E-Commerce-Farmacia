@@ -91,7 +91,7 @@ const Pedido = () => {
   };
 
   return (
-    <div>
+    <div className="celular-container">
       <Cabecalho />
       <div className="pedido">
         <div className="col-esquerda">

@@ -55,7 +55,7 @@ const Home = () => {
   const paginaProdutos = filtrados.slice(inicio, fim);
 
   return (
-    <div className="home">
+    <div className="home celular-container">
       <Cabecalho />
 
       <section className="home-banner">
@@ -108,7 +108,7 @@ const Home = () => {
         </div>
       </section>
 
-      <footer className="home-footer">
+      <footer className="home-footer celular-foote">
         <p>
           &copy; {new Date().getFullYear()} Drogaria Poupe Já. Todos os direitos
           reservados.

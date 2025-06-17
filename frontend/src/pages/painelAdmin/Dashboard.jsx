@@ -101,7 +101,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div>
+    <div className="celular-container">
       <Cabecalho />
       <div className="dashboard">
         <h2>Painel Administrativo</h2>
