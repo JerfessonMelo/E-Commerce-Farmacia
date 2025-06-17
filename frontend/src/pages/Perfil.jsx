@@ -126,44 +126,46 @@ const Perfil = () => {
           <p>Nenhum endereço cadastrado.</p>
         ) : (
           <div className="lista-enderecos">
-            {enderecos.map((end, index) => (
-              <div key={index} className="linha-endereco">
-                <p>{`${end.rua}, ${end.numero} - ${end.bairro}, ${end.cidade} - ${end.estado}, ${end.cep}`}</p>
-                <div className="grupo-botoes-linha">
-                  <button
-                    className="btn-vermelho"
-                    onClick={() => {
-                      setEnderecoSelecionado(end);
-                      setIndiceEdicao(index);
-                      setModoEdicao(true);
-                    }}
-                  >
-                    <i className="fas fa-edit"></i>
-                  </button>
-                  <button
-                    className="btn-cinza"
-                    onClick={() => removerEndereco(index)}
-                  >
-                    <i className="fas fa-trash-alt"></i>
-                  </button>
+            {enderecos.map((end, index) =>
+              end && end.rua ? (
+                <div key={index} className="linha-endereco">
+                  <p>{`${end.rua}, ${end.numero} - ${end.bairro}, ${end.cidade} - ${end.estado}, ${end.cep}`}</p>
+                  <div className="grupo-botoes-linha">
+                    <button
+                      className="btn-vermelho"
+                      onClick={() => {
+                        setEnderecoSelecionado(end);
+                        setIndiceEdicao(index);
+                        setModoEdicao(true);
+                      }}
+                    >
+                      <i className="fas fa-edit"></i>
+                    </button>
+                    <button
+                      className="btn-cinza"
+                      onClick={() => removerEndereco(index)}
+                    >
+                      <i className="fas fa-trash-alt"></i>
+                    </button>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        )}
+              ) : null
+            )}
 
-        {modoEdicao && (
-          <CadastroDeEndereco
-            endereco={enderecoSelecionado}
-            setEndereco={setEnderecoSelecionado}
-            onSalvar={salvarEndereco}
-            onCancelar={() => {
-              setModoEdicao(false);
-              setEnderecoSelecionado(null);
-              setIndiceEdicao(null);
-            }}
-            modoEdicao={indiceEdicao !== null}
-          />
+            {modoEdicao && (
+              <CadastroDeEndereco
+                endereco={enderecoSelecionado}
+                setEndereco={setEnderecoSelecionado}
+                onSalvar={salvarEndereco}
+                onCancelar={() => {
+                  setModoEdicao(false);
+                  setEnderecoSelecionado(null);
+                  setIndiceEdicao(null);
+                }}
+                modoEdicao={indiceEdicao !== null}
+              />
+            )}
+          </div>
         )}
       </div>
     </div>

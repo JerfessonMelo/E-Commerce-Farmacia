@@ -13,6 +13,28 @@ const CadastroDeEndereco = ({
     setEndereco((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handleSalvar = () => {
+    const camposObrigatorios = [
+      "rua",
+      "numero",
+      "bairro",
+      "cidade",
+      "estado",
+      "cep",
+    ];
+
+    const camposVazios = camposObrigatorios.filter(
+      (campo) => !endereco[campo] || endereco[campo].trim() === ""
+    );
+
+    if (camposVazios.length > 0) {
+      alert(`Por favor, preencha todos os campos: ${camposVazios.join(", ")}`);
+      return;
+    }
+
+    onSalvar();
+  };
+
   return (
     <div className="form-endereco">
       <h3>{modoEdicao ? "Editar Endereço" : "Novo Endereço"}</h3>
@@ -61,7 +83,7 @@ const CadastroDeEndereco = ({
       />
 
       <div className="grupo-botoes-endereco">
-        <button onClick={onSalvar} className="btn-vermelho">
+        <button onClick={handleSalvar} className="btn-vermelho">
           <i className={`fas ${modoEdicao ? "fa-check" : "fa-plus"}`}></i>{" "}
           {modoEdicao ? "Atualizar" : "Adicionar"}
         </button>
