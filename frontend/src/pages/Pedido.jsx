@@ -147,14 +147,16 @@ const Pedido = () => {
                 onChange={(e) => setEnderecoEntrega(e.target.value)}
               >
                 <option value="">Selecione um endereço</option>
-                {enderecos.map((e, index) => (
-                  <option
-                    key={index}
-                    value={`${e.rua}, ${e.numero} - ${e.bairro}`}
-                  >
-                    {`${e.rua}, ${e.numero} - ${e.bairro}`}
-                  </option>
-                ))}
+                {enderecos
+                  .filter((e) => e && e.rua)
+                  .map((e, index) => (
+                    <option
+                      key={index}
+                      value={`${e.rua}, ${e.numero} - ${e.bairro}`}
+                    >
+                      {`${e.rua}, ${e.numero} - ${e.bairro}`}
+                    </option>
+                  ))}
               </select>
             ) : (
               <>
@@ -169,15 +171,15 @@ const Pedido = () => {
                 )}
 
                 {mostrarFormularioEndereco && (
-                  <div style={{ marginTop: "15px" }}>
+                  <div>
                     <CadastroDeEndereco
                       endereco={novoEndereco}
                       setEndereco={setNovoEndereco}
                       modoEdicao={false}
                       onSalvar={async () => {
                         try {
-                          await api.put(
-                            "/usuarios/perfil/endereco",
+                          await api.post(
+                            "/usuarios/perfil/enderecos",
                             novoEndereco,
                             {
                               headers: {
