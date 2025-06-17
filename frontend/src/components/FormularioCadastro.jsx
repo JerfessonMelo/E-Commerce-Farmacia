@@ -86,9 +86,12 @@ const FormularioCadastro = ({ trocarParaLogin }) => {
           required
         />
         {erro && <p className="erro-texto">{erro}</p>}
-        <button type="submit" className="btn-vermelho">
-          Cadastrar
-        </button>
+        <div className="botoes-iniciais">
+          <button type="submit" className="btn-branco">
+            <i className="fas fa-user-plus" />
+            Cadastrar
+          </button>
+        </div>
       </form>
       <p className="link-login">
         Já tem conta?

@@ -44,9 +44,12 @@ const FormularioLogin = ({ trocarParaCadastro, aoLogar }) => {
           required
         />
         {erro && <p className="erro-texto">{erro}</p>}
-        <button type="submit" className="btn-vermelho">
-          Entrar
-        </button>
+        <div className="botoes-iniciais">
+          <button type="submit" className="btn-vermelho">
+            <i className="fas fa-sign-in-alt" />
+            Entrar
+          </button>
+        </div>
       </form>
       <p className="link-cadastro">
         Não tem conta?

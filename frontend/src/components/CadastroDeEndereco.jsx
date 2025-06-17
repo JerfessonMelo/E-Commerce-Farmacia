@@ -1,7 +1,13 @@
 import React from "react";
 import "../styles/CadastroDeEndereco.css";
 
-const CadastroDeEndereco = ({ endereco, setEndereco, onSalvar }) => {
+const CadastroDeEndereco = ({
+  endereco,
+  setEndereco,
+  onSalvar,
+  onCancelar,
+  modoEdicao,
+}) => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setEndereco((prev) => ({ ...prev, [name]: value }));
@@ -9,7 +15,7 @@ const CadastroDeEndereco = ({ endereco, setEndereco, onSalvar }) => {
 
   return (
     <div className="form-endereco">
-      <h3>Endereço</h3>
+      <h3>{modoEdicao ? "Editar Endereço" : "Novo Endereço"}</h3>
 
       <input
         type="text"
@@ -54,7 +60,16 @@ const CadastroDeEndereco = ({ endereco, setEndereco, onSalvar }) => {
         onChange={handleChange}
       />
 
-      <button onClick={onSalvar}>Salvar Endereço</button>
+      <div className="grupo-botoes-endereco">
+        <button onClick={onSalvar} className="btn-vermelho">
+          {modoEdicao ? "Atualizar" : "Adicionar"}
+        </button>
+        {modoEdicao && (
+          <button onClick={onCancelar} className="btn-cinza">
+            Cancelar
+          </button>
+        )}
+      </div>
     </div>
   );
 };

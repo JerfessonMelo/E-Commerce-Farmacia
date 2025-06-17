@@ -3,7 +3,6 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const Usuario = require("../models/Usuario");
 const { authMiddleware } = require("../middlewares/authMiddleware");
-
 const router = express.Router();
 
 router.post("/registro", async (req, res) => {
@@ -19,25 +18,6 @@ router.post("/registro", async (req, res) => {
     res.status(201).json({ mensagem: "Usuário registrado com sucesso" });
   } catch (err) {
     res.status(500).json({ mensagem: "Erro ao registrar usuário" });
-  }
-});
-
-router.put("/perfil/endereco", authMiddleware, async (req, res) => {
-  const { rua, numero, bairro, cidade, estado, cep } = req.body;
-  try {
-    const usuarioAtualizado = await Usuario.findByIdAndUpdate(
-      req.usuario.id,
-      {
-        endereco: { rua, numero, bairro, cidade, estado, cep },
-      },
-      { new: true }
-    ).select("-senha");
-
-    res.json(usuarioAtualizado);
-  } catch (err) {
-    res
-      .status(500)
-      .json({ mensagem: "Erro ao atualizar endereço", erro: err.message });
   }
 });
 
@@ -90,4 +70,63 @@ router.get("/perfil", authMiddleware, async (req, res) => {
   res.json(usuario);
 });
 
-module.exports = router;
+router.post("/perfil/enderecos", authMiddleware, async (req, res) => {
+  try {
+    const usuario = await Usuario.findById(req.usuario.id);
+    if (!usuario)
+      return res.status(404).json({ mensagem: "Usuário não encontrado" });
+
+    usuario.endereco.push(req.body);
+    await usuario.save();
+
+    res.json(usuario);
+  } catch (err) {
+    res
+      .status(500)
+      .json({ mensagem: "Erro ao adicionar endereço", erro: err.message });
+  }
+});
+
+router.put("/perfil/enderecos/:indice", authMiddleware, async (req, res) => {
+  try {
+    const usuario = await Usuario.findById(req.usuario.id);
+    if (!usuario)
+      return res.status(404).json({ mensagem: "Usuário não encontrado" });
+
+    const { indice } = req.params;
+    if (!usuario.endereco[indice]) {
+      return res.status(404).json({ mensagem: "Endereço não encontrado" });
+    }
+
+    usuario.endereco[indice] = req.body;
+    await usuario.save();
+
+    res.json(usuario);
+  } catch (err) {
+    res
+      .status(500)
+      .json({ mensagem: "Erro ao atualizar endereço", erro: err.message });
+  }
+});
+
+router.delete("/perfil/enderecos/:indice", authMiddleware, async (req, res) => {
+  try {
+    const usuario = await Usuario.findById(req.usuario.id);
+    if (!usuario)
+      return res.status(404).json({ mensagem: "Usuário não encontrado" });
+
+    const { indice } = req.params;
+    if (!usuario.endereco[indice]) {
+      return res.status(404).json({ mensagem: "Endereço não encontrado" });
+    }
+
+    usuario.endereco.splice(indice, 1);
+    await usuario.save();
+
+    res.json(usuario);
+  } catch (err) {
+    res
+      .status(500)
+      .json({ mensagem: "Erro ao remover endereço", erro: err.message });
+  }
+});
