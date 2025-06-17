@@ -6,6 +6,7 @@ import {
 } from "../services/carrinho";
 import { obterToken, obterDadosUsuario } from "../services/auth";
 import Cabecalho from "../components/Cabecalho";
+import CadastroDeEndereco from "../components/CadastroDeEndereco";
 import api from "../services/api";
 import "../styles/Pedido.css";
 import { useNavigate } from "react-router-dom";
@@ -17,6 +18,8 @@ const Pedido = () => {
   const [frete, setFrete] = useState(0);
   const usuario = obterDadosUsuario() || {};
   const navigate = useNavigate();
+  const [mostrarFormularioEndereco, setMostrarFormularioEndereco] =
+    useState(false);
 
   const totalProdutos = produtos.reduce(
     (soma, p) => soma + p.preco * p.quantidade,
@@ -31,23 +34,24 @@ const Pedido = () => {
     }));
     setProdutos(carrinho);
 
-    const carregarEnderecos = async () => {
-      try {
-        const res = await api.get("/usuarios/perfil", {
-          headers: { Authorization: `Bearer ${obterToken()}` },
-        });
-        setEnderecos(res.data.endereco || []);
-        if (res.data.endereco && res.data.endereco.length > 0) {
-          const e = res.data.endereco[0];
-          setEnderecoEntrega(`${e.rua}, ${e.numero} - ${e.bairro}`);
-        }
-      } catch (err) {
-        console.error("Erro ao carregar endereços:", err);
-      }
-    };
-
     carregarEnderecos();
   }, []);
+
+  const carregarEnderecos = async () => {
+    try {
+      const res = await api.get("/usuarios/perfil", {
+        headers: { Authorization: `Bearer ${obterToken()}` },
+      });
+      const lista = res.data.endereco || [];
+      setEnderecos(lista);
+      if (lista.length > 0) {
+        const e = lista[0];
+        setEnderecoEntrega(`${e.rua}, ${e.numero} - ${e.bairro}`);
+      }
+    } catch (err) {
+      console.error("Erro ao carregar endereços:", err);
+    }
+  };
 
   const finalizarPedido = async () => {
     try {
@@ -145,15 +149,37 @@ const Pedido = () => {
               </select>
             ) : (
               <>
-                <p className="mensagem-sem-endereco">
-                  Nenhum endereço cadastrado.
-                </p>
-                <button
-                  className="btn-cadastrar-endereco"
-                  onClick={() => navigate("/perfil")}
-                >
-                  Cadastrar Endereço
-                </button>
+                {!mostrarFormularioEndereco && (
+                  <button
+                    className="btn-acao"
+                    onClick={() => setMostrarFormularioEndereco(true)}
+                  >
+                    <i className="fas fa-plus-circle"></i> Cadastrar Endereço de
+                    Entrega
+                  </button>
+                )}
+
+                {mostrarFormularioEndereco && (
+                  <div style={{ marginTop: "15px" }}>
+                    <CadastroDeEndereco
+                      onEnderecoSalvo={async () => {
+                        setMostrarFormularioEndereco(false);
+                        await carregarEnderecos();
+                        const res = await api.get("/usuarios/perfil", {
+                          headers: { Authorization: `Bearer ${obterToken()}` },
+                        });
+                        const lista = res.data.endereco || [];
+                        setEnderecos(lista);
+                        if (lista.length > 0) {
+                          const ultimo = lista[lista.length - 1];
+                          setEnderecoEntrega(
+                            `${ultimo.rua}, ${ultimo.numero} - ${ultimo.bairro}`
+                          );
+                        }
+                      }}
+                    />
+                  </div>
+                )}
               </>
             )}
           </div>
