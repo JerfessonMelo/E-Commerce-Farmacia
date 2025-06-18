@@ -26,9 +26,6 @@ const Home = () => {
         const query = new URLSearchParams();
         if (categoriaSelecionada)
           query.append("categoria", categoriaSelecionada);
-        if (faixaEtariaSelecionada)
-          query.append("faixaEtaria", faixaEtariaSelecionada);
-        if (tagsSelecionadas) query.append("tags", tagsSelecionadas);
         if (termoBusca) query.append("busca", termoBusca);
 
         const resposta = await api.get(`/produtos?${query.toString()}`);
@@ -81,26 +78,6 @@ const Home = () => {
             <option value="analgésicos">Analgésicos</option>
             <option value="higiene">Higiene</option>
           </select>
-
-          <select
-            onChange={(e) => setFaixaEtariaSelecionada(e.target.value)}
-            value={faixaEtariaSelecionada}
-          >
-            <option value="">Todas as faixas etárias</option>
-            <option value="infantil">Infantil</option>
-            <option value="adulto">Adulto</option>
-          </select>
-
-          <select
-            onChange={(e) => setTagsSelecionadas(e.target.value)}
-            value={tagsSelecionadas}
-          >
-            <option value="">Todas as tags</option>
-            <option value="antibiótico">Antibiótico</option>
-            <option value="natural">Natural</option>
-            <option value="sem açúcar">Sem Açúcar</option>
-          </select>
-
           <select
             onChange={(e) => setOrdenacao(e.target.value)}
             value={ordenacao}

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import api from "../services/api";
 import { adicionarAoCarrinho } from "../services/carrinho";
 import { obterDadosUsuario } from "../services/auth";
@@ -10,20 +10,22 @@ import "../styles/ProdutoDetalhe.css";
 const ProdutoDetalhe = () => {
   const { id } = useParams();
   const [produto, setProduto] = useState(null);
-  const usuario = obterDadosUsuario() || {};
-  const nomeUsuario = usuario.nome?.split(" ");
   const [produtosRelacionados, setRelacionados] = useState([]);
   const [produtosSimilares, setSimilares] = useState([]);
+  const usuario = obterDadosUsuario() || {};
+  const nomeUsuario = usuario.nome?.split(" ")[0];
 
   useEffect(() => {
     const carregarProduto = async () => {
       try {
         const res = await api.get(`/produtos/${id}`);
         setProduto(res.data);
+
         const categoria = res.data.categoria?.toLowerCase() || "";
 
         const relacionados = await api.get(`/produtos?categoria=${categoria}`);
         const similares = await api.get("/produtos");
+
         const filtradosRelacionados = relacionados.data.filter(
           (p) => p._id !== res.data._id
         );
@@ -44,7 +46,7 @@ const ProdutoDetalhe = () => {
 
   return (
     <div className="produto-detalhe-container celular-container">
-      <Cabecalho />
+      <Cabecalho usuario={nomeUsuario} />
 
       <div className="detalhe">
         <img
@@ -52,6 +54,7 @@ const ProdutoDetalhe = () => {
           alt={produto.nome}
           className="imagem-produto"
         />
+
         <div className="info-produto">
           <h2>{produto.nome}</h2>
           <p>
@@ -60,7 +63,24 @@ const ProdutoDetalhe = () => {
           <p>
             <strong>Descrição:</strong> {produto.descricao}
           </p>
+          <p>
+            <strong>Categoria:</strong> {produto.categoria}
+          </p>
+          <p>
+            <strong>Tipo de Produto:</strong> {produto.tipoProduto}
+          </p>
+          <p>
+            <strong>Princípio Ativo:</strong>{" "}
+            {produto.principioAtivo || "Não informado"}
+          </p>
+          <p>
+            <strong>Faixa Etária:</strong> {produto.faixaEtaria}
+          </p>
+          <p>
+            <strong>Estoque disponível:</strong> {produto.estoque}
+          </p>
           <p className="preco">R$ {produto.preco.toFixed(2)}</p>
+
           <button
             onClick={() => {
               adicionarAoCarrinho(produto);
@@ -69,8 +89,20 @@ const ProdutoDetalhe = () => {
           >
             Adicionar ao carrinho
           </button>
+
+          {produto.tags?.length > 0 && (
+            <div className="tags-produto">
+              <strong>Tags:</strong>{" "}
+              {produto.tags.map((tag, index) => (
+                <span key={index} className="tag">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
         </div>
       </div>
+
       <SugestoesProdutos
         titulo="Quem comprou, também se interessou"
         produtos={produtosRelacionados}
