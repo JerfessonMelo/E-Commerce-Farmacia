@@ -34,6 +34,7 @@ const FormularioCadastro = ({ trocarParaLogin }) => {
         <input
           type="text"
           name="nome"
+          autoComplete="name"
           placeholder="Nome completo"
           onChange={handleChange}
           required
@@ -42,6 +43,7 @@ const FormularioCadastro = ({ trocarParaLogin }) => {
         <input
           type="date"
           name="dataNascimento"
+          autoComplete="bday"
           placeholder="Data de Nascimento"
           onChange={handleChange}
           required
@@ -49,8 +51,15 @@ const FormularioCadastro = ({ trocarParaLogin }) => {
         <div className="linha-genero-telefone">
           <div className="campo">
             <label>Seu Gênero</label>
-            <select id="genero" name="genero" onChange={handleChange} required>
-              <option value="" disabled selected hidden>
+            <select
+              id="genero"
+              name="genero"
+              onChange={handleChange}
+              required
+              value={form.genero || ""}
+              autoComplete="sex"
+            >
+              <option value="" disabled hidden>
                 Selecione
               </option>
               <option value="masculino">Masculino</option>
@@ -63,6 +72,7 @@ const FormularioCadastro = ({ trocarParaLogin }) => {
             <input
               type="text"
               name="telefone"
+              autoComplete="tel-national"
               placeholder="Telefone Celular"
               onChange={handleChange}
               required
@@ -73,6 +83,7 @@ const FormularioCadastro = ({ trocarParaLogin }) => {
         <input
           type="email"
           name="email"
+          autoComplete="email"
           placeholder="E-mail"
           onChange={handleChange}
           required
@@ -81,6 +92,7 @@ const FormularioCadastro = ({ trocarParaLogin }) => {
         <input
           type="password"
           name="senha"
+          autoComplete="new-password"
           placeholder="Senha"
           onChange={handleChange}
           required

@@ -32,6 +32,7 @@ const FormularioLogin = ({ trocarParaCadastro, aoLogar }) => {
         <input
           type="email"
           name="email"
+          autoComplete="email"
           placeholder="Email"
           onChange={handleChange}
           required
@@ -39,6 +40,7 @@ const FormularioLogin = ({ trocarParaCadastro, aoLogar }) => {
         <input
           type="password"
           name="senha"
+          autoComplete="current-password"
           placeholder="Senha"
           onChange={handleChange}
           required
