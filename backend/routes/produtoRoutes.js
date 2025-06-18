@@ -129,6 +129,33 @@ router.put("/:id/status", authMiddleware, adminMiddleware, async (req, res) => {
 });
 
 /**
+ * GET /produtos/relacionados/:id
+ * Retorna produtos relacionados com base na categoria
+ */
+router.get("/relacionados/:id", async (req, res) => {
+  try {
+    const produtoAtual = await Produto.findById(req.params.id);
+
+    if (!produtoAtual || !produtoAtual.ativo) {
+      return res.status(404).json([]);
+    }
+
+    const relacionados = await Produto.find({
+      _id: { $ne: produtoAtual._id }, // diferente do atual
+      categoria: produtoAtual.categoria,
+      ativo: true,
+    }).limit(10);
+
+    res.json(relacionados); // garante que sempre retorna array
+  } catch (err) {
+    res.status(500).json({
+      mensagem: "Erro ao buscar produtos relacionados",
+      erro: err.message,
+    });
+  }
+});
+
+/**
  * POST /produtos
  * Cadastra um novo produto com imagem — somente admin
  */
