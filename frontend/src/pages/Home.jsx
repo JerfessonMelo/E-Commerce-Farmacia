@@ -83,7 +83,7 @@ const Home = () => {
           </select>
         </section>
 
-        <div className="lista-produtos2">
+        <div className="lista-produtos">
           {paginaProdutos.length > 0 ? (
             paginaProdutos.map((produto) => (
               <ProdutoCard key={produto._id} produto={produto} />
@@ -119,4 +119,3 @@ const Home = () => {
 };
 
 export default Home;
-//////

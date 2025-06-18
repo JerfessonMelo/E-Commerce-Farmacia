@@ -29,7 +29,6 @@ body {
   color: #555;
 }
 
-/* Seção de produtos */
 .home-produtos {
   flex: 1;
   padding: 30px 20px;
@@ -39,7 +38,6 @@ body {
   background-color: #f9f9f9;
 }
 
-/* Filtros */
 .filtros {
   display: flex;
   gap: 15px;
@@ -56,8 +54,7 @@ body {
   background-color: white;
 }
 
-/* Lista de produtos */
-.lista-produtos2 {
+.lista-produtos {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -66,7 +63,6 @@ body {
   width: 100%;
 }
 
-/* Rodapé */
 .home-footer {
   text-align: center;
   padding: 20px;
@@ -76,7 +72,6 @@ body {
   border-top: 1px solid #e0e0e0;
 }
 
-/* Paginação */
 .paginacao {
   display: flex;
   justify-content: center;
