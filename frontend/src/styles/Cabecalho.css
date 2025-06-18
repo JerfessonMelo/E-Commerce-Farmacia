@@ -101,77 +101,111 @@
   transition: background-color 0.3s ease;
 }
 
+.cabecalho {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo img {
+  height: 40px;
+}
+
+.barra-busca {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  margin: 0 20px;
+  max-width: 500px;
+  background: var(--gray-light);
+  border-radius: 24px;
+  padding: 6px 12px;
+}
+
+.barra-busca input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-size: 16px;
+  outline: none;
+  padding: 8px;
+}
+
+.barra-busca button {
+  background: none;
+  border: none;
+  color: var(--text-color);
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.acoes-usuario {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.acao {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.acao i {
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+
+.icones-mobile {
+  display: none;
+}
+
 @media (max-width: 600px) {
-  .header-drogaria {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 16px;
-    background: white;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-  }
-
-  .logo img {
-    height: 36px;
-  }
-
   .barra-busca {
-    width: calc(100% - 32px);
-    margin: 10px auto;
-    border-radius: 28px;
-    background: var(--gray-light);
-    padding: 8px 12px;
+    width: 100%;
+    margin: 10px 0;
+    order: 2;
+  }
+
+  .acoes-usuario {
+    display: none;
+  }
+
+  .icones-mobile {
     display: flex;
+    gap: 12px;
     align-items: center;
   }
 
-  .barra-busca input {
-    flex: 1;
-    border: none;
-    background: transparent;
-    font-size: 1rem;
-    outline: none;
-  }
-
-  .barra-busca button {
+  .btn-menu {
     background: none;
     border: none;
-    font-size: 1rem;
+    font-size: 22px;
     color: var(--text-color);
     cursor: pointer;
   }
 
-  .acoes-usuario {
-    gap: 16px;
+  .cabecalho {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 10px 16px;
   }
 
-  .acoes-usuario .acao span {
-    display: none;
-  }
-
-  .acoes-usuario .acao i {
-    font-size: 20px;
-  }
-
-  .acoes-usuario .acao {
-    background: none;
-    padding: 6px;
-    border-radius: 8px;
-  }
-
-  .acoes-usuario .acao:hover {
-    background: rgba(0, 0, 0, 0.05);
-  }
-
-  .acoes-usuario {
+  .logo {
     display: flex;
+    justify-content: space-between;
     align-items: center;
   }
 
-  .header-drogaria .acoes-usuario {
-    flex-direction: row;
+  .logo img {
+    height: 36px;
   }
 }
