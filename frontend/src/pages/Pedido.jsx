@@ -99,7 +99,7 @@ const Pedido = () => {
             <h3>
               <i className="fas fa-shopping-cart"></i> Meu Carrinho
             </h3>
-            <ul className="lista-produtos">
+            <ul className="pedido-lista-produtos">
               {produtos.map((p) => (
                 <li className="produto-item" key={p._id}>
                   <div className="produto-info">

@@ -1,21 +1,21 @@
-.lista-produtos {
+.admin-lista-produtos {
   max-width: 1000px;
   margin: 40px auto;
   padding: 20px;
 }
 
-.lista-produtos h2 {
+.admin-lista-produtos h2 {
   text-align: center;
   margin-bottom: 20px;
 }
 
-.lista-produtos table {
+.admin-lista-produtos table {
   width: 100%;
   border-collapse: collapse;
 }
 
-.lista-produtos th,
-.lista-produtos td {
+.admin-lista-produtos th,
+.admin-lista-produtos td {
   padding: 12px;
   border: 1px solid #ddd;
   text-align: left;

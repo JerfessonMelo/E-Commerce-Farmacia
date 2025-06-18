@@ -54,7 +54,7 @@ body {
   background-color: white;
 }
 
-.lista-produtos {
+.home-lista-produtos {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;

@@ -37,7 +37,7 @@ const ListaProdutos = () => {
   };
 
   return (
-    <div className="lista-produtos">
+    <div className="admin-lista-produtos">
       <h2>Lista de Produtos</h2>
       <table>
         <thead>
