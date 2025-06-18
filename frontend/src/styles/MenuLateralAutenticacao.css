@@ -106,3 +106,60 @@
     transform: translateY(0);
   }
 }
+
+@media (max-width: 600px) {
+  .menu-lateral-overlay {
+    justify-content: flex-end;
+    align-items: stretch;
+    padding: 0;
+  }
+
+  .menu-lateral {
+    width: 100%;
+    max-width: 320px;
+    height: 100%;
+    border-radius: 0;
+    padding: 20px 20px 60px;
+    animation: slideIn 0.3s ease-out;
+    box-shadow: -4px 0 12px rgba(0, 0, 0, 0.3);
+    overflow-y: auto;
+  }
+
+  .btn-fechar {
+    top: 18px;
+    right: 18px;
+    font-size: 28px;
+    color: var(--primary-color);
+  }
+
+  .logo-boas-vindas {
+    width: 160px;
+    height: auto;
+    margin-bottom: 10px;
+  }
+
+  .boas-vindas h2 {
+    font-size: 1.5rem;
+  }
+
+  .boas-vindas p {
+    font-size: 0.95rem;
+  }
+
+  .botoes-iniciais button {
+    font-size: 0.95rem;
+    padding: 10px 12px;
+    border-radius: 10px;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+}

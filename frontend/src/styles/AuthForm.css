@@ -99,3 +99,40 @@
     transform: translateY(0);
   }
 }
+
+@media (max-width: 600px) {
+  .auth-form {
+    padding: 10px;
+    max-height: unset;
+  }
+
+  .auth-form input,
+  .auth-form select,
+  .auth-form button {
+    font-size: 1rem;
+    padding: 12px;
+    margin-bottom: 14px;
+  }
+
+  .linha-genero-telefone {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .linha-genero-telefone .campo {
+    width: 100%;
+  }
+
+  .auth-form h2 {
+    font-size: 1.4rem;
+  }
+
+  .link-cadastro,
+  .link-login {
+    font-size: 0.9rem;
+  }
+
+  .btn-cadastro {
+    font-size: 0.95rem;
+  }
+}
