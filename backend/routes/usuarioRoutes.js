@@ -3,7 +3,15 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const Usuario = require("../models/Usuario");
 const { authMiddleware } = require("../middlewares/authMiddleware");
-const router = express.Router();
+const rateLimit = require("express-rate-limit");
+
+const loginLimiter = rateLimit({
+  windowMs: 60 * 1000,
+  max: 5,
+  message: {
+    mensagem: "Muitas tentativas de login, tente novamente mais tarde",
+  },
+});
 
 router.post("/registro", async (req, res) => {
   const { nome, email, senha } = req.body;
@@ -23,18 +31,15 @@ router.post("/registro", async (req, res) => {
 
 router.post("/login", async (req, res) => {
   const { email, senha } = req.body;
-  console.log("Tentando login com:", email, senha);
 
   try {
     const usuario = await Usuario.findOne({ email });
     if (!usuario) {
-      console.log("Usuário não encontrado");
       return res.status(401).json({ mensagem: "Credenciais inválidas" });
     }
 
     const senhaValida = await bcrypt.compare(senha, usuario.senha);
     if (!senhaValida) {
-      console.log("Senha incorreta");
       return res.status(401).json({ mensagem: "Credenciais inválidas" });
     }
 
@@ -49,7 +54,11 @@ router.post("/login", async (req, res) => {
       { expiresIn: "8h" }
     );
 
-    console.log("Login realizado com sucesso");
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      maxAge: 8 * 60 * 60 * 1000,
+    });
 
     res.json({
       token,

@@ -7,7 +7,6 @@ const {
 
 const router = express.Router();
 
-// Criar pedido
 router.post("/", authMiddleware, async (req, res) => {
   const { produtos, total, enderecoEntrega, frete } = req.body;
 
@@ -29,13 +28,11 @@ router.post("/", authMiddleware, async (req, res) => {
   }
 });
 
-// Listar pedidos do usuário
 router.get("/meus", authMiddleware, async (req, res) => {
   const pedidos = await Pedido.find({ usuarioId: req.usuario.id });
   res.json(pedidos);
 });
 
-// Listar todos (admin)
 router.get("/todos", authMiddleware, adminMiddleware, async (req, res) => {
   const pedidos = await Pedido.find()
     .populate("usuarioId", "nome email")

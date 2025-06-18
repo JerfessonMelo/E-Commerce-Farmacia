@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import api from "../services/api";
-import { obterToken } from "../services/auth";
 import "../styles/ListaClientes.css";
 
 const ListaClientes = () => {
@@ -9,11 +8,7 @@ const ListaClientes = () => {
   useEffect(() => {
     const carregarClientes = async () => {
       try {
-        const res = await api.get("/admin/usuarios", {
-          headers: {
-            Authorization: `Bearer ${obterToken()}`,
-          },
-        });
+        const res = await api.get("/admin/usuarios");
         setClientes(res.data);
       } catch (err) {
         alert("Erro ao carregar clientes");

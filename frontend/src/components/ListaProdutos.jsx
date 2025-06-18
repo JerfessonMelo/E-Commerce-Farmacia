@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import api from "../services/api";
-import { obterToken } from "../services/auth";
 import "../styles/ListaProdutos.css";
 
 const ListaProdutos = () => {
@@ -8,9 +7,7 @@ const ListaProdutos = () => {
 
   const carregarProdutos = async () => {
     try {
-      const res = await api.get("/produtos/todos", {
-        headers: { Authorization: `Bearer ${obterToken()}` },
-      });
+      const res = await api.get("/produtos/todos");
       setProdutos(res.data);
     } catch (erro) {
       console.error("Erro ao carregar produtos:", erro);
@@ -23,13 +20,7 @@ const ListaProdutos = () => {
 
   const alterarStatus = async (id, novoStatus) => {
     try {
-      await api.put(
-        `/produtos/${id}/status`,
-        { ativo: novoStatus },
-        {
-          headers: { Authorization: `Bearer ${obterToken()}` },
-        }
-      );
+      await api.put(`/produtos/${id}/status`, { ativo: novoStatus });
       carregarProdutos();
     } catch (err) {
       alert("Erro ao alterar status");

@@ -4,7 +4,7 @@ import {
   removerDoCarrinho,
   limparCarrinho,
 } from "../services/carrinho";
-import { obterToken, obterDadosUsuario } from "../services/auth";
+import { obterDadosUsuario } from "../services/auth";
 import Cabecalho from "../components/Cabecalho";
 import CadastroDeEndereco from "../components/CadastroDeEndereco";
 import api from "../services/api";
@@ -48,9 +48,7 @@ const Pedido = () => {
 
   const carregarEnderecos = async () => {
     try {
-      const res = await api.get("/usuarios/perfil", {
-        headers: { Authorization: `Bearer ${obterToken()}` },
-      });
+      const res = await api.get("/usuarios/perfil");
       const lista = res.data.endereco || [];
       setEnderecos(lista);
       if (lista.length > 0) {
@@ -64,23 +62,15 @@ const Pedido = () => {
 
   const finalizarPedido = async () => {
     try {
-      await api.post(
-        "/pedidos",
-        {
-          produtos: produtos.map((p) => ({
-            produtoId: p._id,
-            quantidade: p.quantidade,
-          })),
-          total: totalGeral,
-          enderecoEntrega,
-          frete,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${obterToken()}`,
-          },
-        }
-      );
+      await api.post("/pedidos", {
+        produtos: produtos.map((p) => ({
+          produtoId: p._id,
+          quantidade: p.quantidade,
+        })),
+        total: totalGeral,
+        enderecoEntrega,
+        frete,
+      });
       alert("Pedido finalizado com sucesso!");
       limparCarrinho();
       setProdutos([]);
@@ -180,12 +170,7 @@ const Pedido = () => {
                         try {
                           await api.post(
                             "/usuarios/perfil/enderecos",
-                            novoEndereco,
-                            {
-                              headers: {
-                                Authorization: `Bearer ${obterToken()}`,
-                              },
-                            }
+                            novoEndereco
                           );
                           setMostrarFormularioEndereco(false);
                           setNovoEndereco({

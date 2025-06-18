@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const path = require("path");
+const cookieParser = require("cookie-parser");
 const conectarDB = require("./config/db");
 const usuarioRoutes = require("./routes/usuarioRoutes");
 const produtoRoutes = require("./routes/produtoRoutes");
@@ -33,6 +34,7 @@ app.use(
   })
 );
 
+app.use(cookieParser());
 app.use(express.json());
 app.use("/produtos", express.static("public/produtos"));
 app.use("/api/usuarios", usuarioRoutes);

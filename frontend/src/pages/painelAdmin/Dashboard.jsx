@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import api from "../../services/api";
-import { obterToken } from "../../services/auth";
 import Cabecalho from "../../components/Cabecalho";
 import CadastroProduto from "../../components/CadastroProduto";
 import ListaClientes from "../../components/ListaClientes";
@@ -30,12 +29,8 @@ const Dashboard = () => {
 
   const carregarDados = async () => {
     try {
-      const token = obterToken();
-
       const [dashboardRes, produtosRes] = await Promise.all([
-        api.get("/admin/dashboard", {
-          headers: { Authorization: `Bearer ${token}` },
-        }),
+        api.get("/admin/dashboard"),
         api.get("/produtos"),
       ]);
 
@@ -52,35 +47,17 @@ const Dashboard = () => {
 
   const handleCadastrarProduto = async () => {
     try {
-      const token = obterToken();
-
       if (modoEdicao && idProdutoEditando) {
-        await api.put(
-          `/produtos/${idProdutoEditando}`,
-          {
-            ...novoProduto,
-            preco: parseFloat(novoProduto.preco),
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        await api.put(`/produtos/${idProdutoEditando}`, {
+          ...novoProduto,
+          preco: parseFloat(novoProduto.preco),
+        });
         alert("Produto atualizado com sucesso!");
       } else {
-        await api.post(
-          "/produtos",
-          {
-            ...novoProduto,
-            preco: parseFloat(novoProduto.preco),
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        await api.post("/produtos", {
+          ...novoProduto,
+          preco: parseFloat(novoProduto.preco),
+        });
         alert("Produto cadastrado com sucesso!");
       }
 

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Bar } from "react-chartjs-2";
 import api from "../services/api";
-import { obterToken } from "../services/auth";
 import {
   Chart as ChartJS,
   BarElement,
@@ -19,9 +18,7 @@ const GraficoVendas = () => {
   useEffect(() => {
     const carregarDados = async () => {
       try {
-        const res = await api.get("/admin/pedidos/grafico", {
-          headers: { Authorization: `Bearer ${obterToken()}` },
-        });
+        const res = await api.get("/admin/pedidos/grafico");
         setDados(res.data);
       } catch (err) {
         console.error("Erro ao carregar gráfico:", err);

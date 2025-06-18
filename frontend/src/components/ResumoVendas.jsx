@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import api from "../services/api";
-import { obterToken } from "../services/auth";
 import "../styles/ResumoVendas.css";
 
 const ResumoVendas = () => {
@@ -9,9 +8,7 @@ const ResumoVendas = () => {
   useEffect(() => {
     const carregarResumo = async () => {
       try {
-        const res = await api.get("/admin/pedidos/resumo", {
-          headers: { Authorization: `Bearer ${obterToken()}` },
-        });
+        const res = await api.get("/admin/pedidos/resumo");
         setResumo(res.data);
       } catch (err) {
         console.error("Erro ao carregar resumo:", err);

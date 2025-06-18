@@ -1,6 +1,7 @@
 const express = require("express");
 const multer = require("multer");
 const path = require("path");
+const { query, validationResult } = require("express-validator");
 const router = express.Router();
 const Produto = require("../models/Produto");
 const {
@@ -8,7 +9,6 @@ const {
   adminMiddleware,
 } = require("../middlewares/authMiddleware");
 
-// Configuração do armazenamento de imagens
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, "public/produtos/");
@@ -19,63 +19,85 @@ const storage = multer.diskStorage({
     cb(null, uniqueName);
   },
 });
-const upload = multer({ storage });
-
-/**
- * GET /produtos
- * Lista produtos com suporte a filtros, paginação e ordenação
- */
-router.get("/", async (req, res) => {
-  try {
-    const {
-      categoria,
-      faixaEtaria,
-      tags,
-      busca,
-      page = 1,
-      limit = 12,
-      sort = "nome",
-    } = req.query;
-
-    const filtro = { ativo: true };
-
-    if (categoria) filtro.categoria = categoria.toLowerCase();
-    if (faixaEtaria) filtro.faixaEtaria = faixaEtaria.toLowerCase();
-    if (tags)
-      filtro.tags = {
-        $in: tags.split(",").map((t) => t.trim().toLowerCase()),
-      };
-    if (busca) {
-      const regex = new RegExp(busca, "i");
-      filtro.$or = [{ nome: regex }, { descricao: regex }, { marca: regex }];
-    }
-
-    const skip = (parseInt(page) - 1) * parseInt(limit);
-    const produtos = await Produto.find(filtro)
-      .sort(sort)
-      .skip(skip)
-      .limit(parseInt(limit));
-
-    const total = await Produto.countDocuments(filtro);
-
-    res.json({
-      produtos,
-      total,
-      pagina: parseInt(page),
-      paginas: Math.ceil(total / limit),
-    });
-  } catch (err) {
-    res.status(500).json({
-      mensagem: "Erro ao buscar produtos",
-      erro: err.message,
-    });
+const fileFilter = (req, file, cb) => {
+  const allowed = [".jpg", ".jpeg", ".png", ".gif"];
+  const ext = path.extname(file.originalname).toLowerCase();
+  if (allowed.includes(ext)) {
+    cb(null, true);
+  } else {
+    cb(new Error("Tipo de arquivo não suportado"));
   }
+};
+const upload = multer({
+  storage,
+  fileFilter,
+  limits: { fileSize: 5 * 1024 * 1024 },
 });
 
-/**
- * GET /produtos/todos
- * Lista todos os produtos (inclusive inativos) — somente admin
- */
+router.get(
+  "/",
+  [
+    query("page").optional().isInt({ min: 1 }).toInt(),
+    query("limit").optional().isInt({ min: 1, max: 100 }).toInt(),
+    query("categoria").optional().trim().escape(),
+    query("faixaEtaria").optional().trim().escape(),
+    query("tags").optional().trim(),
+    query("busca").optional().trim(),
+    query("sort").optional().trim(),
+  ],
+  async (req, res) => {
+    const erros = validationResult(req);
+    if (!erros.isEmpty()) {
+      return res.status(400).json({ erros: erros.array() });
+    }
+
+    try {
+      const {
+        categoria,
+        faixaEtaria,
+        tags,
+        busca,
+        page = 1,
+        limit = 12,
+        sort = "nome",
+      } = req.query;
+
+      const filtro = { ativo: true };
+
+      if (categoria) filtro.categoria = categoria.toLowerCase();
+      if (faixaEtaria) filtro.faixaEtaria = faixaEtaria.toLowerCase();
+      if (tags)
+        filtro.tags = {
+          $in: tags.split(",").map((t) => t.trim().toLowerCase()),
+        };
+      if (busca) {
+        const regex = new RegExp(busca, "i");
+        filtro.$or = [{ nome: regex }, { descricao: regex }, { marca: regex }];
+      }
+
+      const skip = (parseInt(page) - 1) * parseInt(limit);
+      const produtos = await Produto.find(filtro)
+        .sort(sort)
+        .skip(skip)
+        .limit(parseInt(limit));
+
+      const total = await Produto.countDocuments(filtro);
+
+      res.json({
+        produtos,
+        total,
+        pagina: parseInt(page),
+        paginas: Math.ceil(total / limit),
+      });
+    } catch (err) {
+      res.status(500).json({
+        mensagem: "Erro ao buscar produtos",
+        erro: err.message,
+      });
+    }
+  }
+);
+
 router.get("/todos", authMiddleware, adminMiddleware, async (req, res) => {
   try {
     const produtos = await Produto.find();
@@ -88,10 +110,6 @@ router.get("/todos", authMiddleware, adminMiddleware, async (req, res) => {
   }
 });
 
-/**
- * GET /produtos/:id
- * Busca produto por ID
- */
 router.get("/:id", async (req, res) => {
   try {
     const produto = await Produto.findById(req.params.id);
@@ -107,10 +125,6 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-/**
- * PUT /produtos/:id/status
- * Ativa/desativa produto — somente admin
- */
 router.put("/:id/status", authMiddleware, adminMiddleware, async (req, res) => {
   try {
     const { ativo } = req.body;
@@ -128,10 +142,6 @@ router.put("/:id/status", authMiddleware, adminMiddleware, async (req, res) => {
   }
 });
 
-/**
- * GET /produtos/relacionados/:id
- * Retorna produtos relacionados com base na categoria
- */
 router.get("/relacionados/:id", async (req, res) => {
   try {
     const produtoAtual = await Produto.findById(req.params.id);
@@ -141,12 +151,12 @@ router.get("/relacionados/:id", async (req, res) => {
     }
 
     const relacionados = await Produto.find({
-      _id: { $ne: produtoAtual._id }, // diferente do atual
+      _id: { $ne: produtoAtual._id },
       categoria: produtoAtual.categoria,
       ativo: true,
     }).limit(10);
 
-    res.json(relacionados); // garante que sempre retorna array
+    res.json(relacionados);
   } catch (err) {
     res.status(500).json({
       mensagem: "Erro ao buscar produtos relacionados",
@@ -155,10 +165,6 @@ router.get("/relacionados/:id", async (req, res) => {
   }
 });
 
-/**
- * POST /produtos
- * Cadastra um novo produto com imagem — somente admin
- */
 router.post(
   "/",
   authMiddleware,

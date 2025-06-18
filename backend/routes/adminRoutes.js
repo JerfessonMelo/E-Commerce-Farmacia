@@ -9,7 +9,6 @@ const {
 
 const router = express.Router();
 
-// Listar todos os usuários (clientes)
 router.get("/usuarios", authMiddleware, adminMiddleware, async (req, res) => {
   try {
     const usuarios = await Usuario.find().select("-senha");
@@ -21,7 +20,6 @@ router.get("/usuarios", authMiddleware, adminMiddleware, async (req, res) => {
   }
 });
 
-// Listar todos os pedidos (relatório)
 router.get("/pedidos", authMiddleware, adminMiddleware, async (req, res) => {
   try {
     const pedidos = await Pedido.find()
@@ -35,7 +33,6 @@ router.get("/pedidos", authMiddleware, adminMiddleware, async (req, res) => {
   }
 });
 
-// Dados resumidos para o dashboard administrativo
 router.get("/dashboard", authMiddleware, adminMiddleware, async (req, res) => {
   try {
     const [usuarios, produtos, pedidos] = await Promise.all([

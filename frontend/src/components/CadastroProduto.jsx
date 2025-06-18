@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { obterToken } from "../services/auth";
 import api from "../services/api";
 
 const CadastroProduto = () => {
@@ -48,7 +47,6 @@ const CadastroProduto = () => {
 
       const resposta = await api.post("/produtos", formData, {
         headers: {
-          Authorization: `Bearer ${obterToken()}`,
           "Content-Type": "multipart/form-data",
         },
       });

@@ -1,30 +1,16 @@
-import { jwtDecode } from "jwt-decode";
+export const salvarToken = () => {};
 
-export const salvarToken = (token) => {
-  localStorage.setItem("token", token);
-};
-
-export const obterToken = () => {
-  return localStorage.getItem("token");
-};
+export const obterToken = () => null;
 
 export const removerToken = () => {
-  localStorage.removeItem("token");
+  localStorage.removeItem("usuario");
 };
 
 export const estaAutenticado = () => {
-  return !!obterToken();
+  return !!localStorage.getItem("usuario");
 };
 
 export const obterDadosUsuario = () => {
-  const token = obterToken();
-  if (!token) return null;
-
-  try {
-    const usuario = jwtDecode(token);
-    return usuario;
-  } catch (erro) {
-    console.error("Erro ao decodificar token com jwt-decode:", erro);
-    return null;
-  }
+  const usuario = localStorage.getItem("usuario");
+  return usuario ? JSON.parse(usuario) : null;
 };

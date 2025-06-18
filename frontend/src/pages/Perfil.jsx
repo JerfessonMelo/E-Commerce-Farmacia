@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import api from "../services/api";
-import { obterToken, removerToken, estaAutenticado } from "../services/auth";
+import { removerToken, estaAutenticado } from "../services/auth";
 import { useNavigate } from "react-router-dom";
 import Cabecalho from "../components/Cabecalho";
 import CadastroDeEndereco from "../components/CadastroDeEndereco";
@@ -22,11 +22,7 @@ const Perfil = () => {
 
     const carregarPerfil = async () => {
       try {
-        const res = await api.get("/usuarios/perfil", {
-          headers: {
-            Authorization: `Bearer ${obterToken()}`,
-          },
-        });
+        const res = await api.get("/usuarios/perfil");
         setUsuario(res.data);
         setEnderecos(res.data.endereco || []);
       } catch (err) {
@@ -48,9 +44,7 @@ const Perfil = () => {
 
       const metodo = indiceEdicao !== null ? api.put : api.post;
 
-      const res = await metodo(endpoint, enderecoSelecionado, {
-        headers: { Authorization: `Bearer ${obterToken()}` },
-      });
+      const res = await metodo(endpoint, enderecoSelecionado);
 
       alert(
         indiceEdicao !== null
@@ -71,9 +65,7 @@ const Perfil = () => {
   const removerEndereco = async (index) => {
     if (window.confirm("Tem certeza que deseja remover este endereço?")) {
       try {
-        const res = await api.delete(`/usuarios/perfil/enderecos/${index}`, {
-          headers: { Authorization: `Bearer ${obterToken()}` },
-        });
+        const res = await api.delete(`/usuarios/perfil/enderecos/${index}`);
         alert("Endereço removido com sucesso!");
         setUsuario(res.data);
         setEnderecos(res.data.endereco || []);
