@@ -4,6 +4,9 @@ import "./index.css";
 import "./styles/theme.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+if (window.matchMedia("(max-width: 600px)").matches) {
+  require("./styles/Cabecalho.css");
+}
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
