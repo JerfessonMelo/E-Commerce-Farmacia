@@ -8,7 +8,13 @@ const CadastroProduto = () => {
     descricao: "",
     preco: "",
     marca: "",
+    categoria: "",
+    principioAtivo: "",
+    faixaEtaria: "",
+    tipoProduto: "",
+    tags: "",
   });
+
   const [imagemFile, setImagemFile] = useState(null);
   const [mensagem, setMensagem] = useState("");
 
@@ -30,6 +36,12 @@ const CadastroProduto = () => {
       formData.append("descricao", produto.descricao);
       formData.append("preco", produto.preco);
       formData.append("marca", produto.marca);
+      formData.append("categoria", produto.categoria);
+      formData.append("principioAtivo", produto.principioAtivo);
+      formData.append("faixaEtaria", produto.faixaEtaria);
+      formData.append("tipoProduto", produto.tipoProduto);
+      formData.append("tags", produto.tags);
+
       if (imagemFile) {
         formData.append("imagem", imagemFile);
       }
@@ -85,6 +97,41 @@ const CadastroProduto = () => {
           placeholder="Marca"
           value={produto.marca}
           onChange={handleChange}
+        />
+        <input
+          type="text"
+          name="categoria"
+          placeholder="Categoria Produto"
+          onChange={handleChange}
+          value={produto.categoria}
+        />
+        <input
+          type="text"
+          name="principioAtivo"
+          placeholder="Princípio Ativo"
+          onChange={handleChange}
+          value={produto.principioAtivo}
+        />
+        <input
+          type="text"
+          name="faixaEtaria"
+          placeholder="Adulto ou Infantil"
+          onChange={handleChange}
+          value={produto.faixaEtaria}
+        />
+        <input
+          type="text"
+          name="tipoProduto"
+          placeholder="Xarope Ou Comprimido"
+          onChange={handleChange}
+          value={produto.tipoProduto}
+        />
+        <input
+          type="text"
+          name="tags"
+          placeholder="Tags (ex: vitamina,cabelo,imunidade)"
+          onChange={handleChange}
+          value={produto.tags}
         />
         <input type="file" name="imagem" onChange={handleImagemChange} />
         <button type="submit">Cadastrar Produto</button>

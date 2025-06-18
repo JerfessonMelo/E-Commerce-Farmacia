@@ -4,6 +4,7 @@ import api from "../services/api";
 import { adicionarAoCarrinho } from "../services/carrinho";
 import { obterDadosUsuario } from "../services/auth";
 import Cabecalho from "../components/Cabecalho";
+import SugestoesProdutos from "../components/SugestoesProdutos";
 import "../styles/ProdutoDetalhe.css";
 
 const ProdutoDetalhe = () => {
@@ -11,16 +12,29 @@ const ProdutoDetalhe = () => {
   const [produto, setProduto] = useState(null);
   const usuario = obterDadosUsuario() || {};
   const nomeUsuario = usuario.nome?.split(" ");
+  const [produtosRelacionados, setRelacionados] = useState([]);
+  const [produtosSimilares, setSimilares] = useState([]);
 
   useEffect(() => {
     const carregarProduto = async () => {
       try {
         const res = await api.get(`/produtos/${id}`);
         setProduto(res.data);
+        const categoria = res.data.categoria?.toLowerCase() || "";
+
+        const relacionados = await api.get(`/produtos?categoria=${categoria}`);
+        const similares = await api.get("/produtos");
+        const filtradosRelacionados = relacionados.data.filter(
+          (p) => p._id !== res.data._id
+        );
+
+        setRelacionados(filtradosRelacionados.slice(0, 10));
+        setSimilares(similares.data.slice(0, 10));
       } catch (err) {
-        console.error("Erro ao carregar produto:", err);
+        console.error("Erro ao carregar produto ou sugestões:", err);
       }
     };
+
     carregarProduto();
   }, [id]);
 
@@ -57,6 +71,15 @@ const ProdutoDetalhe = () => {
           </button>
         </div>
       </div>
+      <SugestoesProdutos
+        titulo="Quem comprou, também se interessou"
+        produtos={produtosRelacionados}
+      />
+
+      <SugestoesProdutos
+        titulo="Similares que você pode se interessar"
+        produtos={produtosSimilares}
+      />
     </div>
   );
 };

@@ -1,0 +1,49 @@
+.sugestoes-container {
+  margin: 50px auto;
+  max-width: 1200px;
+  padding: 0 20px;
+}
+
+.sugestoes-container h3 {
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+  color: #222;
+}
+
+.sugestoes-navegacao {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.sugestoes-lista {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  gap: 20px;
+  padding: 10px 0;
+}
+
+.sugestoes-lista::-webkit-scrollbar {
+  height: 6px;
+}
+
+.sugestoes-lista::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 3px;
+}
+
+.seta {
+  background-color: transparent;
+  border: none;
+  font-size: 2rem;
+  color: var(--primary-color, #b20000);
+  cursor: pointer;
+  padding: 0 10px;
+  user-select: none;
+  transition: transform 0.2s;
+}
+
+.seta:hover {
+  transform: scale(1.2);
+}

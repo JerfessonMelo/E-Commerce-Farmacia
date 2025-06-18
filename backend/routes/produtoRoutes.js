@@ -1,6 +1,6 @@
+const express = require("express");
 const multer = require("multer");
 const path = require("path");
-const express = require("express");
 const router = express.Router();
 const Produto = require("../models/Produto");
 const {
@@ -8,6 +8,7 @@ const {
   adminMiddleware,
 } = require("../middlewares/authMiddleware");
 
+// Configuração do armazenamento de imagens
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, "public/produtos/");
@@ -20,16 +21,77 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
+/**
+ * GET /produtos
+ * Lista produtos com suporte a filtros, paginação e ordenação
+ */
 router.get("/", async (req, res) => {
-  const produtos = await Produto.find({ ativo: true });
-  res.json(produtos);
+  try {
+    const {
+      categoria,
+      faixaEtaria,
+      tags,
+      busca,
+      page = 1,
+      limit = 12,
+      sort = "nome",
+    } = req.query;
+
+    const filtro = { ativo: true };
+
+    if (categoria) filtro.categoria = categoria.toLowerCase();
+    if (faixaEtaria) filtro.faixaEtaria = faixaEtaria.toLowerCase();
+    if (tags)
+      filtro.tags = {
+        $in: tags.split(",").map((t) => t.trim().toLowerCase()),
+      };
+    if (busca) {
+      const regex = new RegExp(busca, "i");
+      filtro.$or = [{ nome: regex }, { descricao: regex }, { marca: regex }];
+    }
+
+    const skip = (parseInt(page) - 1) * parseInt(limit);
+    const produtos = await Produto.find(filtro)
+      .sort(sort)
+      .skip(skip)
+      .limit(parseInt(limit));
+
+    const total = await Produto.countDocuments(filtro);
+
+    res.json({
+      produtos,
+      total,
+      pagina: parseInt(page),
+      paginas: Math.ceil(total / limit),
+    });
+  } catch (err) {
+    res.status(500).json({
+      mensagem: "Erro ao buscar produtos",
+      erro: err.message,
+    });
+  }
 });
 
+/**
+ * GET /produtos/todos
+ * Lista todos os produtos (inclusive inativos) — somente admin
+ */
 router.get("/todos", authMiddleware, adminMiddleware, async (req, res) => {
-  const produtos = await Produto.find();
-  res.json(produtos);
+  try {
+    const produtos = await Produto.find();
+    res.json(produtos);
+  } catch (err) {
+    res.status(500).json({
+      mensagem: "Erro ao buscar todos os produtos",
+      erro: err.message,
+    });
+  }
 });
 
+/**
+ * GET /produtos/:id
+ * Busca produto por ID
+ */
 router.get("/:id", async (req, res) => {
   try {
     const produto = await Produto.findById(req.params.id);
@@ -38,22 +100,38 @@ router.get("/:id", async (req, res) => {
     }
     res.json(produto);
   } catch (err) {
-    return res
-      .status(500)
-      .json({ mensagem: "Erro ao buscar produto", erro: err.message });
+    res.status(500).json({
+      mensagem: "Erro ao buscar produto",
+      erro: err.message,
+    });
   }
 });
 
+/**
+ * PUT /produtos/:id/status
+ * Ativa/desativa produto — somente admin
+ */
 router.put("/:id/status", authMiddleware, adminMiddleware, async (req, res) => {
-  const { ativo } = req.body;
-  const produto = await Produto.findByIdAndUpdate(
-    req.params.id,
-    { ativo },
-    { new: true }
-  );
-  res.json(produto);
+  try {
+    const { ativo } = req.body;
+    const produto = await Produto.findByIdAndUpdate(
+      req.params.id,
+      { ativo },
+      { new: true }
+    );
+    res.json(produto);
+  } catch (err) {
+    res.status(500).json({
+      mensagem: "Erro ao atualizar status do produto",
+      erro: err.message,
+    });
+  }
 });
 
+/**
+ * POST /produtos
+ * Cadastra um novo produto com imagem — somente admin
+ */
 router.post(
   "/",
   authMiddleware,
@@ -61,8 +139,24 @@ router.post(
   upload.single("imagem"),
   async (req, res) => {
     try {
-      const { nome, descricao, preco, marca } = req.body;
+      const {
+        nome,
+        descricao,
+        preco,
+        marca,
+        categoria,
+        principioAtivo,
+        faixaEtaria,
+        tipoProduto,
+        tags,
+      } = req.body;
+
       const imagemUrl = req.file ? `/produtos/${req.file.filename}` : "";
+
+      const tagsArray =
+        typeof tags === "string"
+          ? tags.split(",").map((tag) => tag.trim().toLowerCase())
+          : [];
 
       const novoProduto = new Produto({
         nome,
@@ -70,6 +164,11 @@ router.post(
         preco,
         marca,
         imagemUrl,
+        categoria,
+        principioAtivo,
+        faixaEtaria,
+        tipoProduto,
+        tags: tagsArray,
       });
 
       await novoProduto.save();

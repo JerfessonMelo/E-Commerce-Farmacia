@@ -6,39 +6,44 @@
 }
 
 .detalhe {
-  max-width: 1000px;
+  max-width: 1100px;
   margin: 30px auto;
   background-color: #ffffff;
   padding: 30px;
   display: flex;
   gap: 40px;
-  border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
   flex-wrap: wrap;
 }
 
 .imagem-produto {
-  width: 300px;
+  width: 380px;
   max-width: 100%;
-  border-radius: 10px;
+  border-radius: 12px;
   object-fit: contain;
   border: 1px solid #eee;
+  background-color: white;
 }
 
 .info-produto {
   flex: 1;
   min-width: 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .info-produto h2 {
-  margin-bottom: 15px;
-  color: #333;
+  margin-bottom: 12px;
+  color: #222;
   font-size: 1.6rem;
+  font-weight: 600;
 }
 
 .info-produto p {
-  margin: 8px 0;
-  color: #555;
+  margin: 6px 0;
+  color: #444;
   font-size: 1rem;
 }
 
@@ -46,20 +51,20 @@
   font-size: 1.8rem;
   font-weight: bold;
   color: var(--primary-color, #b20000);
-  margin-top: 15px;
+  margin-top: 20px;
 }
 
 .info-produto button {
-  margin-top: 20px;
-  padding: 12px 24px;
+  margin-top: 25px;
+  padding: 14px 28px;
   background-color: var(--primary-color, #b20000);
-  color: #fff;
+  color: white;
   border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
+  border-radius: 8px;
   font-size: 1rem;
-  transition: background-color 0.3s;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .info-produto button:hover {
@@ -74,7 +79,6 @@
 
   .imagem-produto {
     width: 100%;
-    height: auto;
   }
 
   .info-produto {

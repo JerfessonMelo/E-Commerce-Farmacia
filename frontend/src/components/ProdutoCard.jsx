@@ -16,6 +16,8 @@ const ProdutoCard = ({ produto }) => {
       </div>
       <h3>{produto.nome}</h3>
       <p>Marca: {produto.marca}</p>
+      {produto.tipoProduto && <p>Tipo: {produto.tipoProduto}</p>}
+      {produto.categoria && <p>Categoria: {produto.categoria}</p>}
       <p className="preco">R$ {produto.preco.toFixed(2)}</p>
       <button onClick={() => navigate(`/produto/${produto._id}`)}>
         Ver Detalhes

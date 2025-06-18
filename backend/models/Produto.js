@@ -8,6 +8,11 @@ const produtoSchema = new mongoose.Schema({
   imagemUrl: String,
   estoque: Number,
   ativo: { type: Boolean, default: true },
+  categoria: String,
+  principioAtivo: String,
+  faixaEtaria: String,
+  tipoProduto: String,
+  tags: [String],
 });
 
 module.exports = mongoose.model("Produto", produtoSchema);
