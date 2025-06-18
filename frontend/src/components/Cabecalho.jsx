@@ -38,19 +38,37 @@ const Cabecalho = () => {
   const aoLogar = (usuarioLogado) => {
     setUsuario(usuarioLogado);
     setMenuAberto(false);
-    if (usuarioLogado.isAdmin) {
-      navigate("/admin");
-    } else {
-      navigate("/");
-    }
+    navigate(usuarioLogado.isAdmin ? "/admin" : "/");
   };
+
+  const renderIconeLogin = () => (
+    <button className="icone-btn" onClick={() => setMenuAberto(true)}>
+      <i className="fas fa-user" />
+    </button>
+  );
+
+  const renderIconeCarrinho = () => (
+    <Link to="/pedido" className="icone-btn">
+      <i className="fas fa-shopping-basket" />
+    </Link>
+  );
 
   return (
     <>
-      <header className="header-drogaria celular-header">
-        <Link className="logo" to="/">
-          <img src="/logo.png" alt="Drogaria Poupe Já" />
-        </Link>
+      <header className="cabecalho">
+        <div className="cabecalho-topo">
+          <Link className="logo" to="/">
+            <img src="/logo.png" alt="Drogaria Poupe Já" />
+          </Link>
+
+          <div className="icones-mobile">
+            {!usuario?.email && renderIconeLogin()}
+            {!usuario?.isAdmin &&
+              location.pathname !== "/pedido" &&
+              location.pathname !== "/admin" &&
+              renderIconeCarrinho()}
+          </div>
+        </div>
 
         <div className="barra-busca">
           <input
@@ -121,11 +139,7 @@ const Cabecalho = () => {
               <i className="fas fa-box" />
               <button
                 onClick={() => alert("Funcionalidade em desenvolvimento")}
-                style={{
-                  background: "none",
-                  border: "none",
-                  cursor: "pointer",
-                }}
+                className="btn-simples"
               >
                 <span>
                   Acompanhar
