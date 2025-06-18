@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, Link, useNavigate } from "react-router-dom";
+import api from "../services/api";
 import {
   obterDadosUsuario,
   estaAutenticado,
@@ -29,7 +30,12 @@ const Cabecalho = () => {
     navigate(`${destino}?busca=${encodeURIComponent(busca)}`);
   };
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    try {
+      await api.post("/usuarios/logout");
+    } catch (err) {
+      console.error("Erro ao realizar logout", err);
+    }
     removerToken();
     setUsuario(null);
     navigate("/");

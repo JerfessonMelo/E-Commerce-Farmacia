@@ -26,6 +26,11 @@ const Perfil = () => {
         setUsuario(res.data);
         setEnderecos(res.data.endereco || []);
       } catch (err) {
+        try {
+          await api.post("/usuarios/logout");
+        } catch (e) {
+          console.error("Erro ao limpar sessão", e);
+        }
         removerToken();
         alert("Sessão expirada, faça login novamente.");
         navigate("/login");

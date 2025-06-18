@@ -57,7 +57,8 @@ router.post("/login", async (req, res) => {
 
     res.cookie("token", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
+      secure: true,
+      sameSite: "none",
       maxAge: 8 * 60 * 60 * 1000,
     });
 
@@ -165,6 +166,14 @@ router.get("/perfil/enderecos", authMiddleware, async (req, res) => {
       .status(500)
       .json({ mensagem: "Erro ao buscar endereços", erro: err.message });
   }
+});
+
+router.post("/logout", (req, res) => {
+  res.clearCookie("token", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+  });
+  res.json({ mensagem: "Logout realizado com sucesso" });
 });
 
 module.exports = router;
