@@ -24,7 +24,7 @@ body {
 }
 
 .lista-produtos {
-  display: flex;
+  display: grid;
   flex-wrap: wrap;
   justify-content: center;
   align-items: flex-start;
