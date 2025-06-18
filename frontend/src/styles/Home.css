@@ -57,7 +57,7 @@ body {
 }
 
 /* Lista de produtos */
-.lista-produtos {
+.lista-produtos2 {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;

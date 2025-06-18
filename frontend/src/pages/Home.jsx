@@ -83,7 +83,7 @@ const Home = () => {
           </select>
         </section>
 
-        <div className="lista-produtos">
+        <div className="lista-produtos2">
           {paginaProdutos.length > 0 ? (
             paginaProdutos.map((produto) => (
               <ProdutoCard key={produto._id} produto={produto} />
