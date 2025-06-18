@@ -7,7 +7,7 @@ import {
 } from "../services/auth";
 import MenuLateralAutenticacao from "./MenuLateralAutenticacao";
 import "../styles/Cabecalho.css";
-import "../../stylesCelular/CabecalhoCelular.css";
+import "../styles/CabecalhoCelular.css";
 
 const Cabecalho = () => {
   const navigate = useNavigate();
