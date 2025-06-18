@@ -1,0 +1,74 @@
+@media (max-width: 600px) {
+  .header-drogaria {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+
+  .logo img {
+    height: 36px;
+  }
+
+  .barra-busca {
+    width: calc(100% - 32px);
+    margin: 10px auto;
+    border-radius: 28px;
+    background: var(--gray-light);
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+  }
+
+  .barra-busca input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-size: 1rem;
+    outline: none;
+  }
+
+  .barra-busca button {
+    background: none;
+    border: none;
+    font-size: 1rem;
+    color: var(--text-color);
+    cursor: pointer;
+  }
+
+  .acoes-usuario {
+    gap: 16px;
+  }
+
+  .acoes-usuario .acao span {
+    display: none; /* Esconde texto no mobile */
+  }
+
+  .acoes-usuario .acao i {
+    font-size: 20px;
+  }
+
+  .acoes-usuario .acao {
+    background: none;
+    padding: 6px;
+    border-radius: 8px;
+  }
+
+  .acoes-usuario .acao:hover {
+    background: rgba(0, 0, 0, 0.05);
+  }
+
+  .acoes-usuario {
+    display: flex;
+    align-items: center;
+  }
+
+  .header-drogaria .acoes-usuario {
+    flex-direction: row;
+  }
+}

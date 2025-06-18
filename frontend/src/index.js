@@ -6,7 +6,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
 if (window.matchMedia("(max-width: 600px)").matches) {
-  require("./styles/Celular.css");
+  require("../../styles/Celular.css");
 }
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
