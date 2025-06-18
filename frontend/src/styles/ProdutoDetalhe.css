@@ -87,20 +87,3 @@
 .info-produto button:hover {
   background-color: var(--primary-hover);
 }
-
-@media (max-width: 768px) {
-  .detalhe {
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-  }
-
-  .imagem-produto {
-    width: 100%;
-    max-width: 300px;
-  }
-
-  .info-produto {
-    text-align: center;
-  }
-}

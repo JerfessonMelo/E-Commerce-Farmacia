@@ -25,15 +25,3 @@
 .lista-clientes th {
   background-color: #f4f4f4;
 }
-
-@media (max-width: 600px) {
-  .lista-clientes {
-    margin: 20px;
-    padding: 10px;
-  }
-
-  .lista-clientes table {
-    display: block;
-    overflow-x: auto;
-  }
-}

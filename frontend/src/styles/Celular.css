@@ -1,65 +1,66 @@
-:root {
-  --cel-primary: #d50000;
-  --cel-primary-hover: #b00000;
-  --cel-background: #ffffff;
-  --cel-surface: #ffeaea;
-  --cel-text: #333;
-}
-
 .celular-container {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background: var(--cel-background);
-  color: var(--cel-text);
+  background: var(--gray-light);
+  color: var(--text-color);
   font-family: var(--font-family-base);
 }
 
 .celular-header {
-  background: var(--cel-primary);
+  background: var(--primary-color);
   color: #fff;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 16px;
+  padding: 14px 18px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid var(--primary-hover);
 }
 
 .celular-header img {
-  height: 32px;
+  height: 36px;
 }
 
 .celular-header .titulo {
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   font-weight: bold;
 }
 
 .celular-content {
   flex: 1;
-  padding: 16px;
+  padding: 18px 16px;
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  margin: 16px;
 }
 
 .celular-footer {
-  background: var(--cel-surface);
-  padding: 12px;
+  background: #fff;
+  padding: 12px 20px;
   text-align: center;
-  font-size: 0.85rem;
-  color: var(--cel-text);
+  font-size: 0.9rem;
+  color: var(--muted-text-color);
+  border-top: 1px solid #e0e0e0;
 }
 
 .celular-button {
   display: inline-block;
-  padding: 10px 14px;
+  padding: 12px 20px;
   border: none;
-  border-radius: 6px;
-  background: var(--cel-primary);
+  border-radius: 8px;
+  background: var(--primary-color);
   color: #fff;
   font-weight: bold;
-  text-decoration: none;
+  font-size: 1rem;
   cursor: pointer;
+  width: 100%;
+  transition: background-color 0.3s ease;
 }
 
 .celular-button:hover {
-  background: var(--cel-primary-hover);
+  background: var(--primary-hover);
 }
 
 @media (min-width: 600px) {
@@ -67,6 +68,7 @@
     max-width: 480px;
     margin: 0 auto;
     border: 1px solid #ddd;
-    border-radius: 8px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   }
 }

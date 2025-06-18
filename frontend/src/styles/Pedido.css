@@ -187,18 +187,3 @@
 .btn-cadastrar-endereco:hover {
   background-color: var(--primary-hover);
 }
-
-@media (max-width: 768px) {
-  .pedido {
-    flex-direction: column;
-    padding: 20px;
-  }
-
-  .col-direita {
-    padding-left: 0;
-    border-left: none;
-    border-top: 1px solid #eee;
-    padding-top: 20px;
-    margin-top: 20px;
-  }
-}

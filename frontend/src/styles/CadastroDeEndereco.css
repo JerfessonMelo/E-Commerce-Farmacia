@@ -72,13 +72,3 @@
 .form-endereco .btn-cinza:hover {
   background-color: #bbb;
 }
-
-@media (max-width: 600px) {
-  .grupo-botoes-endereco {
-    flex-direction: column;
-  }
-
-  .form-endereco input {
-    font-size: 0.95rem;
-  }
-}

@@ -38,15 +38,3 @@
 .btn-desativar {
   background-color: var(--primary-color);
 }
-
-@media (max-width: 600px) {
-  .lista-produtos {
-    margin: 20px;
-    padding: 10px;
-  }
-
-  .lista-produtos table {
-    display: block;
-    overflow-x: auto;
-  }
-}

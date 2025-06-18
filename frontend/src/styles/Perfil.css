@@ -105,27 +105,3 @@
 .btn-cinza:hover {
   background-color: #cfcfcf;
 }
-
-@media (max-width: 600px) {
-  .perfil {
-    margin: 20px;
-    padding: 20px;
-  }
-
-  .perfil h2 {
-    font-size: 1.3rem;
-  }
-
-  .perfil p {
-    font-size: 0.95rem;
-  }
-
-  .perfil button {
-    font-size: 0.9rem;
-  }
-
-  .grupo-botoes-linha {
-    width: 100%;
-    justify-content: flex-end;
-  }
-}
