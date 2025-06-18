@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const Usuario = require("../models/Usuario");
 const { authMiddleware } = require("../middlewares/authMiddleware");
 const rateLimit = require("express-rate-limit");
+const router = express.Router();
 
 const loginLimiter = rateLimit({
   windowMs: 60 * 1000,

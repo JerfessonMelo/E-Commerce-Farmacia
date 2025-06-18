@@ -4,11 +4,12 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import ProdutoDetalhe from "./pages/ProdutoDetalhe";
 import Pedido from "./pages/Pedido";
+import Perfil from "./pages/Perfil";
 import Dashboard from "./pages/painelAdmin/Dashboard";
 import ListaProdutos from "./components/ListaProdutos";
 import ListaPedidos from "./components/ListaPedidos";
 import ListaClientes from "./components/ListaClientes";
-import Perfil from "./pages/Perfil";
+import CookieConsent from "./components/CookieConsent";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/admin/clientes" element={<ListaClientes />} />
         <Route path="/perfil" element={<Perfil />} />
       </Routes>
+      <CookieConsent />
     </Router>
   );
 }
