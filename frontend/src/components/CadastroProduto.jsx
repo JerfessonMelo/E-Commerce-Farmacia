@@ -57,6 +57,11 @@ const CadastroProduto = () => {
         descricao: "",
         preco: "",
         marca: "",
+        categoria: "",
+        principioAtivo: "",
+        faixaEtaria: "",
+        tipoProduto: "",
+        tags: "",
       });
       setImagemFile(null);
     } catch (erro) {

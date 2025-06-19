@@ -1,6 +1,7 @@
 const express = require("express");
 const multer = require("multer");
 const path = require("path");
+const fs = require("fs");
 const { query, validationResult } = require("express-validator");
 const router = express.Router();
 const Produto = require("../models/Produto");
@@ -9,9 +10,15 @@ const {
   adminMiddleware,
 } = require("../middlewares/authMiddleware");
 
+const uploadDir = path.join(__dirname, "..", "public", "produtos");
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir, { recursive: true });
+  console.log("🗂️ Pasta 'public/produtos' criada automaticamente.");
+}
+
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "public/produtos/");
+    cb(null, uploadDir);
   },
   filename: (req, file, cb) => {
     const uniqueName =
