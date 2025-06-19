@@ -1,21 +1,18 @@
-import React, { useState } from "react";
-import api from "../services/api";
+import React, { useState, useEffect } from "react";
 
-const CadastroProduto = () => {
-  const [produto, setProduto] = useState({
-    nome: "",
-    descricao: "",
-    preco: "",
-    marca: "",
-    categoria: "",
-    principioAtivo: "",
-    faixaEtaria: "",
-    tipoProduto: "",
-    tags: "",
-  });
-
+const CadastroProduto = ({
+  produtoInicial,
+  modoEdicao,
+  onSalvar,
+  onCancelar,
+}) => {
+  const [produto, setProduto] = useState(produtoInicial);
   const [imagemFile, setImagemFile] = useState(null);
   const [mensagem, setMensagem] = useState("");
+
+  useEffect(() => {
+    setProduto(produtoInicial); // Atualiza o estado quando produtoInicial muda
+  }, [produtoInicial]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -26,48 +23,9 @@ const CadastroProduto = () => {
     setImagemFile(e.target.files[0]);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-
-    try {
-      const formData = new FormData();
-      formData.append("nome", produto.nome);
-      formData.append("descricao", produto.descricao);
-      formData.append("preco", produto.preco);
-      formData.append("marca", produto.marca);
-      formData.append("categoria", produto.categoria);
-      formData.append("principioAtivo", produto.principioAtivo);
-      formData.append("faixaEtaria", produto.faixaEtaria);
-      formData.append("tipoProduto", produto.tipoProduto);
-      formData.append("tags", produto.tags);
-
-      if (imagemFile) {
-        formData.append("imagem", imagemFile);
-      }
-
-      const resposta = await api.post("/produtos", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-
-      setMensagem("Produto cadastrado com sucesso!");
-      setProduto({
-        nome: "",
-        descricao: "",
-        preco: "",
-        marca: "",
-        categoria: "",
-        principioAtivo: "",
-        faixaEtaria: "",
-        tipoProduto: "",
-        tags: "",
-      });
-      setImagemFile(null);
-    } catch (erro) {
-      console.error("Erro ao cadastrar produto:", erro);
-      setMensagem("Erro ao cadastrar produto.");
-    }
+    onSalvar(produto, imagemFile);
   };
 
   return (
@@ -104,40 +62,46 @@ const CadastroProduto = () => {
         <input
           type="text"
           name="categoria"
-          placeholder="Categoria Produto"
-          onChange={handleChange}
+          placeholder="Categoria"
           value={produto.categoria}
+          onChange={handleChange}
         />
         <input
           type="text"
           name="principioAtivo"
           placeholder="Princípio Ativo"
-          onChange={handleChange}
           value={produto.principioAtivo}
+          onChange={handleChange}
         />
         <input
           type="text"
           name="faixaEtaria"
-          placeholder="Adulto ou Infantil"
-          onChange={handleChange}
+          placeholder="Faixa Etária"
           value={produto.faixaEtaria}
+          onChange={handleChange}
         />
         <input
           type="text"
           name="tipoProduto"
-          placeholder="Xarope Ou Comprimido"
-          onChange={handleChange}
+          placeholder="Tipo de Produto"
           value={produto.tipoProduto}
+          onChange={handleChange}
         />
         <input
           type="text"
           name="tags"
-          placeholder="Tags (ex: vitamina,cabelo,imunidade)"
-          onChange={handleChange}
+          placeholder="Tags (ex: vitamina,cabelo)"
           value={produto.tags}
+          onChange={handleChange}
         />
         <input type="file" name="imagem" onChange={handleImagemChange} />
-        <button type="submit">Cadastrar Produto</button>
+
+        <button type="submit">
+          {modoEdicao ? "Salvar Alterações" : "Cadastrar Produto"}
+        </button>
+        <button type="button" onClick={onCancelar} style={{ marginLeft: 10 }}>
+          Cancelar
+        </button>
       </form>
 
       {mensagem && <p>{mensagem}</p>}

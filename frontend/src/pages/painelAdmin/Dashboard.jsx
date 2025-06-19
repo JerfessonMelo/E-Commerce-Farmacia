@@ -45,6 +45,20 @@ const Dashboard = () => {
     carregarDados();
   }, []);
 
+  useEffect(() => {
+    const handleEditarProduto = (e) => {
+      const produto = e.detail;
+      setNovoProduto(produto);
+      setIdProdutoEditando(produto._id);
+      setModoEdicao(true);
+      setRelatorioAtivo(null);
+    };
+
+    window.addEventListener("editar-produto", handleEditarProduto);
+    return () =>
+      window.removeEventListener("editar-produto", handleEditarProduto);
+  }, []);
+
   const handleCadastrarProduto = async () => {
     try {
       if (modoEdicao && idProdutoEditando) {
@@ -112,30 +126,6 @@ const Dashboard = () => {
         {relatorioAtivo === "usuarios" && <ListaClientes />}
         {relatorioAtivo === "produtos" && <ListaProdutos />}
         {relatorioAtivo === "pedidos" && <RelatorioVendas />}
-
-        {relatorioAtivo === null && (
-          <div className="cadastro-produto">
-            <h3>{modoEdicao ? "Editar Produto" : "Cadastrar Novo Produto"}</h3>
-
-            <CadastroProduto
-              produtoInicial={novoProduto}
-              setProduto={setNovoProduto}
-              modoEdicao={modoEdicao}
-              onSalvar={handleCadastrarProduto}
-              onCancelar={() => {
-                setModoEdicao(false);
-                setIdProdutoEditando(null);
-                setNovoProduto({
-                  nome: "",
-                  descricao: "",
-                  preco: "",
-                  marca: "",
-                  imagemUrl: "",
-                });
-              }}
-            />
-          </div>
-        )}
       </div>
     </div>
   );

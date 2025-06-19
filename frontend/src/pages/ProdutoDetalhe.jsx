@@ -10,7 +10,6 @@ import "../styles/ProdutoDetalhe.css";
 const ProdutoDetalhe = () => {
   const { id } = useParams();
   const [produto, setProduto] = useState(null);
-  const [produtosRelacionados, setRelacionados] = useState([]);
   const [produtosSimilares, setSimilares] = useState([]);
   const usuario = obterDadosUsuario() || {};
   const nomeUsuario = usuario.nome?.split(" ")[0];
@@ -23,14 +22,8 @@ const ProdutoDetalhe = () => {
 
         const categoria = res.data.categoria?.toLowerCase() || "";
 
-        const relacionados = await api.get(`/produtos?categoria=${categoria}`);
         const similares = await api.get("/produtos");
 
-        const filtradosRelacionados = relacionados.data.produtos.filter(
-          (p) => p._id !== res.data._id
-        );
-
-        setRelacionados(filtradosRelacionados.slice(0, 10));
         setSimilares(similares.data.produtos.slice(0, 10));
       } catch (err) {
         console.error("Erro ao carregar produto ou sugestões:", err);
@@ -104,11 +97,6 @@ const ProdutoDetalhe = () => {
           )}
         </div>
       </div>
-
-      <SugestoesProdutos
-        titulo="Quem comprou, também se interessou"
-        produtos={produtosRelacionados}
-      />
 
       <SugestoesProdutos
         titulo="Similares que você pode se interessar"

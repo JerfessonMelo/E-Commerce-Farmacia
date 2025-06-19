@@ -223,4 +223,57 @@ router.post(
   }
 );
 
+router.put(
+  "/:id",
+  authMiddleware,
+  adminMiddleware,
+  upload.single("imagem"),
+  async (req, res) => {
+    try {
+      const {
+        nome,
+        descricao,
+        preco,
+        marca,
+        categoria,
+        principioAtivo,
+        faixaEtaria,
+        tipoProduto,
+        tags,
+      } = req.body;
+
+      const produto = await Produto.findById(req.params.id);
+      if (!produto) {
+        return res.status(404).json({ mensagem: "Produto não encontrado" });
+      }
+
+      // Se nova imagem for enviada, atualiza
+      if (req.file) {
+        produto.imagemUrl = `/produtos/${req.file.filename}`;
+      }
+
+      produto.nome = nome;
+      produto.descricao = descricao;
+      produto.preco = preco;
+      produto.marca = marca;
+      produto.categoria = categoria;
+      produto.principioAtivo = principioAtivo;
+      produto.faixaEtaria = faixaEtaria;
+      produto.tipoProduto = tipoProduto;
+      produto.tags =
+        typeof tags === "string"
+          ? tags.split(",").map((tag) => tag.trim().toLowerCase())
+          : [];
+
+      await produto.save();
+      res.json(produto);
+    } catch (err) {
+      res.status(500).json({
+        mensagem: "Erro ao atualizar produto",
+        erro: err.message,
+      });
+    }
+  }
+);
+
 module.exports = router;
