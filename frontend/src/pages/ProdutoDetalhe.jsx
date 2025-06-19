@@ -26,7 +26,7 @@ const ProdutoDetalhe = () => {
         const relacionados = await api.get(`/produtos?categoria=${categoria}`);
         const similares = await api.get("/produtos");
 
-        const filtradosRelacionados = relacionados.data.filter(
+        const filtradosRelacionados = relacionados.data.produtos.filter(
           (p) => p._id !== res.data._id
         );
 
@@ -50,7 +50,9 @@ const ProdutoDetalhe = () => {
 
       <div className="detalhe">
         <img
-          src={produto.imagemUrl || "/sem-imagem.png"}
+          src={`https://e-commerce-farmacia.onrender.com${
+            produto.imagemUrl || "/produtos/sem-imagem.png"
+          }`}
           alt={produto.nome}
           className="imagem-produto"
         />
