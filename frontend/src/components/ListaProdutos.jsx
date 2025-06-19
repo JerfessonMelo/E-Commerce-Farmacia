@@ -43,6 +43,19 @@ const ListaProdutos = () => {
     }
   };
 
+  const removerProduto = async (id) => {
+    if (window.confirm("Tem certeza que deseja remover este produto?")) {
+      try {
+        await api.delete(`/produtos/${id}`);
+        alert("Produto removido com sucesso!");
+        carregarProdutos();
+      } catch (erro) {
+        alert("Erro ao remover produto");
+        console.error("Erro ao remover produto:", erro);
+      }
+    }
+  };
+
   const salvarProduto = async (produto, imagem) => {
     try {
       const formData = new FormData();
@@ -143,6 +156,7 @@ const ListaProdutos = () => {
                   ></i>{" "}
                   {p.ativo ? "Desativar" : "Ativar"}
                 </button>
+
                 <button
                   className="btn-editar"
                   onClick={() => {
@@ -152,6 +166,13 @@ const ListaProdutos = () => {
                   }}
                 >
                   <i className="fas fa-edit"></i> Alterar
+                </button>
+
+                <button
+                  className="btn-remover"
+                  onClick={() => removerProduto(p._id)}
+                >
+                  <i className="fas fa-trash"></i> Remover
                 </button>
               </td>
             </tr>

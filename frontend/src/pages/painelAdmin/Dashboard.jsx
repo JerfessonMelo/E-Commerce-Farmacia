@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import api from "../../services/api";
 import Cabecalho from "../../components/Cabecalho";
-import CadastroProduto from "../../components/CadastroProduto";
 import ListaClientes from "../../components/ListaClientes";
 import ListaProdutos from "../../components/ListaProdutos";
 import RelatorioVendas from "../../components/RelatorioVendas";
@@ -15,27 +14,11 @@ const Dashboard = () => {
   });
 
   const [relatorioAtivo, setRelatorioAtivo] = useState(null);
-  const [novoProduto, setNovoProduto] = useState({
-    nome: "",
-    descricao: "",
-    preco: "",
-    marca: "",
-    imagemUrl: "",
-  });
-
-  const [produtos, setProdutos] = useState([]);
-  const [modoEdicao, setModoEdicao] = useState(false);
-  const [idProdutoEditando, setIdProdutoEditando] = useState(null);
 
   const carregarDados = async () => {
     try {
-      const [dashboardRes, produtosRes] = await Promise.all([
-        api.get("/admin/dashboard"),
-        api.get("/produtos"),
-      ]);
-
-      setDados(dashboardRes.data);
-      setProdutos(produtosRes.data);
+      const res = await api.get("/admin/dashboard");
+      setDados(res.data);
     } catch (erro) {
       console.error("Erro ao carregar dados do painel:", erro);
     }
@@ -44,52 +27,6 @@ const Dashboard = () => {
   useEffect(() => {
     carregarDados();
   }, []);
-
-  useEffect(() => {
-    const handleEditarProduto = (e) => {
-      const produto = e.detail;
-      setNovoProduto(produto);
-      setIdProdutoEditando(produto._id);
-      setModoEdicao(true);
-      setRelatorioAtivo(null);
-    };
-
-    window.addEventListener("editar-produto", handleEditarProduto);
-    return () =>
-      window.removeEventListener("editar-produto", handleEditarProduto);
-  }, []);
-
-  const handleCadastrarProduto = async () => {
-    try {
-      if (modoEdicao && idProdutoEditando) {
-        await api.put(`/produtos/${idProdutoEditando}`, {
-          ...novoProduto,
-          preco: parseFloat(novoProduto.preco),
-        });
-        alert("Produto atualizado com sucesso!");
-      } else {
-        await api.post("/produtos", {
-          ...novoProduto,
-          preco: parseFloat(novoProduto.preco),
-        });
-        alert("Produto cadastrado com sucesso!");
-      }
-
-      setNovoProduto({
-        nome: "",
-        descricao: "",
-        preco: "",
-        marca: "",
-        imagemUrl: "",
-      });
-      setModoEdicao(false);
-      setIdProdutoEditando(null);
-      carregarDados();
-    } catch (erro) {
-      alert("Erro ao salvar produto");
-      console.error(erro);
-    }
-  };
 
   return (
     <div className="celular-container">

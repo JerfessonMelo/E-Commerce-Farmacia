@@ -247,7 +247,6 @@ router.put(
         return res.status(404).json({ mensagem: "Produto não encontrado" });
       }
 
-      // Se nova imagem for enviada, atualiza
       if (req.file) {
         produto.imagemUrl = `/produtos/${req.file.filename}`;
       }
@@ -275,5 +274,21 @@ router.put(
     }
   }
 );
+
+router.delete("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const produto = await Produto.findById(id);
+    if (!produto) {
+      return res.status(404).json({ mensagem: "Produto não encontrado" });
+    }
+
+    await Produto.findByIdAndDelete(id);
+    res.status(200).json({ mensagem: "Produto removido com sucesso" });
+  } catch (erro) {
+    console.error("Erro ao remover produto:", erro);
+    res.status(500).json({ mensagem: "Erro ao remover produto" });
+  }
+});
 
 module.exports = router;

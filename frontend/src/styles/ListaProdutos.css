@@ -19,41 +19,85 @@
   padding: 12px;
   border: 1px solid #ddd;
   text-align: left;
+  vertical-align: middle;
 }
 
+/* Alinha botões em uma linha com espaçamento */
+.admin-lista-produtos td:last-child {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+/* Botões principais */
+.btn-cadastrar,
+.btn-editar,
 .btn-ativar,
-.btn-desativar {
-  padding: 8px 12px;
+.btn-desativar,
+.btn-remover {
+  padding: 6px 12px;
   border: none;
   border-radius: 6px;
-  cursor: pointer;
+  font-size: 14px;
   font-weight: bold;
-  color: white;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
-.btn-ativar {
+/* Cadastrar */
+.btn-cadastrar {
   background-color: #28a745;
-}
-
-.btn-desativar {
-  background-color: var(--primary-color);
-}
-
-.btn-editar {
-  background-color: #007bff;
-  font-weight: bold;
   color: white;
-  border: none;
-  padding: 8px 12px;
-  margin-left: 5px;
-  border-radius: 6px;
-  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.btn-cadastrar:hover {
+  background-color: #218838;
+}
+
+/* Editar */
+.btn-editar {
+  background-color: #ffc107;
+  color: #333;
 }
 
 .btn-editar:hover {
-  background-color: #0056b3;
+  background-color: #e0a800;
 }
 
+/* Ativar */
+.btn-ativar {
+  background-color: #28a745;
+  color: white;
+}
+
+.btn-ativar:hover {
+  background-color: #218838;
+}
+
+/* Desativar */
+.btn-desativar {
+  background-color: #dc3545;
+  color: white;
+}
+
+.btn-desativar:hover {
+  background-color: #c82333;
+}
+
+/* Remover */
+.btn-remover {
+  background-color: #6c757d;
+  color: white;
+}
+
+.btn-remover:hover {
+  background-color: #5a6268;
+}
+
+/* Overlay do menu lateral */
 .menu-flutuante-overlay {
   position: fixed;
   top: 0;
@@ -66,6 +110,7 @@
   justify-content: flex-end;
 }
 
+/* Menu lateral */
 .menu-flutuante {
   position: relative;
   background: #fff;
@@ -74,23 +119,10 @@
   height: 100%;
   overflow-y: auto;
   box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+  z-index: 2100;
 }
 
-.btn-cadastrar {
-  margin-bottom: 20px;
-  padding: 8px 15px;
-  background-color: #28a745;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.btn-cadastrar:hover {
-  background-color: #218838;
-}
-
+/* Botão fechar lateral */
 .btn-fechar-menu {
   margin: 20px 0;
   background-color: #6c757d;
@@ -108,4 +140,27 @@
 
 .btn-fechar-menu:hover {
   background-color: #5a6268;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .admin-lista-produtos table,
+  .admin-lista-produtos th,
+  .admin-lista-produtos td {
+    font-size: 12px;
+  }
+
+  .menu-flutuante {
+    width: 100%;
+    padding: 15px;
+  }
+
+  .btn-cadastrar,
+  .btn-editar,
+  .btn-ativar,
+  .btn-desativar,
+  .btn-remover {
+    font-size: 12px;
+    padding: 5px 10px;
+  }
 }

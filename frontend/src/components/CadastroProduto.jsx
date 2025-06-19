@@ -11,7 +11,7 @@ const CadastroProduto = ({
   const [mensagem, setMensagem] = useState("");
 
   useEffect(() => {
-    setProduto(produtoInicial); // Atualiza o estado quando produtoInicial muda
+    setProduto(produtoInicial);
   }, [produtoInicial]);
 
   const handleChange = (e) => {
