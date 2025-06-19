@@ -209,6 +209,7 @@ router.post(
         faixaEtaria,
         tipoProduto,
         tags: tagsArray,
+        ativo: true,
       });
 
       await novoProduto.save();
