@@ -31,7 +31,7 @@ const ProdutoDetalhe = () => {
         );
 
         setRelacionados(filtradosRelacionados.slice(0, 10));
-        setSimilares(similares.data.slice(0, 10));
+        setSimilares(similares.data.produtos.slice(0, 10));
       } catch (err) {
         console.error("Erro ao carregar produto ou sugestões:", err);
       }
