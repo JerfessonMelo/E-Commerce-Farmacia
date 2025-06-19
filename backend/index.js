@@ -21,16 +21,24 @@ const allowedOrigins = [
   "https://e-commerce-farmacia-rho.vercel.app",
 ];
 
-app.use(
-  cors({
-    origin: allowedOrigins,
-    credentials: true,
-  })
-);
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Não permitido por CORS"));
+    }
+  },
+  credentials: true,
+};
 
+app.use(cors(corsOptions));
 app.use(cookieParser());
 app.use(express.json());
-app.use("/produtos", express.static("public/produtos"));
+app.use(
+  "/produtos",
+  express.static(path.join(__dirname, "public", "produtos"))
+);
 app.use("/api/usuarios", usuarioRoutes);
 app.use("/api/produtos", produtoRoutes);
 app.use("/api/pedidos", pedidoRoutes);
