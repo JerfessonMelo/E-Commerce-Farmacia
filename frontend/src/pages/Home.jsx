@@ -69,7 +69,7 @@ const Home = () => {
         <h2>Produtos em Destaque</h2>
 
         <section className="filtros">
-          <select
+          {/* <select
             onChange={(e) => setCategoriaSelecionada(e.target.value)}
             value={categoriaSelecionada}
           >
@@ -77,7 +77,7 @@ const Home = () => {
             <option value="vitaminas">Vitaminas</option>
             <option value="analgésicos">Analgésicos</option>
             <option value="higiene">Higiene</option>
-          </select>
+          </select> */}
           <select
             onChange={(e) => setOrdenacao(e.target.value)}
             value={ordenacao}
